@@ -3,6 +3,6 @@
  */
 let baseDomain = ''
 let serviceUrl = {
-  
+  login: baseDomain + 'login'
 }
 module.exports = serviceUrl

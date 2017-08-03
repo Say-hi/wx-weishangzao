@@ -1,21 +1,11 @@
-/**
- * API module
- * @type {Object}
- * 用于将微信官方`API`封装为`Promise`方式
- * > 小程序支持以`CommonJS`规范组织代码结构
- */
 // const wechat = require('./utils/wechat')
 // const Promise = require('./utils/bluebird')
 /*eslint-disable*/
 const useUrl = require('./utils/service')
 App({
-  /**
-   * Global shared
-   * 可以定义任何成员，用于在整个应用中共享
-   */
   data: {
-    name: 'WeApp Boilerplate'
-  }
+    name: '微商造'
+  },
   // 发起微信支付
   wxpay (obj) {
     let objs = {
@@ -136,7 +126,7 @@ App({
    */
   onLaunch () {
     // console.log(' ========== Application is launched ========== ')
-    this.wxlogin()
+    // this.wxlogin()
   },
   /**
    * 生命周期函数--监听小程序显示

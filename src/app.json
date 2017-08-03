@@ -1,9 +1,7 @@
 {
-  // All pages must be here.
-  // First is default to view
-  // https://mp.weixin.qq.com/debug/wxadoc/dev/framework/config.html#pages
+//  微商造小程序页面分布
   "pages": [
-    
+    "pages/index/index" // 主页
     // Dont remove this comment
   ],
   // Window configuration
@@ -39,21 +37,15 @@
     "list": [
       {
         "text": "首页",
-        "pagePath": "pages/index2/index2",
-        "iconPath": "images/home.png",
-        "selectedIconPath": "images/home_hl.png"
+        "pagePath": "pages/index/index"
+//        "iconPath": "images/home.png",
+//        "selectedIconPath": "images/home_hl.png"
       },
       {
-        "text": "关注",
-        "pagePath": "pages/follow/follow",
-        "iconPath": "images/follow.png",
-        "selectedIconPath": "images/follow_hl.png"
-      },
-      {
-        "text": "我",
-        "pagePath": "pages/user/user",
-        "iconPath": "images/user.png",
-        "selectedIconPath": "images/user_hl.png"
+        "text": "首页",
+        "pagePath": "pages/index/index"
+        //        "iconPath": "images/home.png",
+        //        "selectedIconPath": "images/home_hl.png"
       }
     ]
   },

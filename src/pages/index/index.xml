@@ -1,0 +1,27 @@
+<!--主页-->
+<view>
+  <!--顶部轮播图-->
+  <swiper class="carousel" indicator-dots="{{ dots }}" circular="{{ circular }}" autoplay="true" interval="5000" duration="1000">
+    <block wx:for="{{ imgUrls }}">
+      <swiper-item>
+        <image mode="aspectFill" src="{{ item }}" class="slide-image" />
+      </swiper-item>
+    </block>
+  </swiper>
+  <!--导航-->
+  <view class="nav">
+    <view wx:for="{{ navTab }}">
+      <navigator class="nav-tab" url="{{ item.url }}">
+        <image src="{{ item.img }}"></image>
+        <view>{{ item.text }}</view>
+      </navigator>
+    </view>
+  </view>
+  <!--排行榜-->
+  <view class="ranking-list">
+    <view class="top-title">
+      微商造排行榜
+      <view class="rule">排行规则</view>
+    </view>
+  </view>
+</view>
