@@ -1,0 +1,44 @@
+<!--排行榜-->
+<view>
+  <!--分类导航-->
+  <view class="type">
+    <view catchtap="typeChoose" data-index="2" class="{{ curChoose == 1 ? '' : 'cur' }}">微商团队</view>
+    <view catchtap="typeChoose" data-index="1" class="{{ curChoose == 1 ? 'cur' : '' }}">微商人物</view>
+  </view>
+  <!--名称排行-->
+  <view class="rank-nav">
+    <view catchtap="rankNavChoose" data-index="{{ index }}" class="rank-nav-list {{ (curRankNav == index && index == 0) ? 'yellow' : (curRankNav == index && index == 1)? 'blue' : (curRankNav == index && index == 2) ? 'orgin' : '' }}" wx:for="{{ rankNavArr }}">
+      {{ item }}
+    </view>
+    <!--月份弹窗-->
+    <view wx:if="{{ maskShow }}" class="mask">
+      <view class="mask-wrap">
+        <view class="mask-btn">
+          <view catchtap="noMask">取消</view>
+          <view catchtap="confirm">确认</view>
+        </view>
+        <picker-view class="month-picker" indicator-style="height: 50px;" style="width: 100%; height: 250px;" value="{{value}}" bindchange="bindChange">
+          <picker-view-column>
+            <view wx:for="{{months}}" style="line-height: 50px">{{item}}月</view>
+          </picker-view-column>
+        </picker-view>
+      </view>
+    </view>
+  </view>
+  <!--排行内容-->
+  <!--<view class="rank-content">-->
+  <view class="rank-content" wx:for="{{ rankContentArr }}">
+    <view class="rca-left {{ index == 0 ? 'first' : index == 1 ? 'second' : index == 2 ? 'third' : ''}}"></view>
+    <view class="rca-top">
+      <view class="rca-t-top">
+        <image class="{{ index == 0 ? 'i1' : index == 1 ? 'i2' : index == 2 ? 'i3' : '' }}" src="{{ item.img }}"></image>
+        <text>{{ item.name }}</text>
+      </view>
+      <view class="rca-number {{ index > 2 ? 'noColor' : '' }} {{ curRankNav == 0 ? 'rcl-b-a' : curRankNav == 1 ? 'rcl-b-b' : curRankNav == 2 ? 'rcl-b-c' : ''}}">
+        {{ curRankNav == 0 ? '影响力:' : curRankNav == 1 ? '支持度:' : curRankNav == 2 ? '团队代理:' : ''}}{{ item.number }}
+      </view>
+    </view>
+    <navigator class="goSupport" url="../wsdetail/wsdetail?id={{ item.user_id }}">支持TA</navigator>
+  </view>
+  <!--</view>-->
+</view>

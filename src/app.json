@@ -1,7 +1,8 @@
 {
 //  微商造小程序页面分布
   "pages": [
-    "pages/index/index" // 主页
+    "pages/ranking/ranking", // 排行榜
+    "pages/index/index" // 主页,
     // Dont remove this comment
   ],
   // Window configuration
@@ -9,16 +10,16 @@
   "window": {
     // 类型：HexColor；默认值：#000000
     // 导航栏背景颜色，如"#000000"
-    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarBackgroundColor": "#febd43",
     // 类型：String；默认值：white
     // 导航栏标题颜色，仅支持 black/white
     "navigationBarTextStyle": "black",
     // 类型：String；默认值：无
     // 导航栏标题文字内容
-    "navigationBarTitleText": "title",
+    "navigationBarTitleText": "微商造",
     // 类型：HexColor；默认值：#ffffff
     // 窗口的背景色
-    "backgroundColor": "#ffffff",
+    "backgroundColor": "#fff",
     // 类型：String；默认值：dark
     // 下拉背景字体、loading 图的样式，仅支持 dark/light
     "backgroundTextStyle": "light",
@@ -31,21 +32,27 @@
   // https://mp.weixin.qq.com/debug/wxadoc/dev/framework/config.html#tabBar
   "tabBar": {
     "color": "#999999",
-    "selectedColor": "#FCC0A4",
+    "selectedColor": "#fedb43",
     "borderStyle": "black",
     "backgroundColor": "#fff",
     "list": [
       {
         "text": "首页",
-        "pagePath": "pages/index/index"
-//        "iconPath": "images/home.png",
-//        "selectedIconPath": "images/home_hl.png"
+        "pagePath": "pages/index/index",
+        "iconPath": "images/home.png",
+        "selectedIconPath": "images/home_hl.png"
       },
       {
-        "text": "首页",
-        "pagePath": "pages/index/index"
-        //        "iconPath": "images/home.png",
-        //        "selectedIconPath": "images/home_hl.png"
+        "text": "排行榜",
+        "pagePath": "pages/ranking/ranking",
+        "iconPath": "images/rank.png",
+        "selectedIconPath": "images/rank_hl.png"
+      },
+      {
+        "text": "我的",
+        "pagePath": "pages/index/index",
+        "iconPath": "images/user.png",
+        "selectedIconPath": "images/user_hl.png"
       }
     ]
   },

@@ -24,4 +24,41 @@
       <view class="rule">排行规则</view>
     </view>
   </view>
+  <!--搜索框-->
+  <view class="search">
+    <input bindinput="searchInput" bindconfirm="searchConfirm" type="search" placeholder="搜索团队名称"/>
+    <view catchtap="searchConfirm" class="iconfont icon-sousuo"></view>
+  </view>
+  <!--类型-->
+  <view class="type">
+    <view catchtap="typeChoose" data-index="2" class="{{ curChoose == 1 ? '' : 'cur' }}">最佳团队</view>
+    <view catchtap="typeChoose" data-index="1" class="{{ curChoose == 1 ? 'cur' : '' }}">微商大咖</view>
+  </view>
+  <!--申请-->
+  <view class="apply">
+    <view>申请新团队参与排名</view>
+  </view>
+  <!--名称排行-->
+  <view class="rank-nav">
+    <view catchtap="rankNavChoose" data-index="{{ index }}" class="rank-nav-list {{ (curRankNav == index && index == 0) ? 'yellow' : (curRankNav == index && index == 1)? 'blue' : (curRankNav == index && index == 2) ? 'orgin' : ''}}" wx:for="{{ rankNavArr }}">
+      {{ item }}
+    </view>
+  </view>
+  <!--排行&搜索显示区域-->
+  <view class="rank-content">
+    <view wx:for="{{ rankContentList }}">
+      <!--上半部-->
+      <view class="rcl-top">
+        <image src="{{ item.img }}"></image>
+        <text>{{ item.name }}</text>
+        <navigator class="goSupport" url="../wsdetail/wsdetail?id={{ item.user_id }}">支持TA</navigator>
+      </view>
+      <!--下半部-->
+      <view class="rcl-bottom">
+        <view class="rcl-b-a">影响力:{{ item.yx }}</view>
+        <view class="rcl-b-b">支持度:{{ item.zc }}</view>
+        <view class="rcl-b-c">团队代理:{{ item.td }}</view>
+      </view>
+    </view>
+  </view>
 </view>

@@ -1,0 +1,138 @@
+.type {
+  display: flex;
+  font-size: 30rpx;
+  border-bottom: 20rpx solid #eee;
+  justify-content: space-around;
+  view  {
+    color: #333;
+    padding: 0 10rpx;
+    line-height: 88rpx;
+    border-bottom: 4rpx solid #fff;
+  }
+  .cur {
+    border-bottom: 4rpx solid #fedb43;
+  }
+}
+
+.rank-nav {
+  padding: 0 20rpx;
+  border-bottom: 20rpx solid #eee;
+  height: 119rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  .rank-nav-list {
+    border-radius: 8rpx;
+    padding: 0 15rpx;
+    line-height: 40rpx;
+    color: #999;
+    background-color: #eee;
+    font-size: 28rpx;
+  }
+}
+
+.mask {
+  position: fixed;
+  z-index: 998;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  .mask-wrap {
+    .mask-btn {
+      display: flex;
+      width: 100%;
+      bottom: 400rpx;
+      justify-content: space-between;
+      padding: 0 40rpx;
+      box-sizing: border-box;
+      position: absolute;
+      z-index: 999;
+    }
+    .month-picker {
+      background-color: #fff;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      text-align: center;
+    }
+  }
+}
+
+.rank-content {
+  padding: 20rpx;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  border-bottom: 20rpx solid #eee;
+  .rca-left {
+    width: 45rpx;
+    height: 51rpx;
+    margin-right: 30rpx;
+    //background-image: url('../../images/gold.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+  }
+  .first {
+    background-image: url('../../images/gold.png');
+  }
+  .second {
+    background-image: url('../../images/sliver.png');
+  }
+  .third {
+    background-image: url('../../images/copper.png');
+  }
+  .rca-top {
+    display: flex;
+    height: 150rpx;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    .rca-t-top {
+      display: flex;
+      align-items: center;
+      image {
+        width: 81rpx;
+        height: 81rpx;
+        border-radius: 50%;
+      }
+      .i1 {
+        border: 2rpx solid #fedb43;
+      }
+      .i2 {
+        border: 2rpx solid #e3e3e3;
+      }
+      .i3 {
+        border: 2rpx solid #fac67c;
+      }
+      text {
+        margin-left: 40rpx;
+        font-size:  30rpx;
+        color: #333;
+      }
+    }
+    .rca-number {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      //display: inline-block;
+      font-size: 28rpx;
+      color: #fff;
+      line-height: 45rpx;
+      padding: 0 8rpx;
+      border-radius: 8rpx;
+    }
+  }
+  .goSupport {
+    position: absolute;
+    right: 20rpx;
+    //float: right;
+    //margin-right: 10rpx;
+  }
+  .noColor {
+    color: #999 !important;
+    background: #eee !important;
+    box-shadow: none !important;
+  }
+}

@@ -30,14 +30,12 @@
 }
 
 .ranking-list {
-  //background-color: #f00;
   .top-title {
     position: relative;
     text-align: center;
     line-height: 90rpx;
     height: 90rpx;
     font-weight: 700;
-
     .rule {
       position: absolute;
       top: 0;
@@ -56,6 +54,121 @@
       margin-left: 4rpx;
       border-radius: 50%;
       background-color: #fedb43;
+    }
+  }
+}
+
+.search {
+  padding: 0 40rpx;
+  position: relative;
+  input {
+    border: 1rpx solid #eee;
+    border-radius: 10rpx;
+    background-color: #eee;
+    line-height: 60rpx;
+    height: 60rpx;
+    padding-left: 25rpx;
+    font-size: 24rpx;
+  }
+  .icon-sousuo {
+    position: absolute;
+    top: 0;
+    width: 150rpx;
+    right: 40rpx;
+    text-align: center;
+    line-height: 60rpx;
+    //background-color: rgba(0,0,0,0.1);
+    z-index: 999;
+    color: #000;
+    //transform: translate(0, -50%);
+  }
+}
+
+.type {
+  margin-top: 27rpx;
+  display: flex;
+  font-size: 30rpx;
+  justify-content: space-around;
+  view  {
+    color: #333;
+    line-height: 40rpx;
+    border-bottom: 8rpx solid #fff;
+  }
+  .cur {
+    font-weight: 700;
+    border-bottom: 8rpx solid #fedb43;
+  }
+}
+
+.apply {
+  margin-top: 60rpx;
+  text-align: center;
+  view {
+    display: inline-block;
+    font-size: 32rpx;
+    color: #000;
+    padding: 0 13rpx;
+    line-height: 45rpx;
+    font-weight: 700;
+    border-radius: 8rpx;
+    background-color: #fedb43;
+    box-shadow: 0 2rpx 6rpx 2rpx #ffc375;
+  }
+}
+
+.rank-nav {
+  padding: 0 20rpx;
+  margin-top: 86rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  .rank-nav-list {
+    border-radius: 8rpx;
+    padding: 0 15rpx;
+    line-height: 40rpx;
+    color: #999;
+    background-color: #eee;
+    font-size: 28rpx;
+  }
+}
+
+.rank-content {
+   > view {
+     border-bottom: 6rpx solid #eee;
+     padding: 0 20rpx;
+   }
+  > view:nth-last-child(1) {
+    border-bottom: 6rpx solid transparent;;
+  }
+  .rcl-top {
+    margin-top: 40rpx;
+    display: flex;
+    align-items: center;
+    image {
+      margin-left: 40rpx;
+      width: 113rpx;
+      height: 113rpx;
+      border-radius: 50%;
+      margin-right: 42rpx;
+    }
+    text {
+      flex: 1;
+      color: #000;
+      font-size: 28rpx;
+      font-weight: 700;
+    }
+  }
+  .rcl-bottom {
+    margin-top: 50rpx;
+    margin-bottom: 20rpx;
+    display: flex;
+    justify-content: space-around;
+    view {
+      font-size: 28rpx;
+      color: #fff;
+      line-height: 45rpx;
+      padding: 0 6rpx;
+      border-radius: 8rpx;
     }
   }
 }
