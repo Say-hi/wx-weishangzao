@@ -1,0 +1,28 @@
+<!--我的微商主页-->
+<!--封面图片-->
+<view class="cover">
+  <text>封面展示</text>
+  <view class="cover-img-wrap">
+    <view class="cover-img" wx:for="{{ coverImgArr }}">
+      <image mode="aspectFill" src="{{ item }}"></image>
+      <view data-index="{{ index }}" class="del">×</view>
+    </view>
+  </view>
+  <image class="up-img" catchtap="upImg" src="{{ upimg }}"></image>
+</view>
+<!--个人信息-->
+<view class="introduction">
+  <view style="text-align: center;">
+    <text>个人简介</text>
+  </view>
+  <view class="name">
+    <view><view>名称: </view><input class="name-input" /></view>
+    <view><view>微信号: </view><input class="wxn-input" /></view>
+  </view>
+  <view class="address">
+    <view>现居地: <input class="address-input" /></view>
+  </view>
+  <view class="sign">
+    <view>个性签名: <input class="sign-input" placeholder="20字内" maxlength="20" /></view>
+  </view>
+</view>

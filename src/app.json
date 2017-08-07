@@ -1,8 +1,16 @@
 {
 //  微商造小程序页面分布
   "pages": [
-    "pages/ranking/ranking", // 排行榜
-    "pages/index/index" // 主页,
+    "pages/homepage/homepage", // 我的微商主页
+    "pages/index/index", // 主页
+    "pages/followWs/followWs", // 我关注的微商
+    "pages/RHO/RHO", // 我关联的上家
+    "pages/relevanceTeam/relevanceTeam", // 我关联的团队
+    "pages/relevanceAgent/relevanceAgent", // 关联我的代理
+    "pages/user/user", // 个人中心
+    "pages/ruler/ruler", // 规则
+    "pages/ranking/ranking" // 排行榜,
+
     // Dont remove this comment
   ],
   // Window configuration
@@ -10,7 +18,7 @@
   "window": {
     // 类型：HexColor；默认值：#000000
     // 导航栏背景颜色，如"#000000"
-    "navigationBarBackgroundColor": "#febd43",
+    "navigationBarBackgroundColor": "#fedb43",
     // 类型：String；默认值：white
     // 导航栏标题颜色，仅支持 black/white
     "navigationBarTextStyle": "black",
@@ -50,7 +58,7 @@
       },
       {
         "text": "我的",
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/user/user",
         "iconPath": "images/user.png",
         "selectedIconPath": "images/user_hl.png"
       }

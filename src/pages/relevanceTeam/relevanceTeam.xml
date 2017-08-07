@@ -1,0 +1,5 @@
+<!--我关联的团队-->
+<view class="team" wx:for="{{ teamArr }}">
+  <image class="br" src="{{ item.img }}"></image>
+  <text>{{ item.name }}</text>
+</view>

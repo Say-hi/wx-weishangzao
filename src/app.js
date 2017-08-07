@@ -112,6 +112,7 @@ App({
   getUserInfo (obj) {
     wx.getUserInfo({
       withCredentials: obj.withCredentials || true,
+      lang: obj.lang || 'zh_CN',
       success: obj.success || function (res) {
         console.log('getUserInfoSuccess', res)
       },
@@ -126,7 +127,7 @@ App({
    */
   onLaunch () {
     // console.log(' ========== Application is launched ========== ')
-    // this.wxlogin()
+    this.wxlogin()
   },
   /**
    * 生命周期函数--监听小程序显示

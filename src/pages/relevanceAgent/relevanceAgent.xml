@@ -1,0 +1,11 @@
+<!--关联我的代理-->
+<view>
+  <view class="agent" wx:for="{{ agentArr }}">
+    <view class="a-top">
+      <image class="br" src="{{ item.img }}"></image>
+      <text>{{ item.name }}</text>
+    </view>
+    <text>{{ item.sign }}</text>
+    <view data-index="{{ index }}" catchtap="del" class="del">删除代理</view>
+  </view>
+</view>

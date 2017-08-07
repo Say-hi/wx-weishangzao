@@ -1,0 +1,17 @@
+<!--个人中心-->
+<view>
+  <!--个人信息顶部-->
+  <view class="user-top">
+    <image class="bg" src="../../images/user-bg.png"></image>
+    <image class="user-img br" src="{{ userInfo.avatarUrl }}"></image>
+    <text class="user-name">{{ userInfo.nickName }}</text>
+  </view>
+  <!--用户操作-->
+  <block wx:for="{{ operationArr }}">
+    <navigator class="user-operation" url="{{ item.url }}">
+      <image src="{{ item.icon }}"></image>
+      <text>{{ item.text }}</text>
+      <text catchtap="kaiTongPoster" class="poster" wx:if="{{ index == 1 }}">{{ poster_time || '点击开通' }}</text>
+    </navigator>
+  </block>
+</view>

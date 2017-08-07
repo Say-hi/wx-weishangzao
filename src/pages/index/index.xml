@@ -21,7 +21,7 @@
   <view class="ranking-list">
     <view class="top-title">
       微商造排行榜
-      <view class="rule">排行规则</view>
+      <navigator url="../ruler/ruler" class="rule">排行规则</navigator>
     </view>
   </view>
   <!--搜索框-->
