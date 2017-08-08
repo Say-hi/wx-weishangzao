@@ -4,7 +4,7 @@ page {
 
 .cover {
   padding: 0 20rpx;
-  text-align: center;
+  //position: relative;
   text {
     display: inline-block;
     background-color: #000;
@@ -14,15 +14,16 @@ page {
     line-height: 44rpx;
     padding: 0 10rpx;
     border-radius: 8rpx;
+    //margin: 40rpx 0;
+    //margin-bottom: 66rpx;
     margin: 40rpx 0;
-    margin-bottom: 66rpx;
   }
   .cover-img-wrap {
     display: flex;
     flex-wrap: wrap;
     .cover-img {
       position: relative;
-      margin-right: 10rpx;
+      margin-right: 14rpx;
       image {
         width: 222rpx;
         height: 260rpx;
@@ -39,6 +40,12 @@ page {
     width: 119rpx;
     height: 119rpx;
     float: left;
+  }
+  .up-img2 {
+    //position: absolute;
+    //left: 0;
+    width: 119rpx;
+    height: 119rpx;
   }
 }
 
@@ -59,11 +66,53 @@ page {
   input {
     border-bottom: 1rpx solid #000;
   }
-  .name {
+  .name, .address, .sign {
+    padding: 0 20rpx;
     display: flex;
+    align-items: center;
+    //height: 60rpx;
     > view {
+      flex: 1;
       display: flex;
-      
+      align-items: center;
+      .t {
+        font-size: 28rpx;
+        color: #333;
+        //line-height: 90rpx;
+      }
+      input {
+        height: 100%;
+        flex: 1;
+      }
     }
+  }
+  .address {
+    margin-top: 40rpx;
+  }
+  .sign {
+    margin-top: 40rpx;
+  }
+}
+.product, .road {
+  margin-top: 60rpx;
+  text {
+    margin-bottom: 30rpx;
+  }
+  .address {
+    margin-top: 10rpx;
+  }
+}
+
+.btn-wrap {
+  text-align: center;
+  padding: 50rpx;
+  .confirm-btn {
+    display: inline-block;
+    width: 390rpx;
+    line-height: 71rpx;
+    background-color: #fedb43;
+    border-radius: 8rpx;
+    text-align: center;
+    //margin: 40rpx auto;
   }
 }

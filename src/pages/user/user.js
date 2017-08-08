@@ -48,6 +48,9 @@ Page({
   // 开通海报制作
   kaiTongPoster () {
     // todo 跳转开通用户的海报制作
+    wx.navigatorTo({
+      url: '../ktPoster/ktPoster'
+    })
   },
   // 获取缓存中的用户信息
   getUserInfo () {

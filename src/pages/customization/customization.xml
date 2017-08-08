@@ -1,0 +1,10 @@
+<!--个性化定制-->
+<view class="wrap">
+  <view class="wrap-i">
+    <view wx:for="{{ textArr }}"><text>{{ item.t }}</text><text>{{ item.m }}</text></view>
+    <view class="mg">
+      <image src="{{ mg }}"></image>
+      <text>如需制作，添加美工客服</text>
+    </view>
+  </view>
+</view>

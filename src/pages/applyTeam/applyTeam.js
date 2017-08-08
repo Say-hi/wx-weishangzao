@@ -7,18 +7,32 @@ Page({
    * 页面的初始数据
    */
   data: {
-    coverImgArr: ['http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg', 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg'],
-    productImgArr: ['http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg', 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg'],
-    upimg: '../../images/up.png'
+    upImg: '../../images/team-bg.png'
   },
-  // 用户上传封面展示图片
-  upImg () {
-    // todo 选择图片
+  // 点击上传头像图片
+  upload () {
+    wx.chooseImage({
+      count: 1, // 默认9
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+      success (res) {
+        const src = res.tempFilePaths[0]
+        wx.redirectTo({
+          url: `../upload/upload?src=${src}`
+        })
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad () {
+  onLoad (params) {
+    let { avatar } = params
+    if (avatar) {
+      this.setData({
+        upImg: avatar
+      })
+    }
     // TODO: onLoad
   },
 

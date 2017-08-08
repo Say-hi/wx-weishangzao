@@ -7,14 +7,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    coverImgArr: ['http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg', 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg'],
-    productImgArr: ['http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg', 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg'],
-    upimg: '../../images/up.png'
+    title: 'ktPoster'
   },
-  // 用户上传封面展示图片
-  upImg () {
-    // todo 选择图片
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */

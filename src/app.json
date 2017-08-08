@@ -1,6 +1,11 @@
 {
 //  微商造小程序页面分布
   "pages": [
+    "pages/applyTeam/applyTeam", // 团队申请
+    "pages/upload/upload", // 上传图片
+    "pages/weishang/weishang", // 我是微商
+    "pages/customization/customization", // 个性化定制
+    "pages/ktPoster/ktPoster", // 海报开通
     "pages/homepage/homepage", // 我的微商主页
     "pages/index/index", // 主页
     "pages/followWs/followWs", // 我关注的微商
@@ -10,7 +15,6 @@
     "pages/user/user", // 个人中心
     "pages/ruler/ruler", // 规则
     "pages/ranking/ranking" // 排行榜,
-
     // Dont remove this comment
   ],
   // Window configuration

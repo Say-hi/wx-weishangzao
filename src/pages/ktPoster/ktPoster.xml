@@ -1,0 +1,23 @@
+<!--开通海报-->
+<view class="content">
+  <view class="c1">
+    <view>微商造是全国首家专门为解决人脉、海报制作、找代理、清货等微商难题的功能平台。</view>
+  </view>
+  <view class="c2">
+    <view>海报制作是专门开发给一些不具备作图能力的微商小咖们朋友圈的海报展示对于做微商来说至关重要！</view>
+  </view>
+  <view class="c2">
+    <view>海报的分类为:正能量 产品描述 招商 讲师/课程 早安 晚安 节日6大类。每天不间断上新海报素材供微商们使用。</view>
+  </view>
+  <view class="c2 kt">
+    <view>20元开通三个月</view>
+  </view>
+  <view class="c3">
+    <text>客服微信</text>
+    <text>二维码</text>
+  </view>
+  <view class="c3">
+    <text>1009527975</text>
+    <image src="../../images/kfewm.png "></image>
+  </view>
+</view>
