@@ -11,6 +11,11 @@ Page({
   },
   // 点击上传头像图片
   upload () {
+    let teamInput = {
+      name: this.data.name,
+      number: this.data.number
+    }
+    wx.setStorageSync('teamInput', teamInput)
     wx.chooseImage({
       count: 1, // 默认9
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
@@ -23,19 +28,46 @@ Page({
       }
     })
   },
+  // 输入内容
+  teamInput (e) {
+    let type = e.currentTarget.dataset.type
+    if (type === 'name') {
+      this.setData({
+        name: e.detail.value
+      })
+    } else if (type === 'number') {
+      this.setData({
+        number: e.detail.value
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad (params) {
+    let teamInput = wx.getStorageSync('teamInput')
     let { avatar } = params
     if (avatar) {
       this.setData({
-        upImg: avatar
+        upImg: avatar,
+        hide: true
+      })
+    }
+    if (teamInput) {
+      this.setData({
+        name: teamInput.name,
+        number: teamInput.number
       })
     }
     // TODO: onLoad
   },
-
+  // 提交信息
+  confirm () {
+    wx.removeStorage({
+      key: 'teamInput'
+    })
+    // todo 提交信息
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

@@ -1,15 +1,18 @@
 <!--团队申请-->
 <view style="padding: 20rpx;">
   <view class="a-o">
-    <view class="a-i">请输入您的团队名称</view><input/>
+    <view class="a-i">请输入您的团队名称</view><input data-type="name" value="{{ name }}" bindinput="teamInput"/>
   </view>
   <view class="a-o">
-    <view class="a-i">申请人微信</view><input/>
+    <view class="a-i">申请人微信</view><input data-type="number" value="{{ number }}" bindinput="teamInput"/>
   </view>
   <view class="a">上传您的团队头像</view>
   <!--头像区域-->
   <view class="avatar">
     <image catchtap="upload" class="up-img" src="{{ upImg }}"></image>
-    <image catchtap="upload" class="up-img bg" src="../../images/team-up.png"></image>
+    <image wx:if="{{ !hide }}" catchtap="upload" class="up-img bg" src="../../images/team-up.png"></image>
   </view>
+  <!--<view style="text-align: center;">-->
+  <view catchtap="confirm" class="confirm-btn">提交信息</view>
+  <!--</view>-->
 </view>

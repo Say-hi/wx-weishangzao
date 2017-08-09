@@ -1,0 +1,116 @@
+page {
+  background-color: #fff;
+  width: 100%;
+  height: 100%;
+}
+
+.carousel-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  .carousel {
+    width: 100%;
+    height: 100%;
+    image {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .user {
+    background-color: #fff;
+    position: absolute;
+    z-index: 999;
+    bottom: 50rpx;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 97%;
+    height: 400rpx;
+    border-radius: 10rpx;
+    box-sizing: border-box;
+    //padding: 0 80rpx;
+    .user-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: translate(20%, -50%);
+      border: 4rpx solid #fff;
+      height: 171rpx;
+      width: 171rpx;
+    }
+    .user-info {
+      margin-left: 80rpx;
+      margin-top: 90rpx;
+      display: flex;
+      flex-direction: column;
+      font-size: 30rpx;
+      color: #333;
+      text {
+        margin-top: 30rpx;
+      }
+    }
+    .user-btn {
+      margin-right: 80rpx;
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      top: 35%;
+      right: 20rpx;
+      transform: translateY(-50%);
+      text {
+        margin-bottom: 20rpx;
+        background-color: #fedb43;
+        border-radius: 8rpx;
+        line-height: 56rpx;
+        width: 178rpx;
+        text-align: center;
+        font-size: 30rpx;
+      }
+    }
+    .user-bottom {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      box-sizing: border-box;
+      padding: 0 40rpx;
+      //background-color: #ff0;
+      //margin-top: 66rpx;
+      width: 100%;
+      height: 120rpx;
+      border-top: 1rpx solid #ccc;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      > view {
+        font-size: 30rpx;
+        line-height: 60rpx;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+}
+
+.detail-info {
+  padding: 20rpx;
+  padding-bottom: 40rpx;
+  font-size: 28rpx;
+  view {
+    margin-top: 10rpx;
+  }
+  .title {
+    margin: 20rpx 0;
+    display: inline-block;
+    line-height: 40rpx;
+    padding:  0 6rpx;
+    border-radius: 8rpx;
+    background-color: #fedb43;
+  }
+  .product-img {
+    margin-top: 20rpx;
+    margin-left: 20rpx;
+    width: 150rpx;
+    height: 150rpx;
+  }
+}

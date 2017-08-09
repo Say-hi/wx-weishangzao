@@ -1,8 +1,17 @@
 <!--上传头像页面-->
-<import src="../template/weCropper.wxml"/>
+<!--<import src="../template/weCropper"/>-->
 
 <view class="cropper-wrapper">
-<template is="weCropper" data="{{...cropperOpt}}"/>
+<!--<template is="weCropper" data="{{...cropperOpt}}"/>-->
+<canvas
+        class="cropper"
+        disable-scroll="true"
+        bindtouchstart="touchStart"
+        bindtouchmove="touchMove"
+        bindtouchend="touchEnd"
+        style="width:{{cropperOpt.width}}px;height:{{cropperOpt.height}}px;background-color: rgba(0, 0, 0, 0.8)"
+        canvas-id="{{cropperOpt.id}}">
+</canvas>
 <view class="cropper-buttons">
   <view
           class="upload"

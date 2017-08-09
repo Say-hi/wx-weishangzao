@@ -1,11 +1,11 @@
-import weCropper from '../../utils/weCropper.js'
+import WeCropper from '../../utils/weCropper.js'
 
 const device = wx.getSystemInfoSync()
 const width = device.windowWidth
 const height = device.windowHeight - 50
 
 Page({
-  data:  {
+  data: {
     cropperOpt: {
       id: 'cropper',
       width,
@@ -62,8 +62,7 @@ Page({
     const { src } = option
     if (src) {
       Object.assign(cropperOpt, { src })
-
-      new weCropper(cropperOpt)
+      new WeCropper(cropperOpt)
         .on('ready', function (ctx) {
           console.log(`wecropper is ready for work!`)
         })
