@@ -93,9 +93,17 @@ page {
 }
 
 .detail-info {
-  padding: 20rpx;
+  padding: 20rpx 0;
   padding-bottom: 100rpx;
   font-size: 28rpx;
+  .diw {
+    padding: 0 20rpx;
+    padding-bottom: 50rpx;
+    border-bottom: 10rpx solid #eee;
+  }
+  .diw:nth-last-child(1) {
+    border-bottom: none;
+  }
   view {
     margin-top: 10rpx;
   }
@@ -107,11 +115,22 @@ page {
     border-radius: 8rpx;
     background-color: #fedb43;
   }
-  .product-img {
-    margin-top: 20rpx;
-    margin-left: 20rpx;
-    width: 150rpx;
-    height: 150rpx;
+  .team-introduce {
+    display: flex;
+    flex-wrap: wrap;
+    view {
+      display: inline-block;
+      width: 343rpx;
+    }
+    .product-img {
+      margin-left: 10rpx;
+      margin-bottom: 10rpx;
+      width: 341rpx;
+      height: 212rpx;
+    }
+    .product-img:nth-child(2n+1) {
+      margin-left: 0;
+    }
   }
 }
 

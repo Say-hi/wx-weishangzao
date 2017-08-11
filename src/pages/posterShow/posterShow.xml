@@ -1,0 +1,90 @@
+<!--海报展示-->
+<import src="../template/weCropper"></import>
+<view>
+  <!--顶部导航-->
+  <view class="type">
+    <view catchtap="typeChoose" data-index="2" class="{{ curChoose == 1 ? '' : 'cur' }}">今日上新</view>
+    <view catchtap="typeChoose" data-index="1" class="{{ curChoose == 1 ? 'cur' : '' }}">精选推荐</view>
+  </view>
+  <!--海报分类图片-->
+  <view class="poster">
+    <!--<view class="p-title">正能量</view>-->
+    <!--<scroll-view class="sv" scroll-x="true">-->
+     <!--<view class="sv-in" style="width: {{ w1 }}">-->
+       <!--<view class="sv-item" wx:for="{{ p1 }}">-->
+         <!--<image mode="aspectFill" src="{{ item.img }}"></image>-->
+         <!--<view data-index="{{ index }}" catchtap="collect" class="sv-i-t">-->
+           <!--<text class="sv-i-t-c">编码:{{ item.code }}</text>-->
+           <!--<text class="iconfont {{ item.collect == 1 ? 'icon-wuxing1' : 'icon-wuxing orange' }}">{{ item.collect == 1 ? '收藏' : '已收藏' }}</text>-->
+         <!--</view>-->
+       <!--</view>-->
+     <!--</view>-->
+    <!--</scroll-view>-->
+    <!--<view class="p-title second">产品描述</view>-->
+    <!--<scroll-view class="sv" scroll-x="true">-->
+      <!--<view class="sv-in" style="width: {{ w2 }}">-->
+        <!--<view class="sv-item" wx:for="{{ p2 }}">-->
+          <!--<image mode="aspectFill" src="{{ item.img }}"></image>-->
+          <!--<view data-index="{{ index }}" catchtap="collect" class="sv-i-t">-->
+            <!--<text class="sv-i-t-c">编码:{{ item.code }}</text>-->
+            <!--<text class="iconfont {{ item.collect == 1 ? 'icon-wuxing1' : 'icon-wuxing orange' }}">{{ item.collect == 1 ? '收藏' : '已收藏' }}</text>-->
+          <!--</view>-->
+        <!--</view>-->
+      <!--</view>-->
+    <!--</scroll-view>-->
+    <!--<view class="p-title second">招商</view>-->
+    <!--<scroll-view class="sv" scroll-x="true">-->
+      <!--<view class="sv-in" style="width: {{ w2 }}">-->
+        <!--<view class="sv-item" wx:for="{{ p2 }}">-->
+          <!--<image mode="aspectFill" src="{{ item.img }}"></image>-->
+          <!--<view data-index="{{ index }}" catchtap="collect" class="sv-i-t">-->
+            <!--<text class="sv-i-t-c">编码:{{ item.code }}</text>-->
+            <!--<text class="iconfont {{ item.collect == 1 ? 'icon-wuxing1' : 'icon-wuxing orange' }}">{{ item.collect == 1 ? '收藏' : '已收藏' }}</text>-->
+          <!--</view>-->
+        <!--</view>-->
+      <!--</view>-->
+    <!--</scroll-view>-->
+    <!--<view class="p-title second">讲师/课程</view>-->
+    <!--<scroll-view class="sv" scroll-x="true">-->
+      <!--<view class="sv-in" style="width: {{ w2 }}">-->
+        <!--<view class="sv-item" wx:for="{{ p2 }}">-->
+          <!--<image mode="aspectFill" src="{{ item.img }}"></image>-->
+          <!--<view data-index="{{ index }}" catchtap="collect" class="sv-i-t">-->
+            <!--<text class="sv-i-t-c">编码:{{ item.code }}</text>-->
+            <!--<text class="iconfont {{ item.collect == 1 ? 'icon-wuxing1' : 'icon-wuxing orange' }}">{{ item.collect == 1 ? '收藏' : '已收藏' }}</text>-->
+          <!--</view>-->
+        <!--</view>-->
+      <!--</view>-->
+    <!--</scroll-view>-->
+    <!--<view class="p-title second">早安/晚安</view>-->
+    <!--<scroll-view class="sv" scroll-x="true">-->
+      <!--<view class="sv-in" style="width: {{ w2 }}">-->
+        <!--<view class="sv-item" wx:for="{{ p2 }}">-->
+          <!--<image mode="aspectFill" src="{{ item.img }}"></image>-->
+          <!--<view data-index="{{ index }}" catchtap="collect" class="sv-i-t">-->
+            <!--<text class="sv-i-t-c">编码:{{ item.code }}</text>-->
+            <!--<text class="iconfont {{ item.collect == 1 ? 'icon-wuxing1' : 'icon-wuxing orange' }}">{{ item.collect == 1 ? '收藏' : '已收藏' }}</text>-->
+          <!--</view>-->
+        <!--</view>-->
+      <!--</view>-->
+    <!--</scroll-view>-->
+    <!--<view class="p-title second">节日</view>-->
+    <!--<scroll-view class="sv" scroll-x="true">-->
+      <!--<view class="sv-in" style="width: {{ w2 }}">-->
+        <!--<view class="sv-item" wx:for="{{ p2 }}">-->
+          <!--<image mode="aspectFill" src="{{ item.img }}"></image>-->
+          <!--<view data-index="{{ index }}" catchtap="collect" class="sv-i-t">-->
+            <!--<text class="sv-i-t-c">编码:{{ item.code }}</text>-->
+            <!--<text class="iconfont {{ item.collect == 1 ? 'icon-wuxing1' : 'icon-wuxing orange' }}">{{ item.collect == 1 ? '收藏' : '已收藏' }}</text>-->
+          <!--</view>-->
+        <!--</view>-->
+      <!--</view>-->
+    <!--</scroll-view>-->
+    <template wx:for="{{ tempArr }}" is="poster" data="{{ ...item }}"></template>
+  </view>
+  <!--底部定位-->
+  <view class="bottom-btn">
+    <navigator class="b-b-btn" url="../posterCollect/posterCollect">收藏夹</navigator>
+    <navigator class="b-b-btn" url="../customization/customization">个性化定制</navigator>
+  </view>
+</view>

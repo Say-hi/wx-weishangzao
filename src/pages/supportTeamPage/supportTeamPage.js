@@ -24,13 +24,11 @@ Page({
       team: '团队asdf',
       level: 'zaasdf',
       experience: '阿斯兰的房间爱死了打开房间爱死爱死了打开房间爱死爱死了打开房间爱死了贷款',
-      product: '阿斯顿减肥拉萨的费',
+      product: '阿斯顿减肥拉萨的费阿斯顿减肥拉萨的费阿斯顿减肥拉萨的费阿斯顿减肥拉萨的费',
       imageArr: [
         'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
         'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-        'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-        'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-        'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
+        'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg'
       ]
     }
   },

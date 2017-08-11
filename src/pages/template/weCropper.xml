@@ -1,0 +1,25 @@
+<template name="weCropper">
+    <canvas
+            class="cropper"
+            disable-scroll="true"
+            bindtouchstart="touchStart"
+            bindtouchmove="touchMove"
+            bindtouchend="touchEnd"
+            style="width:{{width}}px;height:{{height}}px;background-color: rgba(0, 0, 0, 0.8)"
+            canvas-id="{{id}}">
+    </canvas>
+</template>
+<template name="poster">
+    <view class="p-title {{ w == 'w1' ? '' : 'second' }}">{{ t }}</view>
+    <scroll-view class="sv" scroll-x="true">
+        <view class="sv-in" style="width: {{ w }}">
+            <view class="sv-item" wx:for="{{ p }}">
+                <image mode="aspectFill" src="{{ item.img }}"></image>
+                <view data-index="{{ index }}" catchtap="collect" class="sv-i-t">
+                    <text class="sv-i-t-c">编码:{{ item.code }}</text>
+                    <text class="iconfont {{ item.collect == 1 ? 'icon-wuxing1' : 'icon-wuxing orange' }}">{{ item.collect == 1 ? '收藏' : '已收藏' }}</text>
+                </view>
+            </view>
+        </view>
+    </scroll-view>
+</template>

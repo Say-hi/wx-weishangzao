@@ -1,0 +1,11 @@
+<!--一号海报模板-->
+<view class="out">
+    <view class="wrap">
+        <view catchtap="sss" style="position: absolute; top: {{ top }}rpx; left: {{ left }}rpx; width: {{ width }}rpx; height: {{ height }}rpx;" class="img1">
+            <image mode="{{ mode }}" src="../../images/team-bg.png"></image>
+        </view>
+        <view class="bg">
+            <image src="../../images/1.png"></image>
+        </view>
+    </view>
+</view>

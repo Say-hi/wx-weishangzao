@@ -1,0 +1,101 @@
+page {
+  width: 100%;
+  height: 100%;
+}
+
+.mt {
+  width: 100%;
+  height: 80%;
+  //transition: all 2s;
+}
+.mtt {
+  height: 10%;
+}
+
+#map {
+  //margin-top: 50rpx;
+  height: 100%;
+  width: 100%;
+  //position: relative;
+  .near {
+    position: fixed;
+    top: 30rpx;
+    right: 20rpx;
+    padding: 10rpx 20rpx;
+    line-height: 40rpx;
+    font-size: 30rpx;
+    border-radius: 10rpx;
+    background-color: rgba(255,0,0,0.5);
+  }
+}
+
+.user {
+  margin: 0 auto;
+  margin-top: 50rpx;
+  width: 90%;
+  border-radius: 20rpx;
+  background-color: #fff;
+  .user-wrap {
+    background-color: #f00;
+    position: relative;
+    border-top-left-radius: 20rpx;
+    border-top-right-radius: 20rpx;
+    image {
+      position: absolute;
+      top: -50rpx;
+      left: 4%;
+      width: 100rpx;
+      height: 100rpx;
+      border: 4rpx solid #fff;
+      border-radius: 50%;
+    }
+    .user-text {
+      margin-left: 150rpx;
+      line-height: 50rpx;
+      font-size: 24rpx;
+      color: #fff;
+      .icon-06 {
+        position: absolute;
+        top: 20rpx;
+        right: 20rpx;
+        font-size: 40rpx;
+      }
+      .icon-dingwei {
+        font-size: 30rpx;
+      }
+    }
+  }
+  .user-sign {
+    padding: 10rpx;
+    font-size: 30rpx;
+    input {
+      margin: 10rpx 0;
+      border: 1rpx solid #ccc;
+      border-radius: 10rpx;
+    }
+  }
+  .confirm-btn {
+    margin: 20rpx auto;
+    width: 50%;
+    border-radius: 10rpx;
+    //margin-top: 30rpx;
+    text-align: center;
+    background-color: #f00;
+    color: #fff;
+    line-height: 70rpx;
+  }
+  .cancel {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 80rpx);
+    width: 50rpx;
+    line-height: 50rpx;
+    border: 4rpx solid #000;
+    text-align: center;
+    border-radius: 50%;
+  }
+}
+.write {
+  position: relative;
+}

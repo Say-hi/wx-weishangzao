@@ -1,0 +1,37 @@
+page {
+  width: 100%;
+  height: 100%;
+}
+
+.out {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: 60rpx;
+  .wrap {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    background-color: #f00;
+    .img1 {
+      image {
+        width: 100%;
+        height: 100%;
+      }
+      //position: absolute;
+    }
+    .bg {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      pointer-events: none; /*事件穿透*/
+      image {
+        width: 100%;
+        height: 100%;
+        pointer-events: none; /*事件穿透*/
+      }
+    }
+  }
+}

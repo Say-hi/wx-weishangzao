@@ -1,0 +1,19 @@
+<!--海报收藏夹-->
+<view class="out-wrap">
+  <!--左侧导航栏-->
+  <view class="left">
+    <view catchtap="leftChoose" data-index="{{ index }}" class="{{ cur == index ? 'cur' : '' }}" wx:for="{{ leftArr }}">{{ item }}</view>
+  </view>
+  <!--右侧图片显示区域-->
+  <scroll-view scroll-y="{{ scrollY }}" style="height: 100%;">
+    <view style="height: 100%;" class="right">
+      <view class="sv-item" wx:for="{{ p1 }}">
+        <image mode="aspectFill" src="{{ item.img }}"></image>
+        <view data-index="{{ index }}" catchtap="collect" class="sv-i-t">
+          <text class="sv-i-t-c">编码:{{ item.code }}</text>
+          <text class="iconfont {{ item.collect == 1 ? 'icon-wuxing1' : 'icon-wuxing orange' }}">{{ item.collect == 1 ? '收藏' : '已收藏' }}</text>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</view>

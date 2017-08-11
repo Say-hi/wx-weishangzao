@@ -21,12 +21,12 @@ Page({
         img: '../../images/weishang.png'
       },
       {
-        url: '../weimap/weimap',
+        url: '../map/map',
         text: '微商地图',
         img: '../../images/ditu.png'
       },
       {
-        url: '../weihaibao/weihaibao',
+        url: '../posterShow/posterShow',
         text: '海报制作',
         img: '../../images/haibao.png'
       },

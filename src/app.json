@@ -1,14 +1,19 @@
 {
 //  微商造小程序页面分布
   "pages": [
-    "pages/supportPage/supportPage",  // 微商支持页面
+    "pages/posterOne/posterOne", // 1号海报模板
+    "pages/map/map", // 微商地图
+    "pages/index/index", // 主页
+    "pages/posterCollect/posterCollect", // 海报收藏夹
+    "pages/posterShow/posterShow", // 海报展示
+    "pages/supportPage/supportPage",  // 微商人物支持页面
+    "pages/supportTeamPage/supportTeamPage", // 微商团队支持页面
     "pages/applyTeam/applyTeam", // 团队申请
     "pages/upload/upload", // 上传图片
     "pages/weishang/weishang", // 我是微商
     "pages/customization/customization", // 个性化定制
     "pages/ktPoster/ktPoster", // 海报开通
     "pages/homepage/homepage", // 我的微商主页
-    "pages/index/index", // 主页
     "pages/followWs/followWs", // 我关注的微商
     "pages/RHO/RHO", // 我关联的上家
     "pages/relevanceTeam/relevanceTeam", // 我关联的团队

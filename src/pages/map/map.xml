@@ -1,0 +1,43 @@
+<!--微商地图-->
+<!--<view wx:if="{{ show }}" class='near'><text></text><text></text></view>-->
+
+<view class="mt {{ show ? '' : 'mtt' }}">
+    <map id="map" longitude="{{ longitude }}" latitude="{{ latitude }}" scale="14" bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap" bindregionchange="regionchange">
+        <cover-view class="near">
+            <cover-view>{{ join }}人在参与...</cover-view>
+            <cover-view>附近微商5km/{{ nearPeople }}人</cover-view>
+        </cover-view>
+    </map>
+</view>
+<!--用户展示位置-->
+<view wx:if="{{ show }}" class="user">
+    <view class="user-wrap">
+        <image src="{{ user.avatarUrl }}"></image>
+        <view class="user-text">
+            <view>{{ user.nickName || '获取失败' }}</view>
+            <view>微信号:{{ user.number || '尚未填写' }}</view>
+            <view catchtap="edit" class="iconfont icon-06"></view>
+        </view>
+    </view>
+    <view class="user-sign">
+        {{ user.sign || '用户尚未填写内容' }}
+    </view>
+</view>
+<!--用户填写信息-->
+<view wx:if="{{ !show }}" class="write user">
+    <view class="user-wrap">
+        <image src="{{ user.avatarUrl }}"></image>
+        <view class="user-text">
+            <view>{{ user.nickName || '获取失败' }}</view>
+            <view class="iconfont icon-dingwei">{{ address || '定位失败' }}</view>
+        </view>
+    </view>
+    <view class="user-sign">
+        <text>微信号</text>
+        <input data-type="nubmer" bindinput="inputValue" plceholder="输入您的微信号"/>
+        <text>个性签名</text>
+        <input data-type="sign" bindinput="inputValue" plceholder="输入您的个性签名"/>
+    </view>
+    <view class="confirm-btn" catchtap="confirm">保存信息</view>
+    <view catchtap="cancel" class="cancel">×</view>
+</view>
