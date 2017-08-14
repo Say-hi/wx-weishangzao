@@ -1,11 +1,35 @@
 <!--一号海报模板-->
-<view class="out">
-    <view class="wrap">
-        <view catchtap="sss" style="position: absolute; top: {{ top }}rpx; left: {{ left }}rpx; width: {{ width }}rpx; height: {{ height }}rpx;" class="img1">
-            <image mode="{{ mode }}" src="../../images/team-bg.png"></image>
-        </view>
-        <view class="bg">
-            <image src="../../images/1.png"></image>
-        </view>
-    </view>
+<!--全屏移动-->
+<view class="wrap">
+    <movable-area class="oneWrapOut">
+        <movable-view class="oneWrap" direction="all" out-of-bounds="true">
+            <image
+                    bindtouchstart="touchStart"
+                    bindtouchmove="touchMove"
+                    bindtouchend="touchEnd"
+                    catchtap="changePic"
+                    style="width: 750rpx; height: 770rpx; transform: translate(-50%, -50%) scale({{ scaleOne }});"
+                    data-type="one"
+                    class="one"
+                    mode="{{ mode }}"
+                    src="{{ one }}">
+            </image>
+        </movable-view>
+    </movable-area>
+    <movable-area class="twoWrapOut">
+        <movable-view class="twoWrap" direction="all" out-of-bounds="true">
+            <image
+                    bindtouchstart="touchStart"
+                    bindtouchmove="touchMove"
+                    bindtouchend="touchEnd"
+                    catchtap="changePic"
+                    style="width: 120rpx; height: 120rpx; transform: translate(-50%, -50%) scale({{ scaleTwo }});"
+                    data-type="two"
+                    class="two"
+                    mode="{{ mode }}"
+                    src="{{ one }}">
+            </image>
+        </movable-view>
+    </movable-area>
+    <image class="bg" src="../../images/1.png"></image>
 </view>

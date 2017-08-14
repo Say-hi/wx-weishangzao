@@ -1,9 +1,11 @@
 {
 //  微商造小程序页面分布
   "pages": [
+    "pages/sale/sale", // 我清货神器
+    "pages/index/index", // 主页
+//    "pages/demo/demo", // demo
     "pages/posterOne/posterOne", // 1号海报模板
     "pages/map/map", // 微商地图
-    "pages/index/index", // 主页
     "pages/posterCollect/posterCollect", // 海报收藏夹
     "pages/posterShow/posterShow", // 海报展示
     "pages/supportPage/supportPage",  // 微商人物支持页面

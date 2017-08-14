@@ -1,5 +1,5 @@
 // Window configuration
 // https://mp.weixin.qq.com/debug/wxadoc/dev/framework/config.html#window
 {
-  "navigationBarTitleText": "海报编辑"
+  "navigationBarTitleText": "海报编辑-编辑完成后自助截屏"
 }

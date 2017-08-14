@@ -1,0 +1,11 @@
+<!--我的清货神器-->
+<view>
+  <!--顶部轮播图-->
+  <swiper class="carousel" indicator-dots="{{ dots }}" circular="{{ circular }}" autoplay="true" interval="5000" duration="1000">
+    <block wx:for="{{ imgUrls }}">
+      <swiper-item>
+        <image mode="aspectFill" src="{{ item }}" class="slide-image" />
+      </swiper-item>
+    </block>
+  </swiper>
+</view>
