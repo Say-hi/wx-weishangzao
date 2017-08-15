@@ -85,9 +85,7 @@ App({
                 encryptedData: encryptedData
               },
               success (session) {
-                let session_key = 'akljgaajgoehageajnafe'
-                wx.setStorageSync('session_key', session_key)
-                // console.log(session)
+                wx.setStorageSync('session_key', session.data.data.session_key)
                 if (loginSuccess) {
                   loginSuccess(params)
                 }

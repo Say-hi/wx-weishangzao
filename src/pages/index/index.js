@@ -26,8 +26,8 @@ Page({
         img: '../../images/ditu.png'
       },
       {
-        url: '../posterShow/posterShow',
-        text: '海报制作',
+        url: '../ranking/ranking',
+        text: '历史排行',
         img: '../../images/haibao.png'
       },
       {
@@ -36,7 +36,7 @@ Page({
         img: '../../images/qinghuo.png'
       }
     ],
-    rankNavArr: ['总影响力', '支持度最高', '代理最多'], // rank-nav标题
+    rankNavArr: ['总影响力', '支持度最高', '担保金最多'], // rank-nav标题
     curRankNav: 0, // rank-nav当前选择项
     rankContentList: [
       {
@@ -56,6 +56,14 @@ Page({
         td: 213
       }
     ]
+  },
+  // 底部导航url
+  chooseOperation (e) {
+    if (e.currentTarget.dataset.type === 'right') {
+      wx.navigateTo({
+        url: '../user/user'
+      })
+    }
   },
   // 获取当前月份
   curMonth () {

@@ -1,3 +1,4 @@
+<!--头像裁剪-->
 <template name="weCropper">
     <canvas
             class="cropper"
@@ -9,6 +10,7 @@
             canvas-id="{{id}}">
     </canvas>
 </template>
+<!--海报-->
 <template name="poster">
     <view class="p-title {{ w == 'w1' ? '' : 'second' }}">{{ t }}</view>
     <scroll-view class="sv" scroll-x="true">
@@ -23,3 +25,4 @@
         </view>
     </scroll-view>
 </template>
+<!--底部导航-->

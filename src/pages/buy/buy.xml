@@ -1,0 +1,9 @@
+<!--我买到的-->
+<view>
+
+</view>
+
+<view class="no">
+<image src="../../images/release.png"></image>
+<view>亲，这里是空的哟~</view>
+</view>

@@ -1,0 +1,34 @@
+<!--发布产品-->
+<view class="product">
+  <input class="p-i" bindinput="inputValue" data-type="title" placeholder="标题 输入商品名称"/>
+  <input class="p-i" type="digit" bindinput="inputValue" data-type="money" placeholder="零售价"/>
+  <input class="p-i" type="number" bindinput="inputValue" data-type="count" placeholder="数量"/>
+  <picker class="p-i" mode="date" value="{{date}}" start="{{ starTime }}" end="{{ endTime }}" bindchange="bindDateChange">
+    <view class="picker">
+      过期时间 {{ time }}
+    </view>
+  </picker>
+  <input class="p-i" bindinput="inputValue" data-type="full" placeholder="产品完整性"/>
+  <textarea class="p-i p-it" bindinput="inputValue" data-type="introduce" placeholder="描述一下产品"></textarea>
+  <image class="p-img" wx:for="{{ imgArr }}"></image>
+  <view class="p-u">
+    <image class="p-up-img" src="{{ item }}" wx:for="{{ upImg }}"></image>
+    <image class="p-up" src="../../images/team-up.png"></image>
+  </view>
+</view>
+
+<view class="product-bottom">
+  <view style="height: 86rpx"></view>
+  <view class="p-b-m"><view>￥</view><input type="digit" bindinput="inputValue" data-type="allMoney" placeholder="输入价格"/></view>
+
+  <picker bindchange="bindPickerChange" value="{{ index }}" range="{{ array }}">
+    <view class="p-type">
+      <view>分类</view>
+      <view class="arrow">
+        {{array[index]}}
+      </view>
+    </view>
+  </picker>
+
+  <view class="confirm-btn">确定发布</view>
+</view>

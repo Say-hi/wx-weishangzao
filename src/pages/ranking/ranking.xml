@@ -35,7 +35,7 @@
         <text>{{ item.name }}</text>
       </view>
       <view class="rca-number {{ index > 2 ? 'noColor' : '' }} {{ curRankNav == 0 ? 'rcl-b-a' : curRankNav == 1 ? 'rcl-b-b' : curRankNav == 2 ? 'rcl-b-c' : ''}}">
-        {{ curRankNav == 0 ? '影响力:' : curRankNav == 1 ? '支持度:' : curRankNav == 2 ? '团队代理:' : ''}}{{ item.number }}
+        {{ curRankNav == 0 ? '影响力:' : curRankNav == 1 ? '支持度:' : curRankNav == 2 ? '保证金:' : ''}}{{ item.number }}
       </view>
     </view>
     <navigator class="goSupport" url="../wsdetail/wsdetail?id={{ item.user_id }}">支持TA</navigator>

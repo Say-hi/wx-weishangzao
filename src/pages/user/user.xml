@@ -11,7 +11,7 @@
     <navigator class="user-operation" url="{{ item.url }}">
       <image src="{{ item.icon }}"></image>
       <text>{{ item.text }}</text>
-      <text catchtap="kaiTongPoster" class="poster" wx:if="{{ index == 1 }}">{{ poster_time || '点击开通' }}</text>
+      <!--<text catchtap="kaiTongPoster" class="poster" wx:if="{{ index == 1 }}">{{ poster_time || '点击开通' }}</text>-->
     </navigator>
   </block>
 </view>

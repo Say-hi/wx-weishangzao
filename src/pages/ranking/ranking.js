@@ -9,7 +9,7 @@ Page({
   data: {
     value: [], // picker值
     months: [], // 可选月份值
-    rankNavArr: ['总影响力', '支持度最高', '代理最多'], // rank-nav标题
+    rankNavArr: ['总影响力', '支持度最高', '保证金最多'], // rank-nav标题
     curRankNav: 0, // rank-nav当前选择项
     rankContentArr: [
       {

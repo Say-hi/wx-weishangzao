@@ -57,8 +57,18 @@
       <view class="rcl-bottom">
         <view class="rcl-b-a">影响力:{{ item.yx }}</view>
         <view class="rcl-b-b">支持度:{{ item.zc }}</view>
-        <view class="rcl-b-c">团队代理:{{ item.td }}</view>
+        <view class="rcl-b-c">担保金:{{ item.td }}</view>
       </view>
     </view>
   </view>
+</view>
+
+<!--消息浮窗-->
+<image style="position:fixed; bottom: 140rpx; right: 60rpx; width: 86rpx; height: 86rpx; border-radius: 50%;" catchtap="message" src="../../images/message.png"></image>
+<!--底部导航-->
+<view style="height: 98rpx; width: 100%;"></view>
+<view class="static-bottom">
+  <image data-type="left" catchtap="chooseOperation" class="l" src="../../images/home_hl.png"></image>
+  <image data-type="center" catchtap="chooseOperation" class="c" src="../../images/fabu.png"></image>
+  <image data-type="right" catchtap="chooseOperation" class="r" src="../../images/user.png"></image>
 </view>

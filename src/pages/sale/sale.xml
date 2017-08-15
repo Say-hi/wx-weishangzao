@@ -8,4 +8,43 @@
       </swiper-item>
     </block>
   </swiper>
+  <!--搜索框-->
+  <view class="search">
+    <view class="iconfont icon-sousuo"></view>
+    <input bindconfirm="search" confirm-type="search" class="search-input" placeholder="请输入您需要商品名称" />
+    <view class="iconfont icon-xinxi"></view>
+  </view>
+  <!--分类导航-->
+  <view class="type">
+    <view catchtap="typeChoose" data-index="2" class="{{ curChoose == 1 ? '' : 'cur' }}">最新发布</view>
+    <view catchtap="typeChoose" data-index="1" class="{{ curChoose == 1 ? 'cur' : '' }}">最高担保</view>
+  </view>
+  <!--商品区间-->
+  <view class="shop" wx:for="{{ products }}" wx:for-item="item">
+    <!--发布用户信息-->
+    <view class="s-u">
+      <image wx:if="{{ curChoose == 1 }}" class="lv" src="../../images/lv5.png"></image>
+      <image class="br" src="{{ item.img }}"></image>
+      <view class="s-u-t">
+        <view>{{ item.name }}</view>
+        <view>{{ item.time }}</view>
+      </view>
+      <text class="s-u-p">￥{{ item.price }}</text>
+    </view>
+    <!--中间图片-->
+    <view class="s-c">
+      <image mode="aspectFill" class="s-c-i" src="{{ p }}" wx:for="{{ item.photos }}" wx:for-item="p"></image>
+    </view>
+    <!--介绍文字-->
+    <view class="s-t ell">{{ item.introduce }}</view>
+    <!--评论-->
+    <view class="comment iconfont icon-liuyan1">{{ item.comment_count }}</view>
+  </view>
+  <!--底部导航-->
+  <view style="height: 80rpx; width: 100%;"></view>
+  <view class="static-bottom">
+    <image data-type="left" catchtap="chooseOperation" class="l" src="../../images/home_hl.png"></image>
+    <image data-type="center" catchtap="chooseOperation" class="c" src="../../images/fabu.png"></image>
+    <image data-type="right" catchtap="chooseOperation" class="r" src="../../images/user.png"></image>
+  </view>
 </view>

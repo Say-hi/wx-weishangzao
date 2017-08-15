@@ -1,0 +1,10 @@
+<!--我发布的-->
+<view>
+
+</view>
+
+<view class="no">
+  <image src="../../images/release.png"></image>
+  <view>还没有发布宝贝哦~</view>
+  <view catchtap="goRelease" class="release-btn">发布宝贝</view>
+</view>
