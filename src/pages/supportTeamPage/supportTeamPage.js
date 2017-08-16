@@ -15,7 +15,7 @@ Page({
     user: {
       img: 'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg',
       name: '国际团队',
-      number: 'awxasdf',
+      number: '123456',
       influence: 234,
       agency: 123,
       support: 1232,

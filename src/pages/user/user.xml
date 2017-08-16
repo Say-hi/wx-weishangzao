@@ -3,15 +3,67 @@
   <!--个人信息顶部-->
   <view class="user-top">
     <image class="bg" src="../../images/user-bg.png"></image>
+    <image class="lv" src="../../images/p1.png"></image>
     <image class="user-img br" src="{{ userInfo.avatarUrl }}"></image>
     <text class="user-name">{{ userInfo.nickName }}</text>
   </view>
   <!--用户操作-->
-  <block wx:for="{{ operationArr }}">
-    <navigator class="user-operation" url="{{ item.url }}">
-      <image src="{{ item.icon }}"></image>
-      <text>{{ item.text }}</text>
-      <!--<text catchtap="kaiTongPoster" class="poster" wx:if="{{ index == 1 }}">{{ poster_time || '点击开通' }}</text>-->
-    </navigator>
-  </block>
+  <view class="op">
+    <view>
+      <navigator url="../tixian/tixian">
+        <image src="../../images/lq.png"></image>
+        <text>零钱: 500</text>
+      </navigator>
+    </view>
+    <view catchtap="showMask">
+      <image src="../../images/qd.png"></image>
+      <text>担保金: 5000</text>
+    </view>
+  </view>
+
+  <view class="clearfix">
+    <block wx:for="{{ operationArr }}">
+      <navigator class="user-operation" url="{{ item.url }}">
+        <image src="{{ item.icon }}"></image>
+        <text>{{ item.text }}</text>
+        <!--<text catchtap="kaiTongPoster" class="poster" wx:if="{{ index == 1 }}">{{ poster_time || '点击开通' }}</text>-->
+      </navigator>
+    </block>
+  </view>
+
+  <view class="title">我的清货神器</view>
+  <navigator wx:for="{{ saleArr }}" class="user-operation sale-operation" url="{{ item.url }}">
+    <image src="{{ item.icon }}"></image>
+    <text>{{ item.text }}</text>
+    <!--<text catchtap="kaiTongPoster" class="poster" wx:if="{{ index == 1 }}">{{ poster_time || '点击开通' }}</text>-->
+  </navigator>
+</view>
+
+        <!--底部导航-->
+<view style="height: 98rpx; width: 100%;"></view>
+<view class="static-bottom">
+<image data-type="left" catchtap="chooseOperation" class="l" src="../../images/home.png"></image>
+<image data-type="center" catchtap="chooseOperation" class="c" src="../../images/fabu.png"></image>
+<image data-type="right" catchtap="chooseOperation" class="r" src="../../images/user_hl.png"></image>
+</view>
+
+<view wx:if="{{ mask }}" class="mask">
+  <view class="mask-in zoomIn animated">
+    <view>担保金: 5000</view>
+    <view class="mask-btn">
+      <view catchtap="maskOp" data-type="cancel">取消</view>
+      <view catchtap="maskOp" data-type="confirm">充值</view>
+    </view>
+  </view>
+</view>
+
+<view wx:if="{{ mask2 }}" class="mask">
+  <view class="mask-in">
+    <view>充值担保金</view>
+    <view><input bindinput="inputValue" type="nubmer" placeholder="请输入金额" /></view>
+    <view class="mask-btn">
+      <view catchtap="maskOp" data-type="cancel">取消</view>
+      <view catchtap="charge" data-type="charge">充值</view>
+    </view>
+  </view>
 </view>

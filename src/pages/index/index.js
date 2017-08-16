@@ -31,7 +31,7 @@ Page({
         img: '../../images/haibao.png'
       },
       {
-        url: '../qinghuo/qinghuo',
+        url: '../sale/sale',
         text: '清货神器',
         img: '../../images/qinghuo.png'
       }
@@ -57,11 +57,21 @@ Page({
       }
     ]
   },
+  // 消息跳转
+  message () {
+    wx.navigateTo({
+      url: '../message/message'
+    })
+  },
   // 底部导航url
   chooseOperation (e) {
     if (e.currentTarget.dataset.type === 'right') {
-      wx.navigateTo({
+      wx.redirectTo({
         url: '../user/user'
+      })
+    } else if (e.currentTarget.dataset.type === 'center') {
+      wx.navigateTo({
+        url: '../release/release'
       })
     }
   },

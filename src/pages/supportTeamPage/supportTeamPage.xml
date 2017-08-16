@@ -16,11 +16,12 @@
 </swiper>
 <!--用户信息-->
 <view class="user">
+  <view class="lv t2"></view>
   <image class="user-img br" src="{{ user.img }}"></image>
   <!--用户名和微信号-->
   <view class="user-info">
     <text>{{ user.name }}</text>
-    <!--<text>微信号: {{ user.number }}</text>-->
+    <text>担保金额: {{ user.number }}</text>
   </view>
   <view class="user-btn">
     <text> 关联团队 </text>

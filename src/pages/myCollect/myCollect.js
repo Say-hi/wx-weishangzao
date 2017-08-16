@@ -7,13 +7,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    dots: false, // 轮播图是否显示点
-    circular: true, // 轮播衔接
-    imgUrls: [
-      'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-      'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-      'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
-    ],
     products: [
       {
         img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
@@ -43,29 +36,7 @@ Page({
       }
     ]
   },
-  chooseOperation (e) {
-    if (e.currentTarget.dataset.type === 'right') {
-      wx.navigateTo({
-        url: '../user/user'
-      })
-    } else if (e.currentTarget.dataset.type === 'center') {
-      wx.navigateTo({
-        url: '../release/release'
-      })
-    }
-  },
-  // 类型选择切换
-  typeChoose (e) {
-    this.setData({
-      curChoose: e.currentTarget.dataset.index
-    })
-  },
-  // 搜索输入框搜索
-  search (e) {
-    this.setData({
-      searchValue: e.detail.value
-    })
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */

@@ -2,9 +2,32 @@
 // const Promise = require('./utils/bluebird')
 /*eslint-disable*/
 const useUrl = require('./utils/service')
+const Moment = require('./utils/moment')
+Moment.locale('en', {
+  relativeTime : {
+    future: "差 %s",
+    past:   "%s前",
+    s:  "秒",
+    m:  "一分钟",
+    mm: "%d分钟",
+    h:  "一小时",
+    hh: "%d小时",
+    d:  "一天",
+    dd: "%d天",
+    M:  "一个月",
+    MM: "%d月",
+    y:  "一年",
+    yy: "%d年"
+  }
+});
+// moment.locale('zh-cn')
 App({
   data: {
     name: '微商造'
+  },
+  // 解析时间
+  moment (time) {
+    return Moment(time, 'YYYYMMDD HH:mm:ss').fromNow()
   },
   // 发起微信支付
   wxpay (obj) {

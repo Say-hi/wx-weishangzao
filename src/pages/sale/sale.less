@@ -85,6 +85,7 @@ page {
 
 .shop {
   padding: 20rpx;
+  padding-bottom: 0rpx;
   border-bottom: 20rpx solid #eee;
   .s-u {
     display: flex;
@@ -92,11 +93,8 @@ page {
     margin-bottom: 17rpx;
     position: relative;
     .lv {
-      position: absolute;
-      width: 74rpx;
-      height: 16rpx;
       bottom: -2rpx;
-      left: 16rpx;
+      left: -10rpx;
     }
     .br {
       width: 110rpx;
@@ -139,6 +137,12 @@ page {
     text-align: right;
     font-size: 36rpx;
     color: #999;
+    display: flex;
+    > view:nth-child(1) {
+      font-size: 26rpx;
+      text-align: left;
+      flex: 1;
+    }
   }
   .icon-liuyan1::before {
     margin-right: 20rpx;

@@ -1,19 +1,22 @@
 {
 //  微商造小程序页面分布
   "pages": [
+    "pages/index/index", // 主页
+    "pages/detail/detail", // 宝贝详情
+    "pages/supportTeamPage/supportTeamPage", // 微商团队支持页面
+    "pages/sale/sale", // 我清货神器
+    "pages/myCollect/myCollect", // 我的收藏
+    "pages/buy/buy", // 我买到的
+    "pages/mySale/mySale", // 我卖出的
+    "pages/user/user", // 个人中心
     "pages/release/release", // 发布产品
     "pages/message/message", // 消息
-    "pages/sale/sale", // 我清货神器
-    "pages/index/index", // 主页
-    "pages/mySale/mySale", // 我卖出的
     "pages/map/map", // 微商地图
-    "pages/buy/buy", // 我买到的
     "pages/releaseProduct/releaseProduct", // 我发布的产品
     "pages/posterOne/posterOne", // 1号海报模板
 //    "pages/posterCollect/posterCollect", // 海报收藏夹
 //    "pages/posterShow/posterShow", // 海报展示
     "pages/supportPage/supportPage",  // 微商人物支持页面
-    "pages/supportTeamPage/supportTeamPage", // 微商团队支持页面
     "pages/applyTeam/applyTeam", // 团队申请
     "pages/upload/upload", // 上传图片
     "pages/weishang/weishang", // 我是微商
@@ -24,7 +27,6 @@
     "pages/RHO/RHO", // 我关联的上家
     "pages/relevanceTeam/relevanceTeam", // 我关联的团队
     "pages/relevanceAgent/relevanceAgent", // 关联我的代理
-    "pages/user/user", // 个人中心
     "pages/ruler/ruler", // 规则
     "pages/ranking/ranking" // 排行榜
     // Dont remove this comment

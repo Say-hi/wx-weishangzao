@@ -12,7 +12,7 @@
   <view class="search">
     <view class="iconfont icon-sousuo"></view>
     <input bindconfirm="search" confirm-type="search" class="search-input" placeholder="请输入您需要商品名称" />
-    <view class="iconfont icon-xinxi"></view>
+    <navigator url="../message/message" class="iconfont icon-xinxi"></navigator>
   </view>
   <!--分类导航-->
   <view class="type">
@@ -20,14 +20,14 @@
     <view catchtap="typeChoose" data-index="1" class="{{ curChoose == 1 ? 'cur' : '' }}">最高担保</view>
   </view>
   <!--商品区间-->
-  <view class="shop" wx:for="{{ products }}" wx:for-item="item">
+  <navigator url="../detail/detail?id={{ item.id }}" class="shop" wx:for="{{ products }}" wx:for-item="item">
     <!--发布用户信息-->
     <view class="s-u">
-      <image wx:if="{{ curChoose == 1 }}" class="lv" src="../../images/lv5.png"></image>
+      <!--<image class="lv" src=""></image>-->
+      <view class="lv t1"></view>
       <image class="br" src="{{ item.img }}"></image>
       <view class="s-u-t">
         <view>{{ item.name }}</view>
-        <view>{{ item.time }}</view>
       </view>
       <text class="s-u-p">￥{{ item.price }}</text>
     </view>
@@ -38,8 +38,11 @@
     <!--介绍文字-->
     <view class="s-t ell">{{ item.introduce }}</view>
     <!--评论-->
-    <view class="comment iconfont icon-liuyan1">{{ item.comment_count }}</view>
-  </view>
+    <view class="comment">
+      <view>发布于: {{ item.time }}</view>
+      <view class="iconfont icon-liuyan1">{{ item.comment_count }}</view>
+    </view>
+  </navigator>
   <!--底部导航-->
   <view style="height: 80rpx; width: 100%;"></view>
   <view class="static-bottom">

@@ -1,0 +1,47 @@
+<!--宝贝详情-->
+<view class='detail'>
+    <view class="d-top">
+        <view class='lv t2'></view>
+        <image class='br' src='{{ img }}'></image>
+        <view class='user'>
+            <view>{{ name }}</view>
+            <view>{{ time }}</view>
+        </view>
+        <view class='price'>￥{{ price }}</view>
+    </view>
+    <view class='info'>
+        <view wx:for='{{ info }}'>{{ item.t }}{{ index == 5 ? '' : ':' }} {{ item.c }}</view>
+    </view>
+    <view class='d-i'>{{ introduce }}</view>
+    <image mode="widthFix" wx:for='{{ imageArr }}' src='{{ item }}'></image>
+</view>
+
+<view class='comment'>
+    <view class='c-t'>留言 {{ nubmer }}</view>
+    <view class='c-c' wx:for='{{ commentArr }}'>
+        <view class='c-w'>
+            <view class='lv p2'></view>
+            <image class='br' src='{{ item.img }}'></image>
+            <text>{{ item.name }}</text>
+        </view>
+        <view class='c-r'>{{ item.reply }}</view>
+        <view class='c-ti'>{{ item.time }}</view>
+    </view>
+</view>
+
+<view style='height: 88rpx;'></view>
+
+<view class='f-b'>
+    <view catchtap='bottomOp' data-type='collect' class='iconfont icon-wuxing1'>收藏</view>
+    <view catchtap='bottomOp' data-type='comment' class='iconfont icon-liuyan'>留言</view>
+    <view catchtap='bottomOp' data-type='share' class='iconfont icon-fenxiang'>分享有礼</view>
+    <!--<button open-type='share' class='iconfont icon-fenxiang'>分享有礼</button>-->
+    <view catchtap='bottomOp' data-type='want' class='want'>我想要</view>
+</view>
+
+<view wx:if="{{ shareMask }}" class="mask">
+    <view class="mask-in">
+        <text>分享好友 产生购买可获得该产品清货价10%佣金奖励</text>
+        <button open-type="share">确定</button>
+    </view>
+</view>

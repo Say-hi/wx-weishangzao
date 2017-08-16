@@ -7,9 +7,44 @@ Page({
    * 页面的初始数据
    */
   data: {
-    title: 'buy'
+    sealArr: [
+      {
+        img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+        name: '一脸油菜',
+        price: 150,
+        status: 0
+      },
+      {
+        img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+        name: '一脸油菜',
+        price: 150,
+        status: 1
+      },
+      {
+        img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+        name: '一脸油菜',
+        price: 150,
+        status: 2
+      }
+    ]
   },
-
+  // 确认收货
+  confirm (e) {
+    // todo
+  },
+  // 关闭弹窗
+  mOp () {
+    this.setData({
+      mask: false
+    })
+  },
+  // 查看快递
+  check (e) {
+    // todo
+    this.setData({
+      mask: true
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

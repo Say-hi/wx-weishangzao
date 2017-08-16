@@ -1,9 +1,33 @@
 <!--我买到的-->
-<view>
-
+<view class="seal" wx:for="{{ sealArr  }}">
+    <image mode="aspectFill" src="{{ item.img }}"></image>
+    <view class="s-c">
+        <view>{{ item.name }}</view>
+        <view class="s-c-p">￥{{ item.price }}</view>
+        <view class="{{ item.status <= 1 ? 'iconfont icon-duihaoyuan' : 'fis' }}">{{ item.status <= 1 ? '交易成功' : '已收货' }}</view>
+    </view>
+    <view wx:if="{{ item.status <= 1 }}" data-id="{{ item.id }}" catchtap="confirm" data-status="{{ item.status }}" class="send-btn">{{ item.status == 0 ? '商家处理中' : '确认收货' }}</view>
+    <view wx:if="{{ item.status == 1 }}" data-id="{{ item.id }}" catchtap="check" class="send-btn check">查看快递</view>
+    <view wx:if="{{ item.status == 2 }}" data-id="{{ item.id }}" catchtap="check" class="send-btn jubao">举报</view>
 </view>
 
-<view class="no">
+<view wx:if="{{ sealArr.length == 0 }}" class="no">
 <image src="../../images/release.png"></image>
 <view>亲，这里是空的哟~</view>
+</view>
+
+<view wx:if="{{ mask }}" class="mask">
+<view class="mask-in animated zoomIn">
+    <view data-type="cancel" catchtap="mOp" class="br">×</view>
+    <view class="title">客户收货信息</view>
+    <input value="{{ name }}"/>
+    <input value="{{ phone }}" />
+    <input value="{{ address }}"/>
+    <view class="title">发货快递信息</view>
+    <view>快递公司</view>
+    <input value="{{ express }}"/>
+    <view>快递单号</view>
+    <input value="{{ expressnumber }}"/>
+    <view data-type="confirm" catchtap="mOp" class="m-confirm">关闭</view>
+</view>
 </view>

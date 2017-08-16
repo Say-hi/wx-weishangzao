@@ -1,9 +1,31 @@
-<!--我买到的-->
-<view>
-
+<!--我卖出的-->
+<view class="seal" wx:for="{{ sealArr  }}">
+    <image mode="aspectFill" src="{{ item.img }}"></image>
+    <view class="s-c">
+        <view>{{ item.name }}</view>
+        <view class="s-c-p">￥{{ item.price }}</view>
+        <view class="{{ item.status <= 1 ? 'iconfont icon-duihaoyuan' : 'finish' }}">{{ item.status <= 1 ? '交易成功' : '对方已确认收货 该订单已结束' }}</view>
+    </view>
+    <view wx:if="{{ item.status <= 1 }}" catchtap="send" data-status="{{ item.status }}" class="send-btn">{{ item.status == 0 ? '确认发货' : '发货中' }}</view>
 </view>
 
-<view class="no">
-<image src="../../images/release.png"></image>
-<view>亲，这里是空的哟~</view>
+<view wx:if="{{ sealArr.length == 0 }}" class="no">
+    <image src="../../images/release.png"></image>
+    <view>亲，这里是空的哟~</view>
+</view>
+
+<view wx:if="{{ mask }}" class="mask">
+    <view class="mask-in animated zoomIn">
+        <view data-type="cancel" catchtap="mOp" class="br">×</view>
+        <view class="title">客户收货信息</view>
+        <input bindinput="inputValue" value="{{ name }}" data-type="name" placeholder="输入收货人姓名"/>
+        <input bindinput="inputValue" value="{{ phone }}" data-type="phone" type="number" placeholder="输入收货人电话"/>
+        <input bindinput="inputValue" value="{{ address }}" data-type="address" placeholder="输入收货人详细地址"/>
+        <view class="title">发货快递信息</view>
+        <view>快递公司</view>
+        <input bindinput="inputValue" value="{{ express }}" data-type="express" placeholder="输入快递公司"/>
+        <view>快递单号</view>
+        <input bindinput="inputValue" value="{{ expressnumber }}" data-type="expressnumber" placeholder="输入快递单号"/>
+        <view data-type="confirm" catchtap="mOp" class="m-confirm">确定发货</view>
+    </view>
 </view>

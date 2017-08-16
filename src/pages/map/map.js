@@ -15,7 +15,7 @@ Page({
       id: 1,
       iconPath: '/resources/location.png',
       position: {
-        left: 0,
+        right: 0,
         top: 250,
         width: 50,
         height: 50
