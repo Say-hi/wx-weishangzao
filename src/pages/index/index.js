@@ -1,5 +1,6 @@
 // 获取全局应用程序实例对象
-// const app = getApp()
+const app = getApp()
+const serviceUrl = require('../../utils/service')
 
 // 创建页面实例对象
 Page({
@@ -55,7 +56,8 @@ Page({
         zc: 112,
         td: 213
       }
-    ]
+    ],
+    orderArr: ['effect_num', 'support_count', 'money_count']
   },
   // 消息跳转
   message () {
@@ -71,7 +73,7 @@ Page({
       })
     } else if (e.currentTarget.dataset.type === 'center') {
       wx.navigateTo({
-        url: '../release/release'
+        url: '../faburuler/faburuler'
       })
     }
   },
@@ -110,6 +112,31 @@ Page({
     this.setData({
       curRankNav: e.currentTarget.dataset.index
     })
+  },
+  // 获取轮播图
+  getCarousel () {
+    let obj = {
+      url: serviceUrl.getBanners,
+      data: {
+        session_key: wx.getStorageSync('session_key')
+      },
+      success (res) {
+        console.log(res)
+      }
+    }
+    app.wxrequest(obj)
+  },
+  // 获取排行榜
+  getRank (keyword) {
+    let objj = {
+      url: serviceUrl.index,
+      data: {
+        session_key: wx.getStorageSync('session_key'),
+        keyword: keyword,
+        order: order,
+        type: type || 0
+      }
+    }
   },
   /**
    * 生命周期函数--监听页面加载

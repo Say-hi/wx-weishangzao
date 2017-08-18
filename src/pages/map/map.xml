@@ -2,7 +2,7 @@
 <!--<view wx:if="{{ show }}" class='near'><text></text><text></text></view>-->
 
 <view class="mt {{ show ? '' : 'mtt' }}">
-    <map id="map" longitude="{{ longitude }}" latitude="{{ latitude }}" scale="14" bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap" bindregionchange="regionchange">
+    <map id="map" longitude="{{ longitude }}" latitude="{{ latitude }}" scale="14" controls="{{ controls }}" bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap" bindregionchange="regionchange">
         <cover-view class="near">
             <cover-view>{{ join }}人在参与...</cover-view>
             <cover-view>附近微商5km/{{ nearPeople }}人</cover-view>

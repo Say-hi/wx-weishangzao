@@ -13,25 +13,18 @@ Page({
     markers: [],
     controls: [{
       id: 1,
-      iconPath: '/resources/location.png',
+      iconPath: '../../images/near.png',
       position: {
-        right: 0,
-        top: 250,
-        width: 50,
-        height: 50
+        left: 270,
+        top: 100,
+        width: 90,
+        height: 30
       },
       clickable: true
     }],
     join: 123,
     nearPeople: 12,
     show: true
-    // user: {
-    //   img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-    //   name: '阿斯兰的风景',
-    //   number: 'wx123123',
-    //   sign: '爱的发生的发生的发生地方',
-    //   location: 'asdfsadfsdafsd'
-    // }
   },
   // 获取地图中心
   getMapCenter () {
@@ -49,6 +42,8 @@ Page({
         }
         that.data.markers.push(obj)
         that.setData({
+          latitude: res.latitude,
+          longitude: res.longitude,
           markers: that.data.markers
         })
       }
@@ -66,10 +61,9 @@ Page({
     console.log(`点击标记${e.markerId}`)
   },
   // 点击控件
-  controltap (e) {
-    console.log(`点击控件${e.controlId}`)
-    this.setData({
-      show: false
+  controltap () {
+    wx.navigateTo({
+      url: '../near/near?lat=' + this.data.latitude + '&lng=' + this.data.longitude
     })
   },
   // 编辑信息
