@@ -18,7 +18,7 @@
 
 <view class='comment'>
     <view class='c-t'>留言 {{ nubmer }}</view>
-    <view class='c-c' wx:for='{{ commentArr }}'>
+    <view catchtap="replyComment" data-id="{{ item.id }}" class='c-c' wx:for='{{ commentArr }}'>
         <view class='c-w'>
             <view class='lv p2'></view>
             <image class='br' src='{{ item.img }}'></image>
@@ -32,16 +32,46 @@
 <view style='height: 88rpx;'></view>
 
 <view class='f-b'>
-    <view catchtap='bottomOp' data-type='collect' class='iconfont icon-wuxing1'>收藏</view>
+    <view catchtap='bottomOp' data-type='collect' class="iconfont {{ shoucang ? 'icon-wuxing1' : 'icon-wuxing' }}">{{ shoucang ? '收藏' : '已收藏' }}</view>
     <view catchtap='bottomOp' data-type='comment' class='iconfont icon-liuyan'>留言</view>
     <view catchtap='bottomOp' data-type='share' class='iconfont icon-fenxiang'>分享有礼</view>
     <!--<button open-type='share' class='iconfont icon-fenxiang'>分享有礼</button>-->
     <view catchtap='bottomOp' data-type='want' class='want'>我想要</view>
 </view>
 
-<view wx:if="{{ shareMask }}" class="mask">
-    <view class="mask-in">
+<view catchtap='delMask' wx:if="{{ shareMask }}" class="mask">
+    <view class="mask-in animated zoomIn">
         <text>分享好友 产生购买可获得该产品清货价10%佣金奖励</text>
         <button open-type="share">确定</button>
     </view>
 </view>
+
+<view wx:if="{{ messageMaask }}" class="mask">
+    <view class="mask-in mask-comment animated zoomIn">
+        <input bindinput="inputValue" placeholder="{{ reply ? '请输入您的回复' : '请输入您的留言' }}"/>
+        <view class="btn-wrap">
+            <button catchtap="delMask">取消</button>
+            <button catchtap="sendComment">确定</button>
+        </view>
+    </view>
+</view>
+
+<view wx:if="{{ buyMask }}" class="mask">
+    <view class="mask-in mask-comment animated zoomIn" style="text-align: center">
+        <view>您要购买的数量</view>
+        <view class="count">
+            <view catchtap="countNumber" data-type="del" class="br">-</view>
+            <view class="count-n">{{ count }}</view>
+            <view catchtap="countNumber" data-type="add" class="br">+</view>
+        </view>
+        <view class="money">金额:{{ money }}元</view>
+        <view class="btn-wrap">
+            <button catchtap="delMask">取消</button>
+            <button catchtap="pay">确定</button>
+        </view>
+    </view>
+</view>
+
+<!--<view class="mask">-->
+
+<!--</view>-->

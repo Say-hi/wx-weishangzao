@@ -1,9 +1,14 @@
 <!--我发布的-->
-<view>
-
+<view class="seal" wx:for="{{ sealArr  }}">
+  <image mode="aspectFill" src="{{ item.img }}"></image>
+  <view class="s-c">
+    <view>{{ item.name }}</view>
+    <view class="s-c-p">￥{{ item.price }}</view>
+  </view>
+  <view catchtap="send" data-id="{{ item.id }}" class="send-btn">编辑</view>
 </view>
 
-<view class="no">
+<view wx:if="{{ sealArr.length == 0 }}" class="no">
   <image src="../../images/release.png"></image>
   <view>还没有发布宝贝哦~</view>
   <view catchtap="goRelease" class="release-btn">发布宝贝</view>

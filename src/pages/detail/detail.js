@@ -6,12 +6,13 @@ Page({
    * 页面的初始数据
    */
   data: {
-    title: 'detail',
+    count: 1,
     lv: '../../images/lv5.png',
     img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
     name: '一脸你有梦',
     time: '2017-12-08 10:21',
     price: 152,
+    money: 152,
     info: [
       {
         t: '商品',
@@ -72,6 +73,40 @@ Page({
       }
     ]
   },
+  // 回复留言
+  replyComment (e) {
+    this.setData({
+      reply: true,
+      messageMaask: true
+    })
+  },
+  // 支付
+  pay () {
+    // todo
+    this.setData({
+      buyMask: false
+    })
+  },
+  // 计算数量
+  countNumber (e) {
+    let type = e.currentTarget.dataset.type
+    if (type === 'add') {
+      this.setData({
+        count: ++this.data.count
+      })
+    } else {
+      if (this.data.count * 1 === 1) {
+        return
+      }
+      this.setData({
+        count: --this.data.count
+      })
+    }
+    this.setData({
+      money: this.data.count * this.data.price
+    })
+  },
+  // 底部操作
   bottomOp (e) {
     let type = e.currentTarget.dataset.type
     if (type === 'share') {
@@ -79,10 +114,45 @@ Page({
         shareMask: true
       })
     } else if (type === 'want') {
-      wx.navigateTo({
-        url: ''
+      this.setData({
+        buyMask: true
+      })
+    } else if (type === 'comment') {
+      this.setData({
+        messageMaask: true
+      })
+    } else if (type === 'collect') {
+
+    }
+  },
+  // 去除遮罩
+  delMask () {
+    this.setData({
+      messageMaask: false,
+      shareMask: false,
+      reply: false,
+      buyMask: false
+    })
+  },
+  // 文本输入
+  inputValue (e) {
+    this.setData({
+      message: e.detail.value
+    })
+  },
+  // 发送留言
+  sendComment () {
+    if (!this.data.message) {
+      return wx.showToast({
+        title: '请输入有效内容'
       })
     }
+    // todo send
+    this.setData({
+      buyMask: false,
+      messageMaask: false,
+      reply: false
+    })
   },
   // 计算相对时间
   get (time) {

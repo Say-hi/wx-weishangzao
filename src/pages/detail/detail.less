@@ -123,6 +123,9 @@ page {
   .want {
     background-color: #fedb43;
   }
+  .icon-wuxing {
+    color: #fedb43;
+  }
   button {
     width: 25%;
     font-size: 30rpx;
@@ -165,5 +168,52 @@ page {
       font-size: 30rpx;
       color: #333;
     }
+  }
+  .mask-comment {
+    width: 80%;
+    .btn-wrap {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      button  {
+        width: 49%;
+      }
+      button:nth-child(1) {
+        background-color: #eee;
+        color: #999;
+      }
+    }
+  }
+  input {
+    border-bottom: 1rpx solid #ccc;
+  }
+  .count {
+    margin-top: 20rpx;
+    display: flex;
+    justify-content: center;
+    @height: 70rpx;
+    font-size: 40rpx;
+    view {
+      margin-right: 4rpx;
+      border-radius: 5rpx;
+    }
+    .count-n {
+      width: @height;
+      height: @height;
+      background-color: #eee;
+      line-height: @height;
+    }
+    .br {
+      width: @height;
+      height: @height;
+      background-color: #eee;
+      line-height: @height;
+      text-align: center;
+    }
+  }
+  .money {
+    margin-top: 10rpx;
+    line-height: 60rpx;
   }
 }

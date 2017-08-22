@@ -18,9 +18,8 @@
 </view>
 
 <view class="product-bottom">
-  <view style="height: 86rpx"></view>
-  <view class="p-b-m"><view>￥</view><input type="digit" bindinput="inputValue" data-type="allMoney" placeholder="输入价格"/></view>
-
+  <!--<view style="height: 86rpx"></view>-->
+  <!--<view class="p-b-m"><view>￥</view><input type="digit" bindinput="inputValue" data-type="allMoney" placeholder="输入价格"/></view>-->
   <picker bindchange="bindPickerChange" value="{{ index }}" range="{{ array }}">
     <view class="p-type">
       <view>分类</view>

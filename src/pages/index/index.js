@@ -128,15 +128,20 @@ Page({
   },
   // 获取排行榜
   getRank (keyword) {
+    let that = this
     let objj = {
       url: serviceUrl.index,
       data: {
         session_key: wx.getStorageSync('session_key'),
         keyword: keyword,
-        order: order,
-        type: type || 0
+        order: that.data.order,
+        type: that.data.type || 0
+      },
+      success (res) {
+        console.log(res)
       }
     }
+    app.wxrequest(objj)
   },
   /**
    * 生命周期函数--监听页面加载

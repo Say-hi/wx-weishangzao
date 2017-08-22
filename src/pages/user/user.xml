@@ -3,7 +3,7 @@
   <!--个人信息顶部-->
   <view class="user-top">
     <image class="bg" src="../../images/user-bg.png"></image>
-    <image class="lv" src="../../images/p1.png"></image>
+    <view class="lv p1"></view>
     <image class="user-img br" src="{{ userInfo.avatarUrl }}"></image>
     <text class="user-name">{{ userInfo.nickName }}</text>
   </view>
