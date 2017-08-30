@@ -1,33 +1,44 @@
 <!--我买到的-->
 <view class="seal" wx:for="{{ sealArr  }}">
-    <image mode="aspectFill" src="{{ item.img }}"></image>
+    <image mode="aspectFill" src="{{ item.good_image }}"></image>
     <view class="s-c">
-        <view>{{ item.name }}</view>
+        <view>{{ item.good_name }}</view>
         <view class="s-c-p">￥{{ item.price }}</view>
-        <view class="{{ item.status <= 1 ? 'iconfont icon-duihaoyuan' : 'fis' }}">{{ item.status <= 1 ? '交易成功' : '已收货' }}</view>
+        <view class="{{ item.order_status >= 3 ? 'iconfont icon-duihaoyuan' : 'fis' }}">{{ item.order_status >= 3 ? '交易成功' : '' }}</view>
     </view>
-    <view wx:if="{{ item.status <= 1 }}" data-id="{{ item.id }}" catchtap="confirm" data-status="{{ item.status }}" class="send-btn">{{ item.status == 0 ? '商家处理中' : '确认收货' }}</view>
-    <view wx:if="{{ item.status == 1 }}" data-id="{{ item.id }}" catchtap="check" class="send-btn check">查看快递</view>
-    <view wx:if="{{ item.status == 2 }}" data-id="{{ item.id }}" catchtap="check" class="send-btn jubao">举报</view>
+    <view data-id="{{ item.order_id }}" catchtap="confirm" data-type="confirm" data-index="{{ index }}" data-status="{{ item.order_status }}" class="send-btn {{item.order_status >=3 ? 'check' : '' }}">{{ item.order_status >=3 ? '已收货' : orderStatus[item.order_status] }}</view>
+    <view wx:if="{{ item.order_status >= 3 }}" data-id="{{ item.order_id }}" data-type="jubao" catchtap="confirm" class="send-btn jubao">举报</view>
+    <view wx:if="{{ item.order_status == 2 }}" data-id="{{ item.order_id }}" data-index="{{ index }}" data-type="express" catchtap="confirm" class="send-btn express">查看快递</view>
+    <view wx:if="{{ item.order_status == 2 }}" data-id="{{ item.order_id }}" data-type="tuihuo" catchtap="confirm" class="send-btn tuihuo">退货</view>
 </view>
 
 <view wx:if="{{ sealArr.length == 0 }}" class="no">
-<image src="../../images/release.png"></image>
-<view>亲，这里是空的哟~</view>
+    <image src="../../images/release.png"></image>
+    <view>亲，这里是空的哟~</view>
 </view>
+
+<view class="tac" wx:if="{{ sealArr.length > 0 }}">{{ more ? '--- 加载更多 ---' : '--- 到底了 ---' }}</view>
 
 <view wx:if="{{ mask }}" class="mask">
 <view class="mask-in animated zoomIn">
     <view data-type="cancel" catchtap="mOp" class="br">×</view>
     <view class="title">客户收货信息</view>
-    <input value="{{ name }}"/>
-    <input value="{{ phone }}" />
-    <input value="{{ address }}"/>
+    <input value="{{ sealArr[index].user_name || '发货方未填写' }}"/>
+    <input value="{{ sealArr[index].mobile || '发货方未填写' }}" />
+    <input value="{{ sealArr[index].address || '发货方未填写' }}"/>
     <view class="title">发货快递信息</view>
     <view>快递公司</view>
-    <input value="{{ express }}"/>
+    <input value="{{ sealArr[index].shipping_name || '发货方未填写' }}"/>
     <view>快递单号</view>
-    <input value="{{ expressnumber }}"/>
+    <input value="{{ sealArr[index].shipping_no || '发货方未填写' }}"/>
     <view data-type="confirm" catchtap="mOp" class="m-confirm">关闭</view>
 </view>
+</view>
+
+<view wx:if="{{ mask2 }}" class="mask">
+    <view class="mask-in animated zoomIn">
+        <view class="title">联系客服我要退换或者举报</view>
+        <button open-type="contact" class="kf">联系客服</button>
+        <view data-type="confirm" catchtap="mOp" class="m-confirm">关闭</view>
+    </view>
 </view>

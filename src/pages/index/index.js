@@ -10,11 +10,10 @@ Page({
   data: {
     dots: false, // 轮播图是否显示点
     circular: true, // 轮播衔接
-    imgUrls: [
-      'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-      'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-      'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
-    ], // 轮播图片
+    imgUrls: [], // 轮播图片
+    curChoose: 2,
+    page: 1,
+    // order: 'effect_num',
     navTab: [
       {
         url: '../weishang/weishang',
@@ -39,24 +38,7 @@ Page({
     ],
     rankNavArr: ['总影响力', '支持度最高', '担保金最多'], // rank-nav标题
     curRankNav: 0, // rank-nav当前选择项
-    rankContentList: [
-      {
-        img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        name: 'ZS钻石国际团队',
-        user_id: 123123,
-        yx: 199,
-        zc: 112,
-        td: 213
-      },
-      {
-        img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        name: '6rpx solid #eee;',
-        user_id: 123123,
-        yx: 199,
-        zc: 112,
-        td: 213
-      }
-    ],
+    rankContentList: [],
     orderArr: ['effect_num', 'support_count', 'money_count']
   },
   // 消息跳转
@@ -98,47 +80,87 @@ Page({
         title: '请输入有效的内容'
       })
     }
+    this.setData({
+      page: 1
+    })
     // todo 获取搜索内容
+    this.getRank(this.data.searchValue, 1, 0)
   },
   // 类型选择切换
   typeChoose (e) {
     this.setData({
+      page: 1,
       curChoose: e.currentTarget.dataset.index
     })
+    if (this.data.searchValue) {
+      this.getRank(this.data.searchValue, 1, 0)
+    } else {
+      this.getRank('', 1, 0)
+    }
   },
   // 导航类型选择
   rankNavChoose (e) {
     if (e.currentTarget.dataset.index * 1 === 3) return
     this.setData({
+      page: 1,
       curRankNav: e.currentTarget.dataset.index
     })
+    if (this.data.searchValue) {
+      this.getRank(this.data.searchValue, 1, 0)
+    } else {
+      this.getRank('', 1, 0)
+    }
   },
   // 获取轮播图
   getCarousel () {
+    let that = this
     let obj = {
       url: serviceUrl.getBanners,
       data: {
         session_key: wx.getStorageSync('session_key')
       },
       success (res) {
-        console.log(res)
+        wx.hideLoading()
+        that.setData({
+          imgUrls: res.data.data
+        })
       }
     }
     app.wxrequest(obj)
   },
   // 获取排行榜
-  getRank (keyword) {
+  getRank (keyword, page, month) {
     let that = this
     let objj = {
       url: serviceUrl.index,
       data: {
         session_key: wx.getStorageSync('session_key'),
         keyword: keyword,
-        order: that.data.order,
-        type: that.data.type || 0
+        order: that.data.orderArr[that.data.curRankNav],
+        type: (that.data.curChoose * 1 === 2 ? 0 : 1),
+        page: page,
+        month: month
       },
       success (res) {
-        console.log(res)
+        wx.hideLoading()
+        if (res.data.data.is_next_page === 1) {
+          that.setData({
+            more: true
+          })
+        } else {
+          that.setData({
+            more: false
+          })
+        }
+        // app.setMore(res.data.data, that)
+        if (page * 1 === 1) {
+          that.setData({
+            rankContentList: []
+          })
+        }
+        that.setData({
+          rankContentList: that.data.rankContentList.concat(res.data.data.rankContentList)
+        })
       }
     }
     app.wxrequest(objj)
@@ -148,6 +170,11 @@ Page({
    */
   onLoad () {
     this.curMonth()
+    let that = this
+    app.wxlogin(function () {
+      that.getCarousel()
+      that.getRank('', 1, 0)
+    })
     // TODO: onLoad
   },
 
@@ -162,6 +189,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow () {
+    this.setData({
+      searchValue: ''
+    })
+    //
     // TODO: onShow
   },
 
@@ -184,5 +215,14 @@ Page({
    */
   onPullDownRefresh () {
     // TODO: onPullDownRefresh
+  },
+  // 触底加载更多
+  onReachBottom () {
+    if (!this.data.more) return
+    if (this.data.searchValue) {
+      this.getRank(this.data.searchValue, ++this.data.page, 0)
+    } else {
+      this.getRank('', ++this.data.page, 0)
+    }
   }
 })

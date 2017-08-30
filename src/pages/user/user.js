@@ -1,6 +1,7 @@
 // 获取全局应用程序实例对象
 // const app = getApp()
-
+const app = getApp()
+const serviceUrl = require('../../utils/service')
 // 创建页面实例对象
 Page({
   /**
@@ -25,7 +26,7 @@ Page({
       },
       {
         icon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC0AAAAnCAYAAACbgcH8AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTExIDc5LjE1ODMyNSwgMjAxNS8wOS8xMC0wMToxMDoyMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjlDODdBRjk2N0IzOTExRTc4MEZFQzQ1NTdFNjNCODgzIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjlDODdBRjk3N0IzOTExRTc4MEZFQzQ1NTdFNjNCODgzIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6OUM4N0FGOTQ3QjM5MTFFNzgwRkVDNDU1N0U2M0I4ODMiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6OUM4N0FGOTU3QjM5MTFFNzgwRkVDNDU1N0U2M0I4ODMiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4C9Ln1AAAJQklEQVR42qxZ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',
-        text: '关联我的团队',
+        text: '我关联的团队',
         url: '../relevanceTeam/relevanceTeam'
       },
       {
@@ -39,6 +40,7 @@ Page({
         url: ''
       }
     ],
+    danbao_money: 321,
     saleArr: [
       {
         icon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAvCAMAAACSXLn7AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAB1UExURUxpcQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP7bQ2pbHHppIIx5Jda4OHFhHV5RGOvLPoJxIsarNBYSBbifMCchCqeQLEk/E+DCOvfVQZuGKDkxDzBLojoAAAAUdFJOUwAZJcqH/hDl8m4Fo0i3lGE13Fl7ck8oWQAAAYZJREFUSMedlulygyAUhREkgFs0grt1z/s/YnViGw1Ioff3+ebM4S4KgKogwpgEwLxIznn35RjrmeBrNb4xQIsN4MYWLwMLC/IyWC1uRvp7tet5FpkZtD+AmcXbwNDiYGBk8TgYrBaunQGf8c0iwValJsUtvrshbs/ALFDEAqnlMGA+os8q77hUbV6OOAnde7xj0A2TfiyHtuaXNU9dXj0p8teRD/qmm7hRzcUwMkAHblEFBphb1T8AlNvoFwogtSAWHK/PShpTfU7jrRFOkpnpGwr3mUDCSE9+J8QzIcrkOFHhn4RA3mn8fGGnByAStU4fyuvgal53UJ005+saGAOD5Tx1THULouUa6BQRAGqvgYnIeo/qXqmHEhD3ujYoUj8qHZClchu0a6FoRNhplz+Rb+op85SJ4rzLnzcWHjPXDU0ZKY/IM77OXGfUXUffOyElu8q8yXf7I7J8pk6zT/kZySNpVgdJviNb/E5udUCEIKnie+OxRJT0ofiDYQyqvzQOY+83+gY+hWQ63YlDbwAAAABJRU5ErkJggg==',
@@ -60,7 +62,37 @@ Page({
         text: '我的卖出',
         url: '../mySale/mySale'
       }
-    ]
+    ],
+    items: [
+      {
+        name: '已阅读并承诺遵守《担保金说明》条例',
+        value: '已阅读并承诺遵守《担保金说明》条例',
+        checked: false
+      }
+    ],
+    pLevel: ['p0', 'p1', 'p2', 'p3', 'p4', 'p5']
+  },
+  mask3confirm () {
+    if (!this.data.items[0].checked) {
+      return wx.showToast({
+        title: '请勾选同意本平台担保金说明'
+      })
+    }
+    this.setData({
+      mask3: false,
+      mask2: true
+    })
+  },
+  sss () {
+    this.setData({
+      mask3: false
+    })
+  },
+  checkboxChange () {
+    this.data.items[0].checked = !this.data.items[0].checked
+    this.setData({
+      items: this.data.items
+    })
   },
   // 充值金额输入
   inputValue (e) {
@@ -70,19 +102,66 @@ Page({
   },
   // 充值
   charge () {
-
+    let that = this
+    let c = {
+      url: serviceUrl.payByGuarantee,
+      data: {
+        session_key: app.gs(),
+        money: that.data.chargeMoney
+      },
+      success (res) {
+        wx.hideLoading()
+        if (res.data.code === 200) {
+          // 吊起微信支付
+          let obj = {
+            timeStamp: res.data.data.timeStamp,
+            nonceStr: res.data.data.nonceStr,
+            package: res.data.data.package,
+            paySign: res.data.data.paySign,
+            success (res) {
+              if (res.errMsg === 'requestPayment:ok') {
+                // 微信支付成功
+                console.log(res)
+                that.setData({
+                  mask2: false
+                })
+              } else {
+                // 微信支付失败
+              }
+            },
+            fail (res) {
+              // 调用支付失败
+              console.log(res)
+            }
+          }
+          app.wxpay(obj)
+        } else {
+          wx.showToast({
+            title: res.data.message
+          })
+        }
+      }
+    }
+    app.wxrequest(c)
+  },
+  showTixian () {
+    this.setData({
+      mask4: true
+    })
   },
   // 弹窗操作
   maskOp (e) {
     if (e.currentTarget.dataset.type === 'confirm') {
       this.setData({
         mask: false,
-        mask2: true
+        mask3: true
       })
     } else if (e.currentTarget.dataset.type === 'cancel') {
       this.setData({
         mask: false,
-        mask2: false
+        mask3: false,
+        mask2: false,
+        mask4: false
       })
     }
   },
@@ -104,22 +183,28 @@ Page({
       })
     }
   },
-  // 获取缓存中的用户信息
+  // 获取用户信息
   getUserInfo () {
     let that = this
-    wx.getStorage({
-      key: 'userInfo',
-      success (res) {
-        // 获取缓存成功
-        that.setData({
-          userInfo: res.data
-        })
+    let s = {
+      url: serviceUrl.userCenter,
+      data: {
+        session_key: app.gs()
       },
-      fail () {
-        // 获取缓存失败
-        console.log('fail get info')
+      success (res) {
+        wx.hideLoading()
+        if (res.data.code === 200) {
+          that.setData({
+            user: res.data.data
+          })
+        } else {
+          wx.showToast({
+            title: res.data.message
+          })
+        }
       }
-    })
+    }
+    app.wxrequest(s)
   },
   /**
    * 生命周期函数--监听页面加载

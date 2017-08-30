@@ -1,43 +1,90 @@
 // 获取全局应用程序实例对象
 // const app = getApp()
-
+const app = getApp()
+const serviceUrl = require('../../utils/service')
 // 创建页面实例对象
 Page({
   /**
    * 页面的初始数据
    */
   data: {
+    page: 1,
     sealArr: [
-      {
-        img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        name: '一脸油菜',
-        price: 150,
-        status: 0
-      },
-      {
-        img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        name: '一脸油菜',
-        price: 150,
-        status: 1
-      },
-      {
-        img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        name: '一脸油菜',
-        price: 150,
-        status: 2
-      }
+      // {
+      //   img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+      //   name: '一脸油菜',
+      //   price: 150,
+      //   status: 0
+      // },
+      // {
+      //   img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+      //   name: '一脸油菜',
+      //   price: 150,
+      //   status: 1
+      // },
+      // {
+      //   img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+      //   name: '一脸油菜',
+      //   price: 150,
+      //   status: 2
+      // }
     ]
   },
-  // 跳转产品发布页面
-  goRelease () {
-    wx.redirectTo({
-      url: ''
-    })
+  // 获取发布产品列表
+  getList (page) {
+    let that = this
+    let s = {
+      url: serviceUrl.fabuProductBySelfLists,
+      data: {
+        session_key: app.gs(),
+        page: page
+      },
+      success (res) {
+        wx.hideLoading()
+        if (res.data.code === 200) {
+          app.setMore(res.data.data, that)
+          that.setData({
+            sealArr: that.data.sealArr.concat(res.data.data)
+          })
+        } else {
+          wx.showToast({
+            title: res.data.message
+          })
+        }
+      }
+    }
+    app.wxrequest(s)
+  },
+  // 删除产品
+  del (e) {
+    let that = this
+    let d = {
+      url: serviceUrl.deleteProduct,
+      data: {
+        session_key: app.gs(),
+        good_id: e.currentTarget.dataset.id
+      },
+      success (res) {
+        wx.hideLoading()
+        if (res.data.code === 200) {
+          that.data.sealArr.splice(e.currentTarget.dataset.index, 1)
+          that.setData({
+            sealArr: that.data.sealArr
+          })
+        } else {
+          wx.showToast({
+            title: res.data.message
+          })
+        }
+      }
+    }
+    app.wxrequest(d)
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad () {
+    this.getList(1)
     // TODO: onLoad
   },
 
@@ -74,5 +121,9 @@ Page({
    */
   onPullDownRefresh () {
     // TODO: onPullDownRefresh
+  },
+  onReachBottom () {
+    if (!this.data.more) return
+    this.getList(++this.data.page)
   }
 })

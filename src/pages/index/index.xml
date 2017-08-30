@@ -4,7 +4,7 @@
   <swiper class="carousel" indicator-dots="{{ dots }}" circular="{{ circular }}" autoplay="true" interval="5000" duration="1000">
     <block wx:for="{{ imgUrls }}">
       <swiper-item>
-        <image mode="aspectFill" src="{{ item }}" class="slide-image" />
+        <image mode="aspectFill" src="{{ item.thumb }}" class="slide-image" />
       </swiper-item>
     </block>
   </swiper>
@@ -26,7 +26,7 @@
   </view>
   <!--搜索框-->
   <view class="search">
-    <input bindinput="searchInput" bindconfirm="searchConfirm" type="search" placeholder="搜索团队名称"/>
+    <input bindinput="searchInput" bindconfirm="searchConfirm" confirm-type="search" placeholder="搜索团队名称"/>
     <view catchtap="searchConfirm" class="iconfont icon-sousuo"></view>
   </view>
   <!--类型-->
@@ -36,7 +36,7 @@
   </view>
   <!--申请-->
   <view class="apply">
-    <view>申请新团队参与排名</view>
+    <navigator url="../applyTeam/applyTeam" >申请新团队参与排名</navigator>
   </view>
   <!--名称排行-->
   <view class="rank-nav">
@@ -49,9 +49,12 @@
     <view wx:for="{{ rankContentList }}">
       <!--上半部-->
       <view class="rcl-top">
-        <image src="{{ item.img }}"></image>
-        <text>{{ item.name }}</text>
-        <navigator class="goSupport" url="../wsdetail/wsdetail?id={{ item.user_id }}">支持TA</navigator>
+        <image lazyload="true" src="{{ item.img }}"></image>
+        <view class="rcl-t-t">
+          <text>{{ item.name }}</text>
+          <text class="rcl-s" wx:if="{{ item.signature }}">{{ item.signature }}</text>
+        </view>
+        <navigator class="goSupport" url="{{ curChoose * 1 == 2 ? '../supportTeamPage/supportTeamPage' : '../supportPage/supportPage'  }}?id={{ item.user_id }}">支持TA</navigator>
       </view>
       <!--下半部-->
       <view class="rcl-bottom">
@@ -60,6 +63,7 @@
         <view class="rcl-b-c">担保金:{{ item.td }}</view>
       </view>
     </view>
+    <view class="tac" wx:if="{{ rankContentList.length == 0 || !more }}">--- 没有更多内容 --</view>
   </view>
 </view>
 

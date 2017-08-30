@@ -1,5 +1,7 @@
 <!--我关联的团队-->
-<view class="team" wx:for="{{ teamArr }}">
-  <image class="br" src="{{ item.img }}"></image>
+<navigator open-type="redirect" url="../supportTeamPage/supportTeamPage?id={{ item.id }}" class="team" wx:for="{{ teamArr }}">
+  <image class="br" src="{{ item.image }}"></image>
   <text>{{ item.name }}</text>
-</view>
+</navigator>
+<view class="tac" wx:if="{{ teamArr.length == 0 }}">您尚未关联团队哦</view>
+<view class="tac" wx:else>--- 到底啦 --</view>

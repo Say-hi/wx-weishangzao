@@ -31,14 +31,19 @@
     <view class="rca-left {{ index == 0 ? 'first' : index == 1 ? 'second' : index == 2 ? 'third' : ''}}"></view>
     <view class="rca-top">
       <view class="rca-t-top">
-        <image class="{{ index == 0 ? 'i1' : index == 1 ? 'i2' : index == 2 ? 'i3' : '' }}" src="{{ item.img }}"></image>
-        <text>{{ item.name }}</text>
+        <image lazyload="true" class="{{ index == 0 ? 'i1' : index == 1 ? 'i2' : index == 2 ? 'i3' : '' }}" src="{{ item.img }}"></image>
+        <!--<text>{{ item.name }}</text>-->
+        <view class="rcl-t-t">
+          <text>{{ item.name }}</text>
+          <text class="rcl-s" wx:if="{{ item.signature }}">{{ item.signature }}</text>
+        </view>
       </view>
       <view class="rca-number {{ index > 2 ? 'noColor' : '' }} {{ curRankNav == 0 ? 'rcl-b-a' : curRankNav == 1 ? 'rcl-b-b' : curRankNav == 2 ? 'rcl-b-c' : ''}}">
-        {{ curRankNav == 0 ? '影响力:' : curRankNav == 1 ? '支持度:' : curRankNav == 2 ? '保证金:' : ''}}{{ item.number }}
+        {{ curRankNav == 0 ? '影响力:' : curRankNav == 1 ? '支持度:' : curRankNav == 2 ? '保证金:' : ''}}{{ curRankNav == 0 ? item.yx : curRankNav == 1 ? item.zc : curRankNav == 2 ? item.td : ''}}
       </view>
     </view>
-    <navigator class="goSupport" url="../wsdetail/wsdetail?id={{ item.user_id }}">支持TA</navigator>
+    <navigator class="goSupport" url="{{ curChoose * 1 == 2 ? '../supportTeamPage/supportTeamPage' : '../supportPage/supportPage'  }}?id={{ item.user_id }}">支持TA</navigator>
   </view>
+  <view class="tac" wx:if="{{ rankContentArr.length == 0 || !more }}">--- 没有更多内容 --</view>
   <!--</view>-->
 </view>

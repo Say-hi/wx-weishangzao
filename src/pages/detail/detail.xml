@@ -1,38 +1,40 @@
 <!--宝贝详情-->
 <view class='detail'>
     <view class="d-top">
-        <view class='lv t2'></view>
-        <image class='br' src='{{ img }}'></image>
+        <view class='lv {{ pLevel[info.user_info.level] }}'></view>
+        <image class='br' src='{{ info.user_info.avatar }}'></image>
         <view class='user'>
-            <view>{{ name }}</view>
-            <view>{{ time }}</view>
+            <view>{{ info.user_info.user_nicename }}</view>
+            <view>{{ info.product_info.add_time }}</view>
         </view>
-        <view class='price'>￥{{ price }}</view>
+        <view class='price'>￥{{ info.product_info.clearance_price }}</view>
     </view>
     <view class='info'>
-        <view wx:for='{{ info }}'>{{ item.t }}{{ index == 5 ? '' : ':' }} {{ item.c }}</view>
+        <view wx:for='{{ infos }}'>{{ item.t }}{{ index == 5 ? '' : ':' }} {{ item.c }}</view>
     </view>
-    <view class='d-i'>{{ introduce }}</view>
-    <image mode="widthFix" wx:for='{{ imageArr }}' src='{{ item }}'></image>
+    <view class='d-i'>{{ info.product_info.describe }}</view>
+    <image mode="widthFix" wx:for='{{ info.product_info.product_images }}' src='{{ item }}'></image>
 </view>
 
 <view class='comment'>
-    <view class='c-t'>留言 {{ nubmer }}</view>
-    <view catchtap="replyComment" data-id="{{ item.id }}" class='c-c' wx:for='{{ commentArr }}'>
+    <view class='c-t'>留言 {{ number == 'null' ? '0' : number }}</view>
+    <view catchtap="replyComment" data-liuyan="{{ item.id }}" data-userid="{{ item.user_id }}" class='c-c' wx:for='{{ commentArr }}'>
         <view class='c-w'>
-            <view class='lv p2'></view>
-            <image class='br' src='{{ item.img }}'></image>
-            <text>{{ item.name }}</text>
+            <view class='lv {{ pLevel[item.level] }}'></view>
+            <image class='br' src='{{ item.avatar }}'></image>
+            <text>{{ item.user_nicename || item.true_name }}</text>
         </view>
-        <view class='c-r'>{{ item.reply }}</view>
-        <view class='c-ti'>{{ item.time }}</view>
+        <view class='c-r'>{{ item.content }}</view>
+        <view class='c-ti'>{{ item.add_time }}</view>
     </view>
 </view>
+<view class="tac" wx:if="{{ commentArr.length === 0 }}">诶哟，还没有人留言诶</view>
+<view class="tac" wx:else>{{ more ? '--- 上拉加载更多 ---' : '--- 到底了 ---' }}</view>
 
 <view style='height: 88rpx;'></view>
 
 <view class='f-b'>
-    <view catchtap='bottomOp' data-type='collect' class="iconfont {{ shoucang ? 'icon-wuxing1' : 'icon-wuxing' }}">{{ shoucang ? '收藏' : '已收藏' }}</view>
+    <view catchtap='bottomOp' data-type='collect' class="iconfont {{ info.product_info.is_collection ? 'icon-wuxing' : 'icon-wuxing1' }}">{{ info.product_info.is_collection ? '已收藏' : '收藏' }}</view>
     <view catchtap='bottomOp' data-type='comment' class='iconfont icon-liuyan'>留言</view>
     <view catchtap='bottomOp' data-type='share' class='iconfont icon-fenxiang'>分享有礼</view>
     <!--<button open-type='share' class='iconfont icon-fenxiang'>分享有礼</button>-->
@@ -64,7 +66,7 @@
             <view class="count-n">{{ count }}</view>
             <view catchtap="countNumber" data-type="add" class="br">+</view>
         </view>
-        <view class="money">金额:{{ money }}元</view>
+        <view class="money">金额:{{ money || info.product_info.clearance_price }}元</view>
         <view class="btn-wrap">
             <button catchtap="delMask">取消</button>
             <button catchtap="pay">确定</button>
@@ -72,6 +74,14 @@
     </view>
 </view>
 
-<!--<view class="mask">-->
-
-<!--</view>-->
+<view wx:if="{{ addressMask }}" class="mask">
+    <view class="mask-in">
+        <view class="title">填写您的收货信息</view>
+        <input bindinput="inputValue" value="{{ sh.name }}" data-type="name" placeholder="填写收货人姓名"/>
+        <input bindinput="inputValue" value="{{ sh.mobile }}" data-type="mobile" placeholder="填写收货人电话"/>
+        <input bindinput="inputValue" value="{{ sh.address }}" data-type="address" placeholder="填写收货人详细地址"/>
+        <view catchtap="confrim" class="mask-btn">
+            确认
+        </view>
+    </view>
+</view>

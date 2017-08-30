@@ -1,6 +1,7 @@
 // 获取全局应用程序实例对象
 // const app = getApp()
-
+const app = getApp()
+const serviceUrl = require('../../utils/service')
 // 创建页面实例对象
 Page({
   /**
@@ -11,28 +12,10 @@ Page({
     months: [], // 可选月份值
     rankNavArr: ['总影响力', '支持度最高', '保证金最多'], // rank-nav标题
     curRankNav: 0, // rank-nav当前选择项
-    rankContentArr: [
-      {
-        img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        name: '美颜高级团队1',
-        number: 1000
-      },
-      {
-        img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        name: '美颜高级团队2',
-        number: 200
-      },
-      {
-        img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        name: '美颜高级团队3',
-        number: 300
-      },
-      {
-        img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        name: '美颜高级团队4',
-        number: 400
-      }
-    ]
+    curChoose: 2,
+    page: 1,
+    rankContentArr: [],
+    orderArr: ['effect_num', 'support_count', 'money_count']
   },
   // 获取当前月份
   curMonth () {
@@ -52,8 +35,10 @@ Page({
   // 类型选择切换
   typeChoose (e) {
     this.setData({
+      page: 1,
       curChoose: e.currentTarget.dataset.index
     })
+    this.getRank('', 1, (this.data.value[0] * 1 + 1))
   },
   // 月份选择
   bindChange (e) {
@@ -73,8 +58,10 @@ Page({
       })
     }
     this.setData({
+      page: 1,
       curRankNav: e.currentTarget.dataset.index
     })
+    this.getRank('', 1, (this.data.value[0] * 1 + 1))
   },
   // 去除遮罩
   noMask () {
@@ -86,14 +73,53 @@ Page({
   confirm () {
     // todo
     this.setData({
+      page: 1,
       maskShow: false
     })
+    this.getRank('', 1, (this.data.value[0] * 1 + 1))
+  },
+  // 获取排行榜
+  getRank (keyword, page, month) {
+    let that = this
+    let objj = {
+      url: serviceUrl.index,
+      data: {
+        session_key: wx.getStorageSync('session_key'),
+        keyword: keyword,
+        order: that.data.orderArr[that.data.curRankNav],
+        type: (that.data.curChoose * 1 === 2 ? 0 : 1),
+        page: page,
+        month: month
+      },
+      success (res) {
+        wx.hideLoading()
+        if (res.data.data.is_next_page === 1) {
+          that.setData({
+            more: true
+          })
+        } else {
+          that.setData({
+            more: false
+          })
+        }
+        if (page * 1 === 1) {
+          that.setData({
+            rankContentArr: []
+          })
+        }
+        that.setData({
+          rankContentArr: that.data.rankContentArr.concat(res.data.data.rankContentList)
+        })
+      }
+    }
+    app.wxrequest(objj)
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad () {
     this.curMonth()
+    this.getRank('', 1, 0)
     // TODO: onLoad
   },
 
@@ -130,5 +156,9 @@ Page({
    */
   onPullDownRefresh () {
     // TODO: onPullDownRefresh
+  },
+  onReachBottom () {
+    if (!this.data.more) return
+    this.getRank('', ++this.data.page, (this.data.value[0] * 1 + 1))
   }
 })

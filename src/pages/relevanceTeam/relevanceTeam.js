@@ -1,28 +1,46 @@
 // 获取全局应用程序实例对象
 // const app = getApp()
-
+const app = getApp()
+const serviceUrl = require('../../utils/service')
 // 创建页面实例对象
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    teamArr: [
-      {
-        img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        name: '妲己团队'
-      },
-      {
-        img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        name: '妲己团队'
-      }
-    ]
+    page: 1,
+    teamArr: []
   },
-
+  // 获取我关联的团队
+  getInfo (page) {
+    let that = this
+    let t = {
+      url: serviceUrl.getMySubscribeTeams,
+      data: {
+        session_key: app.gs(),
+        page: page
+      },
+      success (res) {
+        wx.hideLoading()
+        if (res.data.code === 200) {
+          that.data.teamArr = that.data.teamArr.concat(res.data.data)
+          that.setData({
+            teamArr: that.data.teamArr
+          })
+        } else {
+          wx.showToast({
+            title: res.data.message
+          })
+        }
+      }
+    }
+    app.wxrequest(t)
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad () {
+    this.getInfo(1)
     // TODO: onLoad
   },
 
@@ -59,5 +77,8 @@ Page({
    */
   onPullDownRefresh () {
     // TODO: onPullDownRefresh
+  },
+  onReachBottom () {
+    this.getInfo(++this.data.page)
   }
 })

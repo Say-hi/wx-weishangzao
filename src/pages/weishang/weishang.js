@@ -1,6 +1,7 @@
 // 获取全局应用程序实例对象
 // const app = getApp()
-
+const app = getApp()
+const serviceUrl = require('../../utils/service')
 // 创建页面实例对象
 Page({
   /**
@@ -9,7 +10,29 @@ Page({
   data: {
     title: 'weishang'
   },
-
+  // 开通微商之路
+  kt () {
+    // let that = this
+    let k = {
+      url: serviceUrl.kaitongWeishang,
+      data: {
+        session_key: app.gs()
+      },
+      success (res) {
+        wx.hideLoading()
+        if (res.data.code === 200) {
+          wx.showToast({
+            title: '开通成功'
+          })
+        } else {
+          wx.showToast({
+            title: res.data.message
+          })
+        }
+      }
+    }
+    app.wxrequest(k)
+  },
   /**
    * 生命周期函数--监听页面加载
    */

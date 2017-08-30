@@ -1,14 +1,14 @@
 <!--团队支持页面-->
 <!--底部tab栏-->
 <view class="bottom-tab">
-  <view class="iconfont icon-turned_in">关联上家</view>
-  <view class="iconfont icon-02">支持TA</view>
+  <view catchtap="follow"  data-type="{{ user.is_proxy ? 'cancel' : 'proxy' }}" class="iconfont icon-turned_in">{{ user.is_proxy ? '已关联':'关联团队'}}</view>
+  <view catchtap="support" data-id="{{ id }}" class="iconfont icon-02">{{ user.is_support ? '已支持':'支持TA' }}</view>
   <view catchtap="showMask" class="iconfont icon-liuyan">联系</view>
 </view>
         <!--背景轮播-->
 <view class="carousel-wrap">
 <swiper class="carousel" autoplay="true" interval="5000" duration="1000" circular="true">
-  <block wx:for="{{imgUrls}}">
+  <block wx:for="{{ user.photos }}">
     <swiper-item>
       <image mode="aspectFill" src="{{item}}" class="slide-image" />
     </swiper-item>
@@ -16,30 +16,30 @@
 </swiper>
 <!--用户信息-->
 <view class="user">
-  <view class="lv t2"></view>
-  <image class="user-img br" src="{{ user.img }}"></image>
+  <view class="lv {{ teamLevel[user.team_level] }}"></view>
+  <image class="user-img br" src="{{ user.image }}"></image>
   <!--用户名和微信号-->
   <view class="user-info">
-    <text>{{ user.name }}</text>
-    <text>担保金额: {{ user.number }}</text>
+    <text>{{ user.team_name }}</text>
+    <text>担保金额: {{ user.team_money }}</text>
   </view>
   <view class="user-btn">
-    <text> 关联团队 </text>
-    <text> 支持TA </text>
+    <text catchtap="follow" data-type="{{ user.is_proxy ? 'cancel' : 'proxy' }}" class="{{ user.is_proxy ? 'hui':'' }}"> {{ user.is_proxy ? '已关联':'关联团队'}} </text>
+    <text catchtap="support"  class="{{ user.is_support ? 'hui':'' }}"> {{ user.is_support ? '已支持':'支持TA' }} </text>
   </view>
   <!--数量bottom-->
   <view class="user-bottom">
     <view>
       <text>影响力</text>
-      <text>{{ user.influence }}</text>
+      <text>{{ user.effet_num }}</text>
     </view>
     <view>
       <text>代理</text>
-      <text>{{ user.agency }}</text>
+      <text>{{ user.proxy_num }}</text>
     </view>
     <view>
       <text>支持度</text>
-      <text>{{ user.support }}</text>
+      <text>{{ user.support_num }}</text>
     </view>
   </view>
 </view>
@@ -49,21 +49,21 @@
 <view class="diw">
   <view class="title">微信号</view>
   <!--<view>名称:{{ user.name }}</view>-->
-  <view>微信号:{{ user.number }}</view>
+  <view>微信号:{{ user.wechat_no || '未填写' }}</view>
 </view>
 <!--<view>现居地:{{ user.address }}</view>-->
 <!--<view>个性签名:{{ user.sign }}</view>-->
 <view class="diw">
   <view class="title">代理产品</view>
-  <view>代理产品:{{ user.team }}</view>
+  <view>代理产品:{{ user.product || '未填写' }}</view>
 </view>
 <!--<view>代理级别:{{ user.level }}</view>-->
 <!--<view>微商经历:{{ user.experience }}</view>-->
 <view class="diw">
   <view class="title">团队风采</view>
   <view class="team-introduce">
-    <view>产品名称:{{ user.product }}</view>
-    <image mode="aspectFill" catchtap="previewImg" data-index="{{ index }}" class="product-img" wx:for="{{ user.imageArr }}" src="{{ item }}"></image>
+    <view>产品名称:{{ user.product || '未填写' }}</view>
+    <image mode="aspectFill" catchtap="previewImg" data-index="{{ index }}" class="product-img" wx:for="{{ user.photos }}" src="{{ item }}"></image>
   </view>
 </view>
 </view>
@@ -72,10 +72,10 @@
 <view class="mask" wx:if="{{ mask }}">
   <view class="mask-content {{ maskShowAni }}">
     <view class="title">微信联系</view>
-    <view class="article">微信号:{{ user.number }}</view>
+    <view class="article">微信号:{{ user.wechat_no || '未填写' }}</view>
     <view class="btn">
       <view catchtap="cancel">返回</view>
-      <view catchtap="confirm">复制</view>
+      <view wx:if="{{ user.wechat_no }}" catchtap="confirm">复制</view>
     </view>
   </view>
 </view>

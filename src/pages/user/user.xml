@@ -3,21 +3,21 @@
   <!--个人信息顶部-->
   <view class="user-top">
     <image class="bg" src="../../images/user-bg.png"></image>
-    <view class="lv p1"></view>
-    <image class="user-img br" src="{{ userInfo.avatarUrl }}"></image>
-    <text class="user-name">{{ userInfo.nickName }}</text>
+    <view class="lv {{ pLevel[user.level] }}"></view>
+    <image class="user-img br" src="{{ user.avatar }}"></image>
+    <text class="user-name">{{ user.user_name }}</text>
   </view>
   <!--用户操作-->
   <view class="op">
     <view>
-      <navigator url="../tixian/tixian">
+      <view catchtap="showTixian">
         <image src="../../images/lq.png"></image>
-        <text>零钱: 500</text>
-      </navigator>
+        <text>零钱: {{ user.account }}</text>
+      </view>
     </view>
     <view catchtap="showMask">
       <image src="../../images/qd.png"></image>
-      <text>担保金: 5000</text>
+      <text>担保金: {{ user.money }}</text>
     </view>
   </view>
 
@@ -39,20 +39,48 @@
   </navigator>
 </view>
 
-        <!--底部导航-->
+<!--底部导航-->
 <view style="height: 98rpx; width: 100%;"></view>
+
 <view class="static-bottom">
-<image data-type="left" catchtap="chooseOperation" class="l" src="../../images/home.png"></image>
-<image data-type="center" catchtap="chooseOperation" class="c" src="../../images/fabu.png"></image>
-<image data-type="right" catchtap="chooseOperation" class="r" src="../../images/user_hl.png"></image>
+  <image data-type="left" catchtap="chooseOperation" class="l" src="../../images/home.png"></image>
+  <image data-type="center" catchtap="chooseOperation" class="c" src="../../images/fabu.png"></image>
+  <image data-type="right" catchtap="chooseOperation" class="r" src="../../images/user_hl.png"></image>
 </view>
 
 <view wx:if="{{ mask }}" class="mask">
   <view class="mask-in zoomIn animated">
-    <view>担保金: 5000</view>
+    <view>担保金: {{ user.money }}</view>
     <view class="mask-btn">
       <view catchtap="maskOp" data-type="cancel">取消</view>
       <view catchtap="maskOp" data-type="confirm">充值</view>
+      <button wx:if="{{ user.money * 1 > 0 }}" open-type="contact">退担保金</button>
+    </view>
+  </view>
+</view>
+
+<view wx:if="{{ mask3 }}" class="mask">
+  <view class="mask-in danbao zoomIn animated">
+    <view class="title">担保金说明</view>
+    <view class="mask-text">
+      <view>担保金是让更多人信任你、相信你的实力证明！</view>
+      <view>担保金可申请退款，退款收取服务费20%。</view>
+      <view>担保级别图标：</view>
+      <view>0元Lv 0</view>
+      <view>1~99元 100以下 Lv1</view>
+      <view>100或以上 100以下Lv2</view>
+      <view>500或以上 1000以下LV3</view>
+      <view>1000或以上2500以下LV4</view>
+      <view>2500或以上 5000以下LV5</view>
+    </view>
+    <checkbox-group class="radio-group" bindchange="checkboxChange">
+      <label class="checkbox" wx:for="{{items}}">
+        <checkbox value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
+      </label>
+    </checkbox-group>
+    <view class="mask-btn">
+      <view catchtap="maskOp" data-type="cancel">取消</view>
+      <view catchtap="mask3confirm" class="btn {{ items[0].checked ? 'y' : '' }}">确定</view>
     </view>
   </view>
 </view>
@@ -60,10 +88,21 @@
 <view wx:if="{{ mask2 }}" class="mask">
   <view class="mask-in">
     <view>充值担保金</view>
-    <view><input bindinput="inputValue" type="nubmer" placeholder="请输入金额" /></view>
+    <view><input bindinput="inputValue" type="number" placeholder="请输入金额" /></view>
     <view class="mask-btn">
       <view catchtap="maskOp" data-type="cancel">取消</view>
       <view catchtap="charge" data-type="charge">充值</view>
+    </view>
+  </view>
+</view>
+
+<view wx:if="{{ mask4 }}" class="mask">
+  <view class="mask-in">
+    <view>提现零钱</view>
+    <view wx:if="{{ user.account * 1 == 0 }}">您暂无零钱可以提现</view>
+    <view class="mask-btn">
+      <view catchtap="maskOp" data-type="cancel">取消</view>
+      <button wx:if="{{ user.account * 1 > 0 }}" style="width: 50%;" open-type="contact">零钱提现</button>
     </view>
   </view>
 </view>

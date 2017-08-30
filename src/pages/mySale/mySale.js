@@ -1,33 +1,18 @@
 // 获取全局应用程序实例对象
 // const app = getApp()
-
+const app = getApp()
+const serviceUrl = require('../../utils/service')
 // 创建页面实例对象
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    sealArr: [
-      {
-        img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        name: '一脸油菜',
-        price: 150,
-        status: 0
-      },
-      {
-        img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        name: '一脸油菜',
-        price: 150,
-        status: 1
-      },
-      {
-        img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        name: '一脸油菜',
-        price: 150,
-        status: 2
-      }
-    ]
+    page: 1,
+    sealArr: [],
+    orderStatus: ['用户未付款', '待发货', '已发货', '用户已收货', '退货', '举报']
   },
+  // 快递信息录入
   inputValue (e) {
     let type = e.currentTarget.dataset.type
     let value = e.detail.value
@@ -55,6 +40,7 @@ Page({
   },
   // 发货操作
   mOp (e) {
+    let that = this
     if (e.currentTarget.dataset.type === 'cancel') {
       this.setData({
         mask: false
@@ -65,21 +51,76 @@ Page({
         wx.showToast({
           title: '请补全信息'
         })
+      } else {
+        let cd = {
+          url: serviceUrl.confirmDelivery,
+          data: {
+            session_key: app.gs(),
+            order_id: that.data.id,
+            user_name: that.data.name,
+            mobile: that.data.phone,
+            address: that.data.address,
+            shipping_name: that.data.express,
+            shipping_no: that.data.expressnumber
+          },
+          success (res) {
+            wx.hideLoading()
+            if (res.data.code === 200) {
+              wx.showToast({
+                title: '发货信息录入成功'
+              })
+              that.data.sealArr[that.data.index].order_status = 2
+              that.setData({
+                mask: false,
+                sealArr: that.data.sealArr
+              })
+            } else {
+              wx.showToast({
+                title: res.data.message
+              })
+            }
+          }
+        }
+        app.wxrequest(cd)
       }
-        // todo
     }
   },
   // 发货
   send (e) {
-    if (e.currentTarget.dataset.status * 1 !== 0) return
-    this.setData({
-      mask: true
-    })
+    if (e.currentTarget.dataset.status * 1 === 1 || e.currentTarget.dataset.status * 1 === 2) {
+      this.setData({
+        id: e.currentTarget.dataset.id,
+        index: e.currentTarget.dataset.index,
+        mask: true
+      })
+    }
+  },
+  // 获取卖出列表
+  getSale (page) {
+    let that = this
+    let s = {
+      url: serviceUrl.buyProductByTa,
+      data: {
+        session_key: app.gs(),
+        page: page
+      },
+      success (res) {
+        wx.hideLoading()
+        if (res.data.code === 200) {
+          app.setMore(res.data.data, that)
+          that.setData({
+            sealArr: that.data.sealArr.concat(res.data.data)
+          })
+        }
+      }
+    }
+    app.wxrequest(s)
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad () {
+    this.getSale(1)
     // TODO: onLoad
   },
 
@@ -116,5 +157,9 @@ Page({
    */
   onPullDownRefresh () {
     // TODO: onPullDownRefresh
+  },
+  onReachBottom () {
+    if (!this.data.more) return
+    this.getSale(++this.data.page)
   }
 })

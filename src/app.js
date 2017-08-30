@@ -7,7 +7,7 @@ Moment.locale('en', {
   relativeTime : {
     future: "差 %s",
     past:   "%s前",
-    s:  "秒",
+    s:  "几秒",
     m:  "一分钟",
     mm: "%d分钟",
     h:  "一小时",
@@ -69,6 +69,10 @@ App({
   },
   // 请求数据
   wxrequest (obj) {
+    wx.showLoading({
+      title: '请求数据中...'
+      // mask: true
+    })
     wx.request({
       url: obj.url || useUrl.serviceUrl.login,
       method: obj.method || 'POST',
@@ -82,7 +86,9 @@ App({
       fail: obj.fail || function (err) {
         console.log('未传入fail回调函数,err:' + err.errMsg)
       },
-      complete: obj.complete || function () {}
+      complete: obj.complete || function () {
+
+      }
     })
   },
   // 用户登陆
@@ -108,7 +114,9 @@ App({
                 encryptedData: encryptedData
               },
               success (session) {
-                wx.setStorageSync('session_key', session.data.data.session_key)
+                let s = 'DUGufWMOkMIolSIXLajTvCEvXAYQZwSpnafUVlSagdNEReVSRDAECzwEVAtFbPWg'
+                // wx.setStorageSync('session_key', session.data.data.session_key)
+                wx.setStorageSync('session_key', s)
                 if (loginSuccess) {
                   loginSuccess(params)
                 }
@@ -129,6 +137,22 @@ App({
       }
     })
   },
+  // 获取缓存session_key
+  gs () {
+    return wx.getStorageSync('session_key')
+  },
+  // 设置页面是否加载
+  setMore (params, that) {
+    if (params.length === 0) {
+      that.setData({
+        more: false
+      })
+    } else {
+      that.setData({
+        more: true
+      })
+    }
+  },
   // 获取用户信息
   getUserInfo (obj) {
     wx.getUserInfo({
@@ -148,7 +172,7 @@ App({
    */
   onLaunch () {
     // console.log(' ========== Application is launched ========== ')
-    this.wxlogin()
+    // this.wxlogin()
   },
   /**
    * 生命周期函数--监听小程序显示

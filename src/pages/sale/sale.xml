@@ -4,7 +4,7 @@
   <swiper class="carousel" indicator-dots="{{ dots }}" circular="{{ circular }}" autoplay="true" interval="5000" duration="1000">
     <block wx:for="{{ imgUrls }}">
       <swiper-item>
-        <image mode="aspectFill" src="{{ item }}" class="slide-image" />
+        <image mode="aspectFill" src="{{ item.thumb }}" class="slide-image" />
       </swiper-item>
     </block>
   </swiper>
@@ -20,29 +20,31 @@
     <view catchtap="typeChoose" data-index="1" class="{{ curChoose == 1 ? 'cur' : '' }}">最高担保</view>
   </view>
   <!--商品区间-->
-  <navigator url="../detail/detail?id={{ item.id }}" class="shop" wx:for="{{ products }}" wx:for-item="item">
+  <navigator url="../detail/detail?id={{ item.good_id }}" class="shop" wx:for="{{ products }}" wx:for-item="item">
     <!--发布用户信息-->
     <view class="s-u">
       <!--<image class="lv" src=""></image>-->
-      <view class="lv t1"></view>
-      <image class="br" src="{{ item.img }}"></image>
+      <view class="lv {{ pLevel[item.user_level] }}"></view>
+      <image class="br" src="{{ item.avatar }}"></image>
       <view class="s-u-t">
-        <view>{{ item.name }}</view>
+        <view>{{ item.user_nicename }}</view>
       </view>
       <text class="s-u-p">￥{{ item.price }}</text>
     </view>
     <!--中间图片-->
     <view class="s-c">
-      <image mode="aspectFill" class="s-c-i" src="{{ p }}" wx:for="{{ item.photos }}" wx:for-item="p"></image>
+      <image mode="aspectFill" class="s-c-i" src="{{ p }}" wx:if="{{ index < 3}}" wx:for="{{ item.images }}" wx:for-item="p"></image>
     </view>
     <!--介绍文字-->
-    <view class="s-t ell">{{ item.introduce }}</view>
+    <view class="s-t ell">{{ item.describe }}</view>
     <!--评论-->
     <view class="comment">
-      <view>发布于: {{ item.time }}</view>
-      <view class="iconfont icon-liuyan1">{{ item.comment_count }}</view>
+      <view>发布于: {{ item.add_time }}</view>
+      <view class="iconfont icon-liuyan1">{{ item.leaving_count || '0' }}</view>
     </view>
   </navigator>
+  <view class="tac" wx:if="{{ products.length === 0 }}">诶哟，还没有人发布产品诶</view>
+  <view class="tac" wx:else>{{ more ? '--- 上拉加载更多 ---' : '--- 到底了 ---' }}</view>
   <!--底部导航-->
   <view style="height: 80rpx; width: 100%;"></view>
   <view class="static-bottom">

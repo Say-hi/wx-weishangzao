@@ -171,7 +171,8 @@ page {
         border-left: 1rpx solid #eee;
         border-top: 1rpx solid #eee;
         box-sizing: border-box;
-        width: 50%;
+        //width: 50%;
+        flex: 1;
         text-align: center;
         color: #f98e03;
       }
@@ -179,6 +180,45 @@ page {
         border-left: none;
         color: #ccc;
       }
+      button {
+        border-top: 1rpx solid #eee;
+        border-left: 1rpx solid #eee;
+        border-radius: 0;
+        background-color: #fff;
+      }
+      button::after {
+        flex: 1;
+        border: none;
+      }
+    }
+  }
+  .danbao {
+    overflow: hidden;
+    width: 98%;
+    .title {
+      border-top: none;
+      font-size: 40rpx;
+      color: #2b2f41;
+    }
+    .mask-text {
+      view {
+        line-height: 50rpx;
+        font-size: 26rpx;
+      }
+    }
+    .radio-group {
+      padding-top: 20rpx;
+      font-size: 26rpx;
+      color: #2b2f41;
+      text-align: center;
+    }
+    .btn {
+      background-color: #eee;
+      width: 80%;
+      margin: 20rpx auto;
+    }
+    .y {
+      background-color: #fedb43;
     }
   }
 } 

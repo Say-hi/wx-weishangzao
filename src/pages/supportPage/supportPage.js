@@ -1,45 +1,21 @@
 // 获取全局应用程序实例对象
 // const app = getApp()
-
+const app = getApp()
+const serviceUrl = require('../../utils/service')
 // 创建页面实例对象
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    imgUrls: [
-      'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-      'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-      'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
-    ],
-    user: {
-      img: 'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg',
-      name: '国际团队',
-      number: 'awxasdf',
-      influence: 234,
-      agency: 123,
-      support: 1232,
-      address: '温州',
-      sign: '人一定要有梦想',
-      team: '团队asdf',
-      level: 'zaasdf',
-      experience: '阿斯兰的房间爱死了打开房间爱死爱死了打开房间爱死爱死了打开房间爱死了贷款',
-      product: '阿斯顿减肥拉萨的费',
-      imageArr: [
-        'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-        'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-        'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-        'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
-      ]
-    }
+    pLevel: ['p0', 'p1', 'p2', 'p3', 'p4', 'p5']
   },
   // 预览图片
   previewImg (e) {
     let that = this
     wx.previewImage({
-      current: that.data.user.imageArr[e.currentTarget.dataset.index], // 当前显示图片的http链接
-      urls: that.data.user.imageArr // 需要预览的图片http链接列表
+      current: that.data.user.products[e.currentTarget.dataset.index], // 当前显示图片的http链接
+      urls: that.data.user.products // 需要预览的图片http链接列表
     })
   },
   // mask取消按钮
@@ -80,10 +56,92 @@ Page({
       }
     })
   },
+  // 获取个人信息
+  getInfo (id) {
+    let that = this
+    let obj = {
+      url: serviceUrl.userDetail,
+      data: {
+        session_key: wx.getStorageSync('session_key'),
+        user_id: id
+      },
+      success (res) {
+        wx.hideLoading()
+        if (res.data.code === 200) {
+          that.setData({
+            user: res.data.data
+          })
+        } else {
+          wx.showToast({
+            title: res.data.message,
+            mask: true
+          })
+          setTimeout(function () {
+            wx.reLaunc({
+              url: '../index/idnex'
+            })
+          }, 1000)
+        }
+      }
+    }
+    app.wxrequest(obj)
+  },
+  // 微商关联
+  follow (e) {
+    let that = this
+    let type = e.currentTarget.dataset.type
+    let f = {
+      url: serviceUrl.userAddOrCancelRelation,
+      data: {
+        session_key: app.gs(),
+        user_id: that.data.id,
+        type: type
+      },
+      success (res) {
+        // console.log(res)
+        wx.hideLoading()
+        if (res.data.code === 200) {
+          that.getInfo(that.data.id)
+        } else {
+          wx.showToast({
+            title: res.data.message
+          })
+        }
+      }
+    }
+    app.wxrequest(f)
+  },
+  // 团队支持
+  support () {
+    let that = this
+    let s = {
+      url: serviceUrl.addUserSupport,
+      data: {
+        session_key: app.gs(),
+        user_id: that.data.id
+      },
+      success (res) {
+        wx.hideLoading()
+        if (res.data.code === 200) {
+          that.getInfo(that.data.id)
+        } else {
+          wx.showToast({
+            title: res.data.message
+          })
+        }
+      }
+    }
+    app.wxrequest(s)
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad () {
+  onLoad (params) {
+    this.setData({
+      id: params.id
+    })
+    this.getInfo(params.id)
     // TODO: onLoad
   },
 

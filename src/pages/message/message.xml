@@ -1,8 +1,10 @@
 <!--消息-->
 <view class="message" wx:for="{{ lists }}">
-  <image src="../../images/message-1.png"></image>
+  <view>
+    <image src="../../images/message-1.png"></image>
+  </view>
   <view>
     <view class="m-t">{{ item.content }}</view>
-    <view class="m-t">{{ item.time }}</view>
+    <view class="m-t">{{ item.add_time }}</view>
   </view>
 </view>

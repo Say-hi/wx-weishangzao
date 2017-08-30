@@ -2,10 +2,12 @@
 <view>
   <view class="agent" wx:for="{{ agentArr }}">
     <view class="a-top">
-      <image class="br" src="{{ item.img }}"></image>
+      <image class="br" src="{{ item.avatar }}"></image>
       <text>{{ item.name }}</text>
     </view>
-    <text>{{ item.sign }}</text>
-    <view data-index="{{ index }}" catchtap="del" class="del">删除代理</view>
+    <text>{{ item.signature }}</text>
+    <view data-id="{{ item.user_id }}" catchtap="del" class="del">删除代理</view>
   </view>
+  <view class="tac" wx:if="{{ agentArr.length == 0 || !more }}">还没有代理关注您哦</view>
+  <view class="tac" wx:else>---  到底啦  ---</view>
 </view>

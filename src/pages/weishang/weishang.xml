@@ -10,7 +10,7 @@
     <view>开通后，不仅让所有的微商看到你的个人信息。还能在【微商地图】看到您周边正在经营微商的小伙伴点击【一键添加】加为好友！</view>
   </view>
   <view class="c2 kt">
-    <view>开启微商之路</view>
+    <view catchtap="kt">开启微商之路</view>
   </view>
   <view class="c3">
     <text>客服微信</text>

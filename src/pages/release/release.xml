@@ -1,33 +1,38 @@
 <!--发布产品-->
 <view class="product">
-  <input class="p-i" bindinput="inputValue" data-type="title" placeholder="标题 输入商品名称"/>
-  <input class="p-i" type="digit" bindinput="inputValue" data-type="money" placeholder="零售价"/>
-  <input class="p-i" type="number" bindinput="inputValue" data-type="count" placeholder="数量"/>
+  <input class="p-i" value="{{ info.good_name }}" bindinput="inputValue" data-type="title" placeholder="标题 输入商品名称"/>
+  <input class="p-i" value="{{ info.original_price }}" type="digit" bindinput="inputValue" data-type="money" placeholder="零售价"/>
+  <input class="p-i" value="{{ info.stock_num }}" type="number" bindinput="inputValue" data-type="count" placeholder="数量"/>
   <picker class="p-i" mode="date" value="{{date}}" start="{{ starTime }}" end="{{ endTime }}" bindchange="bindDateChange">
     <view class="picker">
       过期时间 {{ time }}
     </view>
   </picker>
-  <input class="p-i" bindinput="inputValue" data-type="full" placeholder="产品完整性"/>
-  <textarea class="p-i p-it" bindinput="inputValue" data-type="introduce" placeholder="描述一下产品"></textarea>
-  <image class="p-img" wx:for="{{ imgArr }}"></image>
+  <!--<input class="p-i" bindinput="inputValue" type="number" maxlength="3" data-type="full" placeholder="产品完整性"/>-->
+  <view class="p-full">选择产品的完整性</view>
+  <slider bindchange="sliderchange" value="{{ info.product_integrity }}" min="1" max="100" show-value/>
+  <textarea class="p-i p-it" value="{{ info.describe }}" bindinput="inputValue" data-type="introduce" placeholder="描述一下产品"></textarea>
+  <!--<image class="p-img" wx:for="{{ imgArr }}"></image>-->
   <view class="p-u">
-    <image class="p-up-img" src="{{ item }}" wx:for="{{ upImg }}"></image>
-    <image class="p-up" src="../../images/team-up.png"></image>
+    <view class="cover-img" wx:for="{{ upImg }}">
+      <image catchtap="showImg" data-index="{{ index }}" class="p-up-img" src="{{ item }}" ></image>
+      <view data-type="img2" catchtap="delphoto" data-index="{{ index }}" class="del">×</view>
+    </view>
+    <image wx:if="{{ upImg.length < 6 }}" catchtap="upImgs" class="p-up" src="../../images/team-up.png"></image>
   </view>
 </view>
 
 <view class="product-bottom">
   <!--<view style="height: 86rpx"></view>-->
   <!--<view class="p-b-m"><view>￥</view><input type="digit" bindinput="inputValue" data-type="allMoney" placeholder="输入价格"/></view>-->
-  <picker bindchange="bindPickerChange" value="{{ index }}" range="{{ array }}">
+  <picker bindchange="bindPickerChange" range-key="cat_name" value="{{ index }}" range="{{ array }}">
     <view class="p-type">
       <view>分类</view>
       <view class="arrow">
-        {{array[index]}}
+        {{ array[index].cat_name }}
       </view>
     </view>
   </picker>
 
-  <view class="confirm-btn">确定发布</view>
+  <view class="confirm-btn" catchtap="fabu">确定发布</view>
 </view>

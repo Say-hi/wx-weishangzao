@@ -7,13 +7,20 @@ page {
   border-bottom: 20rpx solid #eee;
   .p-i {
     box-sizing: border-box;
-    border-top: 1rpx solid #eee;
+    border-bottom: 1rpx solid #eee;
     height: 86rpx;
     line-height: 86rpx;
     color: #666;
     font-size: 28rpx;
     padding-left: 38rpx;
     width: 100%;
+  }
+  .p-full {
+    border-bottom: 1rpx solid #eee;
+    padding-left: 38rpx;
+    line-height: 86rpx;
+    color: #666;
+    font-size: 28rpx;
   }
   .p-it {
     padding-top: 31rpx;
@@ -23,6 +30,16 @@ page {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+    .cover-img {
+      position: relative;
+      .del {
+        position: absolute;
+        top: 10rpx;
+        right: 10rpx;
+        color: #fedb43;
+        font-size: 50rpx;
+      }
+    }
     .p-up-img {
       width: 228rpx;
       height: 267rpx;

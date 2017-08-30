@@ -1,5 +1,8 @@
 // 获取全局应用程序实例对象
 // const app = getApp()
+const app = getApp()
+const wxf = require('../../utils/common')
+const serviceUrl = require('../../utils/service')
 const dates = (new Date()).getFullYear() + '-' + ((new Date()).getMonth() + 1) + '-' + (new Date()).getDate()
 const datess = ((new Date()).getFullYear() + 1) + '-' + ((new Date()).getMonth() + 1) + '-' + (new Date()).getDate()
 // 创建页面实例对象
@@ -8,18 +11,42 @@ Page({
    * 页面的初始数据
    */
   data: {
-    title: 'release',
-    time: '',
+    time: '选择过期时间',
+    info: {
+      'good_id': 0
+    },
     date: dates,
     starTime: dates,
     endTime: datess,
     index: 0,
-    array: ['选择分类', '美妆护肤', '母婴用品', '服饰鞋子', '保健养生', '内衣首饰', '数码产品', '零食玩具', '护眼用品', '生活用品'],
-    upImg: [
-      'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-      'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-      'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
-    ]
+    array: [{
+      'cat_id': 'false',
+      'cat_name': '选择产品分类'
+    }],
+    upImg: []
+  },
+  // 上传图片
+  upImgs () {
+    let that = this
+    wxf.upPhoto(that, 'upImg', 6, function (that, ss) {
+      that.setData({
+        upImg: ss
+      })
+    })
+  },
+  // 删除图片
+  delphoto (e) {
+    let that = this
+    wxf.delphoto(that, e, 'upImg', function (that, imgArr) {
+      that.setData({
+        upImg: imgArr
+      })
+    })
+  },
+  // 显示图片
+  showImg (e) {
+    let that = this
+    wxf.showImg(that, e, 'upImg')
   },
   // 分类选择
   bindPickerChange (e) {
@@ -31,49 +58,145 @@ Page({
   // 日期选择
   bindDateChange (e) {
     // console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.data.info['exp_time'] = e.detail.value
     this.setData({
       date: e.detail.value,
-      time: e.detail.value
+      time: e.detail.value,
+      info: this.data.info
     })
   },
   // 输入框文字输入
   inputValue (e) {
+    let { info } = this.data
     let type = e.currentTarget.dataset.type
     let value = e.detail.value
     if (type === 'title') {
-      this.setData({
-        title: value
-      })
+      info['good_name'] = value
     } else if (type === 'money') {
-      this.setData({
-        money: value
-      })
+      info['original_price'] = value
     } else if (type === 'count') {
-      this.setData({
-        count: value
-      })
-    } else if (type === 'time') {
-      this.setData({
-        time: value
-      })
+      info['stock_num'] = value
     } else if (type === 'full') {
-      this.setData({
-        full: value
-      })
+      info['product_integrity'] = value
     } else if (type === 'introduce') {
-      this.setData({
-        introduce: value
-      })
-    } else if (type === 'allMoney') {
-      this.setData({
-        allMoney: value
+      info['describe'] = value
+    }
+    this.setData({
+      info: info
+    })
+  },
+  // 获取产品分类
+  getCategoryLists () {
+    let that = this
+    let gc = {
+      url: serviceUrl.getCategoryLists,
+      data: {
+        session_key: app.gs()
+      },
+      success (res) {
+        wx.hideLoading()
+        if (res.data.code === 200) {
+          that.setData({
+            array: that.data.array.concat(res.data.data)
+          })
+        } else {
+          wx.showToast({
+            title: res.data.message
+          })
+        }
+      }
+    }
+    app.wxrequest(gc)
+  },
+  // 发布信息
+  fabu () {
+    let { info } = this.data
+    if (!info.good_name || !info.original_price || !info.stock_num || !info.product_integrity || !info.describe || (this.data.upImg.length === 0) || (this.data.index === 0)) {
+      return wx.showToast({
+        title: '请正确补全信息再提交'
       })
     }
+    let that = this
+    let fb = {
+      url: serviceUrl.releaseGoods,
+      data: {
+        session_key: app.gs(),
+        good_id: that.data.id,
+        good_name: info.good_name,
+        original_price: info.original_price,
+        stock_num: info.stock_num,
+        exp_time: info.exp_time,
+        product_integrity: info.product_integrity,
+        describe: info.describe,
+        product_images: that.data.upImg.join(','),
+        cat_id: that.data.array[that.data.index]['cat_id']
+      },
+      success (res) {
+        wx.hideLoading()
+        if (res.data.code === 200) {
+          wx.showToast({
+            title: '发布成功，偷偷告诉您个秘密！用户分享你的产品链接可以得到10%佣金奖励！',
+            mask: true
+          })
+          setTimeout(function () {
+            wx.redirectTo({
+              url: '../sale/sale'
+            })
+          }, 1500)
+        } else {
+          wx.showTosat({
+            title: res.data.message
+          })
+        }
+      }
+    }
+    app.wxrequest(fb)
+  },
+  // 滑动选择
+  sliderchange (e) {
+    this.data.info['product_integrity'] = e.detail.value
+    this.setData({
+      info: this.data.info
+    })
+  },
+  // 获取发布产品的信息
+  getInfo (id) {
+    let that = this
+    let gi = {
+      url: serviceUrl.editeProduct,
+      data: {
+        session_key: app.gs(),
+        good_id: id
+      },
+      success (res) {
+        wx.hideLoading()
+        if (res.data.code === 200) {
+          that.setData({
+            info: res.data.data,
+            time: res.data.data.exp_time.slice(0, 10),
+            index: res.data.data.cat_info.cat_id,
+            upImg: res.data.data.product_images
+          })
+        } else {
+          wx.showToast({
+            title: res.data.message
+          })
+        }
+      }
+    }
+    app.wxrequest(gi)
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad () {
+  onLoad (params) {
+    if (params.id) {
+      this.setData({
+        id: params.id
+      })
+      this.getInfo(params.id)
+    }
+    this.getCategoryLists()
     // TODO: onLoad
   },
 

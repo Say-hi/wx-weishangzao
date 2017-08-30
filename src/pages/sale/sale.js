@@ -1,6 +1,7 @@
 // 获取全局应用程序实例对象
 // const app = getApp()
-
+const app = getApp()
+const serviceUrl = require('../../utils/service')
 // 创建页面实例对象
 Page({
   /**
@@ -9,39 +10,12 @@ Page({
   data: {
     dots: false, // 轮播图是否显示点
     circular: true, // 轮播衔接
-    imgUrls: [
-      'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-      'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-      'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
-    ],
-    products: [
-      {
-        img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        name: '一帘幽梦',
-        time: '2017-12-05 12:58:20',
-        price: 150,
-        photos: [
-          'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-          'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-          'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
-        ],
-        comment_count: 4,
-        introduce: '测试介绍测试介绍测试介绍测试介绍测试介绍测试介绍测试介绍测试介绍测试介绍测试介绍测试介绍测试介绍测试介绍测试介绍测试介绍测试介绍测试介绍测试介绍测试介绍测试介绍测试介绍测试介绍测试介绍测试介绍'
-      },
-      {
-        img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        name: '一帘幽梦',
-        time: '2017-12-05 12:58:20',
-        price: 150,
-        photos: [
-          'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-          'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-          'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
-        ],
-        comment_count: 4,
-        introduce: '测试介绍测试介绍测试介绍测试介绍测试介绍测试介绍测试介绍测试介绍测试介绍测试介绍测试介绍测试介绍测试介绍测试介绍测试介绍测试介绍测试介绍测试介绍测试介绍测试介绍测试介绍测试介绍测试介绍测试介绍'
-      }
-    ]
+    page: 1,
+    pLevel: ['p0', 'p1', 'p2', 'p3', 'p4', 'p5'],
+    imgUrls: [],
+    products: [],
+    curChoose: 2,
+    searchValue: ''
   },
   chooseOperation (e) {
     if (e.currentTarget.dataset.type === 'right') {
@@ -57,19 +31,81 @@ Page({
   // 类型选择切换
   typeChoose (e) {
     this.setData({
+      page: 1,
       curChoose: e.currentTarget.dataset.index
     })
+    if (e.currentTarget.dataset.index * 1 === 2) {
+      this.getList(this.data.searchValue, 1, '')
+    } else {
+      this.getList(this.data.searchValue, 1, 'guarantee')
+    }
   },
   // 搜索输入框搜索
   search (e) {
     this.setData({
+      page: 1,
       searchValue: e.detail.value
     })
+    if (this.data.curChoose * 1 === 1) {
+      this.getList(this.data.searchValue, 1, '')
+    } else {
+      this.getList(this.data.searchValue, 1, 'guarantee')
+    }
+  },
+  // 获取轮播图
+  getCarousel () {
+    let that = this
+    let obj = {
+      url: serviceUrl.getBanners,
+      data: {
+        session_key: wx.getStorageSync('session_key')
+      },
+      success (res) {
+        that.setData({
+          imgUrls: res.data.data
+        })
+      }
+    }
+    app.wxrequest(obj)
+  },
+  // 获取产品列表
+  getList (keyword, page, sort) {
+    let that = this
+    let p = {
+      url: serviceUrl.productLists,
+      data: {
+        session_key: app.gs(),
+        page: page,
+        keyword: keyword,
+        sort: sort
+      },
+      success (res) {
+        wx.hideLoading()
+        if (page === 1) {
+          that.setData({
+            products: []
+          })
+        }
+        if (res.data.code === 200) {
+          app.setMore(res.data.data, that)
+          that.setData({
+            products: that.data.products.concat(res.data.data)
+          })
+        } else {
+          wx.showToast({
+            title: res.data.message
+          })
+        }
+      }
+    }
+    app.wxrequest(p)
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad () {
+    this.getCarousel()
+    this.getList('', 1, '')
     // TODO: onLoad
   },
 
@@ -106,5 +142,13 @@ Page({
    */
   onPullDownRefresh () {
     // TODO: onPullDownRefresh
+  },
+  onReachBottom () {
+    if (!this.data.more) return
+    if (this.data.curChoose * 1 === 2) {
+      this.getList(this.data.searchValue, ++this.data.page, '')
+    } else {
+      this.getList(this.data.searchValue, ++this.data.page, 'guarantee')
+    }
   }
 })

@@ -1,27 +1,27 @@
 <!--我收藏的-->
 <!--商品区间-->
-<view class="shop" wx:for="{{ products }}" wx:for-item="item">
+<view class="shop" wx:for="{{ products }}" wx:for-item="item" wx:for-index="index">
     <!--发布用户信息-->
     <view class="s-u">
         <image wx:if="{{ curChoose == 1 }}" class="lv" src="../../images/lv5.png"></image>
-        <image class="br" src="{{ item.img }}"></image>
+        <image class="br" src="{{ item.avatar }}"></image>
         <view class="s-u-t">
-            <view>{{ item.name }}</view>
-            <view>{{ item.time }}</view>
+            <view>{{ item.user_nicename || item.true_name }}</view>
+            <view>{{ item.add_time }}</view>
         </view>
-        <text class="s-u-p">￥{{ item.price }}</text>
+        <text class="s-u-p">￥{{ item.clearance_price }}</text>
     </view>
     <!--中间图片-->
     <view class="s-c">
-        <image mode="aspectFill" class="s-c-i" src="{{ p }}" wx:for="{{ item.photos }}" wx:for-item="p"></image>
+        <image wx:if="{{ pindex < 3 }}" mode="aspectFill" class="s-c-i" src="{{ p }}" wx:for-index="pindex" wx:for="{{ item.product_images }}" wx:for-item="p"></image>
     </view>
     <!--介绍文字-->
-    <view class="s-t ell">{{ item.introduce }}</view>
+    <view class="s-t ell">{{ item.describe }}</view>
     <!--评论-->
     <view class="comment">
         <view>
             <image src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAvCAMAAACSXLn7AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAB1UExURUxpcQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP7bQ2pbHHppIIx5Jda4OHFhHV5RGOvLPoJxIsarNBYSBbifMCchCqeQLEk/E+DCOvfVQZuGKDkxDzBLojoAAAAUdFJOUwAZJcqH/hDl8m4Fo0i3lGE13Fl7ck8oWQAAAYZJREFUSMedlulygyAUhREkgFs0grt1z/s/YnViGw1Ioff3+ebM4S4KgKogwpgEwLxIznn35RjrmeBrNb4xQIsN4MYWLwMLC/IyWC1uRvp7tet5FpkZtD+AmcXbwNDiYGBk8TgYrBaunQGf8c0iwValJsUtvrshbs/ALFDEAqnlMGA+os8q77hUbV6OOAnde7xj0A2TfiyHtuaXNU9dXj0p8teRD/qmm7hRzcUwMkAHblEFBphb1T8AlNvoFwogtSAWHK/PShpTfU7jrRFOkpnpGwr3mUDCSE9+J8QzIcrkOFHhn4RA3mn8fGGnByAStU4fyuvgal53UJ005+saGAOD5Tx1THULouUa6BQRAGqvgYnIeo/qXqmHEhD3ujYoUj8qHZClchu0a6FoRNhplz+Rb+op85SJ4rzLnzcWHjPXDU0ZKY/IM77OXGfUXUffOyElu8q8yXf7I7J8pk6zT/kZySNpVgdJviNb/E5udUCEIKnie+OxRJT0ofiDYQyqvzQOY+83+gY+hWQ63YlDbwAAAABJRU5ErkJggg=="></image>
-            <text>取消收藏</text>
+            <text data-id="{{ item.good_id }}" data-index="{{ index }}" catchtap="cancel">取消收藏</text>
         </view>
     </view>
 </view>

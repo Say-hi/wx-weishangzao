@@ -27,6 +27,7 @@ Page({
         title: '请勾选同意本平台发布规则'
       })
     } else {
+      wx.setStorageSync('fabu', 'true')
       wx.redirectTo({
         url: '../release/release'
       })
@@ -36,6 +37,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad () {
+    if (wx.getStorageSync('fabu')) {
+      wx.redirectTo({
+        url: '../release/release'
+      })
+    }
     // TODO: onLoad
   },
 

@@ -1,56 +1,84 @@
 // 获取全局应用程序实例对象
 // const app = getApp()
-
+const app = getApp()
+const serviceUrl = require('../../utils/service')
 // 创建页面实例对象
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    agentArr: [
-      {
-        img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        name: '东北小伙',
-        sign: ',世间事除了生死哪一件事不是闲事世间事除了生死哪一件事不是闲事世间事除了生死哪一件事不是闲事世间事除了生死哪一件事不是闲事',
-        id: 123123
-      },
-      {
-        img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        name: '东北小伙',
-        sign: ',世间事除了生死哪一件事不是闲事世间事除了生死哪一件事不是闲事世间事除了生死哪一件事不是闲事世间事除了生死哪一件事不是闲事',
-        id: 123123
-      },
-      {
-        img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        name: '东北小伙',
-        sign: ',世间事除了生死哪一件事不是闲事世间事除了生死哪一件事不是闲事世间事除了生死哪一件事不是闲事世间事除了生死哪一件事不是闲事',
-        id: 123123
-      },
-      {
-        img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        name: '东北小伙',
-        sign: ',世间事除了生死哪一件事不是闲事世间事除了生死哪一件事不是闲事世间事除了生死哪一件事不是闲事世间事除了生死哪一件事不是闲事',
-        id: 123123
-      },
-      {
-        img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        name: '东北小伙',
-        sign: '世间事除了生死哪一件事不是闲事',
-        id: 23452345
-      }
-    ]
+    agentArr: [],
+    page: 1
   },
   // 删除代理
   del (e) {
-    this.data.agentArr.splice(e.currentTarget.dataset.index, 1)
+    let that = this
+    let s = {
+      url: serviceUrl.deleteProxy,
+      data: {
+        session_key: app.gs(),
+        user_id: e.currentTarget.dataset.id
+      },
+      success (res) {
+        wx.hideLoading()
+        if (res.data.code === 200) {
+          that.getInfo(1)
+        } else {
+          wx.showToast({
+            title: res.data.message
+          })
+        }
+      }
+    }
+    app.wxrequest(s)
     this.setData({
       agentArr: this.data.agentArr
     })
+  },
+  // 获取关联我的代理
+  getInfo (page) {
+    let that = this
+    let a = {
+      url: serviceUrl.getProxyByMy,
+      data: {
+        session_key: app.gs(),
+        page: page
+      },
+      success (res) {
+        wx.hideLoading()
+        if (res.data.code === 200) {
+          if (res.data.data.length === 0) {
+            that.setData({
+              more: false
+            })
+          } else {
+            that.setData({
+              more: true
+            })
+          }
+          if (page * 1 === 1) {
+            that.setData({
+              agentArr: []
+            })
+          }
+          that.setData({
+            agentArr: that.data.agentArr.concat(res.data.data)
+          })
+        } else {
+          wx.showToast({
+            title: res.data.message
+          })
+        }
+      }
+    }
+    app.wxrequest(a)
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad () {
+    this.getInfo(1)
     // TODO: onLoad
   },
 
@@ -87,5 +115,9 @@ Page({
    */
   onPullDownRefresh () {
     // TODO: onPullDownRefresh
+  },
+  onReachBottom () {
+    if (!this.data.more) return
+    this.getInfo(++this.data.page)
   }
 })

@@ -1,10 +1,12 @@
 <!--我关联的上家-->
 <view>
-  <view class="agent" wx:for="{{ agentArr }}">
+  <navigator open-type="redirect" url="../supportPage/supportPage?id={{ item.subscribe_user_id }}" class="agent" wx:for="{{ agentArr }}">
     <view class="a-top">
-      <image class="br" src="{{ item.img }}"></image>
+      <image class="br" src="{{ item.avatar }}"></image>
       <text>{{ item.name }}</text>
     </view>
-    <text>{{ item.sign }}</text>
-  </view>
+    <text wx:if="{{ item.signature }}">{{ item.signature }}</text>
+  </navigator>
+  <view class="tac" wx:if="{{ agentArr.length == 0 }}">您尚未关联上家哦</view>
+  <view class="tac" wx:else>--- 到底啦 ---</view>
 </view>

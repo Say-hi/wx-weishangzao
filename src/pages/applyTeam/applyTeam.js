@@ -1,6 +1,7 @@
 // 获取全局应用程序实例对象
 // const app = getApp()
-
+const app = getApp()
+const serviceUrl = require('../../utils/service')
 // 创建页面实例对象
 Page({
   /**
@@ -41,6 +42,61 @@ Page({
       })
     }
   },
+  // 提交信息
+  confirm () {
+    wx.removeStorage({
+      key: 'teamInput'
+    })
+    if (!this.data.name || !this.data.number) {
+      return wx.showToast({
+        title: '请补全信息后提交'
+      })
+    }
+    let that = this
+    let upImg = {
+      url: serviceUrl.uploadPhotos,
+      filePath: that.data.upImg,
+      formData: {
+        session_key: app.gs(),
+        file: that.data.upImg
+      },
+      success (res) {
+        // console.log(res)
+        let jsonObj = JSON.parse(res.data).data.res_file
+        console.log(jsonObj)
+        let c = {
+          url: serviceUrl.addTeam,
+          data: {
+            session_key: app.gs(),
+            name: that.data.name,
+            wechat_no: that.data.number,
+            image: jsonObj
+          },
+          success (ress) {
+            if (ress.data.code === 200) {
+              wx.showToast({
+                title: '团队创建成功'
+              })
+              setTimeout(function () {
+                wx.reLaunch({
+                  url: '../index/index'
+                })
+              }, 1500)
+            }
+          }
+        }
+        app.wxrequest(c)
+      },
+      fail () {
+        wx.showToast({
+          title: '请传入图片'
+        })
+      }
+    }
+    app.wxUpload(upImg)
+
+    // todo 提交信息
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -60,13 +116,6 @@ Page({
       })
     }
     // TODO: onLoad
-  },
-  // 提交信息
-  confirm () {
-    wx.removeStorage({
-      key: 'teamInput'
-    })
-    // todo 提交信息
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
