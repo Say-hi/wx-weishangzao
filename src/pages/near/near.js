@@ -1,6 +1,6 @@
 // 获取全局应用程序实例对象
-// const app = getApp()
-
+const app = getApp()
+const serviceUrl = require('../../utils/service')
 // 创建页面实例对象
 Page({
   /**
@@ -8,28 +8,28 @@ Page({
    */
   data: {
     nearArr: [
-      {
-        img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        name: '一帘幽梦',
-        sign: '用心良苦却成空',
-        wxnumber: 'asdf654'
-      },
-      {
-        img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        name: '一帘幽梦',
-        sign: '用心良苦却成空',
-        wxnumber: 'asdf654'
-      }
+      // {
+      //   img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+      //   name: '一帘幽梦',
+      //   sign: '用心良苦却成空',
+      //   wxnumber: 'asdf654'
+      // },
+      // {
+      //   img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+      //   name: '一帘幽梦',
+      //   sign: '用心良苦却成空',
+      //   wxnumber: 'asdf654'
+      // }
     ]
   },
   // 一键复制
   copy () {
     let data = ''
     for (let i of this.data.nearArr) {
-      if (!i.wxnumber) {
+      if (!i.wechat_no) {
         data += ' '
       } else {
-        data += (i.wxnumber + ' ')
+        data += (i.wechat_no + ' ')
       }
     }
     wx.setClipboardData({
@@ -41,12 +41,37 @@ Page({
       }
     })
   },
+  // 获取附近的人信息
+  getNear (latitude, longitude) {
+    let that = this
+    let gn = {
+      url: serviceUrl.weishangMap,
+      data: {
+        session_key: app.gs(),
+        lat: latitude,
+        lng: longitude
+      },
+      success (res) {
+        wx.hideLoading()
+        if (res.data.code === 200) {
+          that.setData({
+            nearArr: res.data.data.users
+          })
+        } else {
+          wx.showToast({
+            title: res.data.message
+          })
+        }
+      }
+    }
+    app.wxrequest(gn)
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad (parmas) {
     let {lat, lng} = parmas
-    console.log(lat, lng)
+    this.getNear(lat, lng)
     // TODO: onLoad
   },
 

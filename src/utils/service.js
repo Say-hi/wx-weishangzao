@@ -46,6 +46,7 @@ let serviceUrl = {
   confirmByReceipt: baseDomain + '/api/order/confirmByReceipt',
   getMessageLists: baseDomain + '/api/product/getMessageLists',
   weishangMap: baseDomain + '/api/user/weishangMap',
-  updateMapUser: baseDomain + '/api/user/updateMapUser'
+  updateMapUser: baseDomain + '/api/user/updateMapUser',
+  extensionErcode: baseDomain + '/api/user/extensionErcode'
 }
 module.exports = serviceUrl

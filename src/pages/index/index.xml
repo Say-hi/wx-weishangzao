@@ -20,7 +20,7 @@
   <!--排行榜-->
   <view class="ranking-list">
     <view class="top-title">
-      微商造排行榜
+      荣耀微商排行榜
       <navigator url="../ruler/ruler" class="rule">排行规则</navigator>
     </view>
   </view>

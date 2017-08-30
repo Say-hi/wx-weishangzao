@@ -36,7 +36,7 @@ Page({
     // todo 需要执行的行为
     let that = this
     wx.setClipboardData({
-      data: that.data.user.number,
+      data: that.data.user.wechat_no,
       success (res) {
         // console.log(res)
         wx.showToast({

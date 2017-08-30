@@ -23,7 +23,7 @@
 
   <view class="clearfix">
     <block wx:for="{{ operationArr }}">
-      <navigator class="user-operation" url="{{ item.url }}">
+      <navigator class="user-operation" url="{{ item.text == '我的推广码' ?  (item.url + '?user_id=' + user.user_id + '&name=' + user.true_name): item.url }}">
         <image src="{{ item.icon }}"></image>
         <text>{{ item.text }}</text>
         <!--<text catchtap="kaiTongPoster" class="poster" wx:if="{{ index == 1 }}">{{ poster_time || '点击开通' }}</text>-->

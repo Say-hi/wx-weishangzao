@@ -135,12 +135,12 @@ Page({
         wx.hideLoading()
         if (res.data.code === 200) {
           wx.showToast({
-            title: '发布成功，偷偷告诉您个秘密！用户分享你的产品链接可以得到10%佣金奖励！',
+            title: '发布成功',
             mask: true
           })
           setTimeout(function () {
-            wx.redirectTo({
-              url: '../sale/sale'
+            wx.navigateBack({
+              delta: 1
             })
           }, 1500)
         } else {

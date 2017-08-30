@@ -168,13 +168,21 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad () {
+  onLoad (params) {
     this.curMonth()
     let that = this
     app.wxlogin(function () {
       that.getCarousel()
       that.getRank('', 1, 0)
+    }, params)
+    // 获取位置授权
+    wx.getLocation({
+      type: 'gcj02',
+      success (res) {
+        console.log(res)
+      }
     })
+
     // TODO: onLoad
   },
 

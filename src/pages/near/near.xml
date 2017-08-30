@@ -1,12 +1,13 @@
 <!--附近的人-->
 <view class='near' wx:for="{{ nearArr }}">
-    <image class='br' src='{{ item.img }}'></image>
+    <image class='br' src='{{ item.avatar }}'></image>
     <view class='n-u'>
-        <view>{{ item.name }}</view>
-        <view>{{ item.sign }}</view>
+        <view>{{ item.true_name }}</view>
+        <view>{{ item.signature || '未填写' }}</view>
     </view>
     <view class='n-w'>
-        微信号: {{ item.wxnumber }}
+        微信号: {{ item.wechat_no || '未填写' }}
     </view>
 </view>
-<view class="copy br" catchtap="copy">一键复制</view>
+<view class="tac" wx:if="{{ nearArr.length == 0 }}">附近暂无微商</view>
+<view class="copy br" wx:if="{{ nearArr.length > 0 }}" catchtap="copy">一键复制</view>

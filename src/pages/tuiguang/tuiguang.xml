@@ -1,0 +1,8 @@
+<view class="tac t">向您推荐微商神器</view>
+<view class="tac a">荣耀微商</view>
+<view class="imgac">
+<image catchtap="saveImg" mode="widthFix" src="{{ src }}"></image>
+</view>
+<view class="tac">{{ name }}的专属荣耀微商二维码</view>
+<view class="tac">您可已保存图片后发送到您的朋友圈进行推广</view>
+<button open-type="share" class="tg">我要推广荣耀微商</button>

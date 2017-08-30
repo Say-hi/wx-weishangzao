@@ -32,22 +32,13 @@ Page({
     let that = this
     map.getCenterLocation({
       success (res) {
-        console.log('获取当前地图中心位置', res)
-        let obj = {
-          iconPath: '/resources/others.png',
-          id: that.data.markers.length,
-          latitude: res.latitude,
-          longitude: res.longitude,
-          user_id: -1,
-          width: 50,
-          height: 50
-        }
-        that.data.markers.push(obj)
+        // console.log('获取当前地图中心位置', res)
         that.setData({
-          latitude: res.latitude,
-          longitude: res.longitude,
-          markers: that.data.markers
+          cLatitude: res.latitude,
+          cLongitude: res.longitude,
+          markers: []
         })
+        that.getNear()
       }
     })
   },
@@ -55,49 +46,33 @@ Page({
   regionchange (e) {
     // console.log(`视野变化${e.type}`)
     if (e.type === 'end') {
-      // this.getMapCenter()
+      this.getMapCenter()
     }
   },
   // 点击标记
   mt (e) {
-    console.log(e)
     let that = this
     let id = e.markerId * 1
-    console.log(that.data.users)
     for (let i of that.data.users) {
       if (i.user_id * 1 === id) {
-        console.log(id)
-        that.data.user['avatarUrl'] = i.avatar
-        that.data.user['nickName'] = i.true_name
-        that.data.user['number'] = i.wechat_no || '未填写'
-        that.data.user['sign'] = i.signature || '未填写'
+        // console.log(id)
+        // that.data.user['avatarUrl'] = i.avatar
+        // that.data.user['nickName'] = i.true_name
+        // that.data.user['number'] = i.wechat_no || '未填写'
+        // that.data.user['sign'] = i.signature || '未填写'
         let sho = (that.data.self_id * 1 === id ? '' : 'show')
         that.setData({
-          user: that.data.user,
+          user: i,
           sho: sho
         })
+        return
       }
     }
-    // this.data.users.map((value, index, array) => {
-    //   console.log(1)
-    //   if (value.id * 1 === id) {
-    //     that.data.user['avatarUrl'] = array[index].avatar
-    //     that.data.user['nickName'] = array[index].true_name
-    //     that.data.user['number'] = array[index].wechat_no || '未填写'
-    //     that.data.user['sign'] = array[index].signature || '未填写'
-    //     let show = (that.data.self_id === id ? 'show' : '')
-    //     that.setData({
-    //       user: that.data.user,
-    //       show: show
-    //     })
-    //   }
-    // })
-    // console.log(`点击标记${e.markerId}`)
   },
   // 点击控件
   controltap () {
     wx.navigateTo({
-      url: '../near/near?lat=' + this.data.latitude + '&lng=' + this.data.longitude
+      url: `../near/near?lat=${this.data.cLatitude}&lng=${this.data.cLongitude}`
     })
   },
   // 编辑信息
@@ -109,9 +84,7 @@ Page({
   // 编辑内容确认
   confirm () {
     // todo 上传数据
-    this.setData({
-      show: true
-    })
+    this.upDate()
   },
   // 取消编辑
   cancel () {
@@ -122,13 +95,14 @@ Page({
   // 获取输入内容
   inputValue (e) {
     let type = e.currentTarget.dataset.type
+    let value = e.detail.value
     if (type === 'number') {
       this.setData({
-        number: e.detail.value
+        wechat_no: value
       })
     } else if (type === 'sign') {
       this.setData({
-        sign: e.detail.value
+        signature: value
       })
     }
   },
@@ -136,7 +110,7 @@ Page({
   setMarker (lat, lng, icon, id) {
     // let ml = this.data.markers.length
     let obj = {
-      iconPath: icon,
+      iconPath: icon || '../../images/near.png',
       id: id,
       latitude: lat,
       longitude: lng,
@@ -145,20 +119,25 @@ Page({
       height: 50
     }
     this.data.markers.push(obj)
-    this.setData({
-      markers: this.data.markers
-    })
+    // this.setData({
+    //   markers: this.data.markers
+    // })
   },
   // 获取临时地址
-  getTemp (url, lat, lng, id) {
-    let that = this
-    wx.downloadFile({
-      url: url,
-      success (res) {
-        that.setMarker(lat, lng, res.tempFilePath, id)
-      }
-    })
-  },
+  // getTemp (url, lat, lng, id) {
+  //   let that = this
+  //   wx.downloadFile({
+  //     url: url,
+  //     success (res) {
+  //       that.setMarker(lat, lng, res.tempFilePath, id)
+  //     },
+  //     fail (res) {
+  //       setTimeout(function () {
+  //         that.setMarker(lat, lng, res.tempFilePath, id)
+  //       }, 150)
+  //     }
+  //   })
+  // },
   // 逆地址解析 获取用户当前位置
   reverseGeocoder () {
     let that = this
@@ -167,7 +146,9 @@ Page({
         that.setData({
           address: res.result.address,
           longitude: res.result.location.lng,
-          latitude: res.result.location.lat
+          cLongitude: res.result.location.lng,
+          latitude: res.result.location.lat,
+          cLatitude: res.result.location.lat
         })
         that.getNear()
         // that.getTemp(wx.getStorageSync('userInfo').avatarUrl, res.result.location.lat, res.result.location.lng)
@@ -204,11 +185,11 @@ Page({
     qqmapsdk.reverseGeocoder(obj)
   },
   // 获取微信用户信息
-  getUserInfo () {
-    this.setData({
-      user: wx.getStorageSync('userInfo')
-    })
-  },
+  // getUserInfo () {
+  //   this.setData({
+  //     user: wx.getStorageSync('userInfo')
+  //   })
+  // },
   // 获取附近的人信息
   getNear () {
     let that = this
@@ -222,17 +203,19 @@ Page({
       success (res) {
         wx.hideLoading()
         if (res.data.code === 200) {
-          res.data.data.user_info['lat'] = that.data.latitude
-          res.data.data.user_info['lng'] = that.data.longitude
+          res.data.data.user_info['lat'] = that.data.cLatitude
+          res.data.data.user_info['lng'] = that.data.cLongitude
           res.data.data.users.unshift(res.data.data.user_info)
           for (let i of res.data.data.users) {
-            that.getTemp(i.avatar, i.lat, i.lng, i.user_id)
+            that.setMarker(i.lat, i.lng, '', i.user_id)
           }
           that.setData({
             join: res.data.data.total,
             nearPeople: res.data.data.nearby_total,
             users: res.data.data.users,
-            self_id: res.data.data.user_info.user_id
+            user: res.data.data.user_info,
+            self_id: res.data.data.user_info.user_id,
+            markers: that.data.markers
           })
         } else {
           wx.showToast({
@@ -250,13 +233,18 @@ Page({
       url: serviceUrl.updateMapUser,
       data: {
         session_key: app.gs(),
-        wechat_no: that.data.number,
-        signature: that.data.sign
+        wechat_no: that.data.wechat_no,
+        signature: that.data.signature
       },
       success (res) {
         wx.hideLoading()
         if (res.data.code === 200) {
-
+          that.data.user['wechat_no'] = that.data.wechat_no
+          that.data.user['signature'] = that.data.signature
+          that.setData({
+            user: that.data.user,
+            show: true
+          })
         } else {
           wx.showToast({
             title: res.data.message
@@ -271,12 +259,10 @@ Page({
    */
   onLoad () {
     // let that = this
-    this.getUserInfo()
+    // this.getUserInfo()
     qqmapsdk = new QQMapWX({
       key: qqmapsdkkey
     })
-    this.reverseGeocoder()
-
     // TODO: onLoad
   },
 
@@ -291,6 +277,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow () {
+    this.reverseGeocoder()
     // TODO: onShow
   },
 

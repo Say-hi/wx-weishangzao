@@ -1,0 +1,9 @@
+<view class="ml" wx:for="{{ lists }}">
+  <view class="ml-l">
+    <text>{{ item.money }}</text>
+    <text>{{ item.from }}</text>
+  </view>
+  <view class="ml-r">
+    {{ item.time }}
+  </view>
+</view>

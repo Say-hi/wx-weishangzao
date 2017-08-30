@@ -23,6 +23,11 @@ Page({
       },
       success (res) {
         wx.hideLoading()
+        if (page * 1 === 1) {
+          that.setData({
+            sealArr: []
+          })
+        }
         if (res.data.code === 200) {
           app.setMore(res.data.data, that)
           that.setData({
@@ -80,6 +85,8 @@ Page({
         }
       }
       app.wxrequest(ce)
+    } else if (type === 'confirm' && (e.currentTarget.dataset.status * 1) === 0) {
+      that.forPay(e.currentTarget.dataset.id)
     }
   },
   // 关闭弹窗
@@ -95,6 +102,57 @@ Page({
     this.setData({
       mask: true
     })
+  },
+  // 支付订单
+  forPay (id) {
+    let that = this
+    let fp = {
+      url: serviceUrl.payByOrder,
+      data: {
+        session_key: app.gs(),
+        order_id: id
+      },
+      success (res) {
+        // 零钱支付成功
+        wx.hideLoading()
+        if (res.data.code === 200) {
+          wx.showToast({
+            title: '支付成功',
+            mask: true
+          })
+          that.getList(1)
+        } else if (res.data.code === 201) {
+          // 发起微信支付
+          let obj = {
+            timeStamp: res.data.data.timeStamp,
+            nonceStr: res.data.data.nonceStr,
+            package: res.data.data.package,
+            paySign: res.data.data.paySign,
+            success (res) {
+              if (res.errMsg === 'requestPayment:ok') {
+                // 微信支付成功
+                console.log(res)
+                that.getList(1)
+              } else {
+                // 微信支付失败
+                wx.showLoast({
+                  title: '未完成支付'
+                })
+              }
+            },
+            fail (res) {
+              // 调用支付失败
+              console.log(res)
+              wx.showLoast({
+                title: '未完成支付'
+              })
+            }
+          }
+          app.wxpay(obj)
+        }
+      }
+    }
+    app.wxrequest(fp)
   },
   /**
    * 生命周期函数--监听页面加载

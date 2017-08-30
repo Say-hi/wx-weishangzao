@@ -58,7 +58,7 @@
   <view>微商经历:{{ user.weishang_lu || '未填写' }}</view>
   <view class="title">代理产品</view>
   <view>产品名称:{{ user.product_name || '未填写' }}</view>
-  <image catchtap="previewImg" data-index="{{ index }}" class="product-img" wx:for="{{ user.products }}" src="{{ item }}"></image>
+  <image mode="aspectFill" catchtap="previewImg" data-index="{{ index }}" class="product-img" wx:for="{{ user.products }}" src="{{ item }}"></image>
 </view>
 
         <!--mask-->
