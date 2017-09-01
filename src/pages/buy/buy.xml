@@ -20,19 +20,19 @@
 <view class="tac" wx:if="{{ sealArr.length > 0 }}">{{ more ? '--- 加载更多 ---' : '--- 到底了 ---' }}</view>
 
 <view wx:if="{{ mask }}" class="mask">
-<view class="mask-in animated zoomIn">
-    <view data-type="cancel" catchtap="mOp" class="br">×</view>
-    <view class="title">客户收货信息</view>
-    <input value="{{ sealArr[index].user_name || '发货方未填写' }}"/>
-    <input value="{{ sealArr[index].mobile || '发货方未填写' }}" />
-    <input value="{{ sealArr[index].address || '发货方未填写' }}"/>
-    <view class="title">发货快递信息</view>
-    <view>快递公司</view>
-    <input value="{{ sealArr[index].shipping_name || '发货方未填写' }}"/>
-    <view>快递单号</view>
-    <input value="{{ sealArr[index].shipping_no || '发货方未填写' }}"/>
-    <view data-type="confirm" catchtap="mOp" class="m-confirm">关闭</view>
-</view>
+    <view class="mask-in animated zoomIn">
+        <view data-type="cancel" catchtap="mOp" class="br">×</view>
+        <view class="title">客户收货信息</view>
+        <input value="{{ sealArr[index].user_name || '发货方未填写' }}"/>
+        <input value="{{ sealArr[index].mobile || '发货方未填写' }}" />
+        <input value="{{ sealArr[index].address || '发货方未填写' }}"/>
+        <view class="title">发货快递信息</view>
+        <view>快递公司</view>
+        <input value="{{ sealArr[index].shipping_name || '发货方未填写' }}"/>
+        <view>快递单号</view>
+        <input value="{{ sealArr[index].shipping_no || '发货方未填写' }}"/>
+        <view data-type="confirm" catchtap="mOp" class="m-confirm">关闭</view>
+    </view>
 </view>
 
 <view wx:if="{{ mask2 }}" class="mask">
@@ -40,5 +40,17 @@
         <view class="title">联系客服我要退换或者举报</view>
         <button open-type="contact" class="kf">联系客服</button>
         <view data-type="confirm" catchtap="mOp" class="m-confirm">关闭</view>
+    </view>
+</view>
+
+<view wx:if="{{ mask3 }}" class="mask">
+    <view class="mask-in animated zoomIn">
+        <!--<view data-type="cancel" catchtap="mOp" class="br">×</view>-->
+        <view class="title">填写收货信息</view>
+        <input bindinput="inputValue" data-type="name" placeholder="填写收货人姓名"/>
+        <input type="number" maxlength="11" bindinput="inputValue" data-type="mobile" placeholder="填写收货人电话"/>
+        <input bindinput="inputValue" data-type="address" placeholder="填写收货人详细地址"/>
+        <input bindinput="inputValue" data-type="liuyan" placeholder="请填写您给商家的留言"/>
+        <view data-type="payConfirm" catchtap="mOp" class="m-confirm">确认</view>
     </view>
 </view>

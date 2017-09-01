@@ -135,12 +135,6 @@ Page({
       buyMask: false
     })
   },
-  // 文本输入
-  // inputValue (e) {
-  //   this.setData({
-  //     message: e.detail.value
-  //   })
-  // },
   // 计算相对时间
   get (time) {
     return app.moment(time)
@@ -275,6 +269,7 @@ Page({
             mask: true
           })
           that.setData({
+            buyMask: false,
             addressMask: true
           })
         } else if (res.data.code === 201) {
@@ -289,11 +284,12 @@ Page({
                 // 微信支付成功
                 console.log(res)
                 that.setData({
+                  buyMask: false,
                   addressMask: true
                 })
               } else {
                 // 微信支付失败
-                wx.showLoast({
+                wx.showToast({
                   title: '未完成支付'
                 })
               }
@@ -301,7 +297,7 @@ Page({
             fail (res) {
               // 调用支付失败
               console.log(res)
-              wx.showLoast({
+              wx.showToast({
                 title: '未完成支付'
               })
             }
@@ -315,6 +311,11 @@ Page({
   // 提交用户位置信息
   confrim () {
     let that = this
+    if (!this.data.sh.name || !this.data.sh.mobile || !this.data.sh.address) {
+      return wx.showToast({
+        title: '请补全您的收货信息'
+      })
+    }
     let cf = {
       url: serviceUrl.updateOrderUserInfo,
       data: {
@@ -322,11 +323,12 @@ Page({
         order_id: that.data.id,
         user_name: that.data.sh.name,
         mobile: that.data.sh.mobile,
-        address: that.data.sh.address
+        address: that.data.sh.address,
+        buyer_message: that.data.sh.liuyan || ''
       },
       success (res) {
+        wx.hideLoading()
         if (res.data.code === 200) {
-          wx.hideLoading()
           that.setData({
             addressMask: false
           })
@@ -351,6 +353,8 @@ Page({
       sh['mobile'] = value
     } else if (type === 'address') {
       sh['address'] = value
+    } else if (type === 'liuyan') {
+      sh['liuyan'] = value
     } else {
       return this.setData({
         message: value
@@ -367,7 +371,7 @@ Page({
     let that = this
     this.setData({
       id: params.id,
-      recommend_id: params.recommend_id
+      recommend_id: params.recommend_id || 0
     })
     if (params.recommend_id) {
       // 通过他人的分享进入

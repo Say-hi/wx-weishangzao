@@ -1,5 +1,5 @@
 <!--消息-->
-<view class="message" wx:for="{{ lists }}">
+<navigator url="{{ item.is_redirect == 1 ? ('../detail/detail?id=' + item.good_id) : '' }}" class="message" wx:for="{{ lists }}">
   <view>
     <image src="../../images/message-1.png"></image>
   </view>
@@ -7,4 +7,4 @@
     <view class="m-t">{{ item.content }}</view>
     <view class="m-t">{{ item.add_time }}</view>
   </view>
-</view>
+</navigator>

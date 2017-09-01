@@ -110,7 +110,7 @@ Page({
   setMarker (lat, lng, icon, id) {
     // let ml = this.data.markers.length
     let obj = {
-      iconPath: icon || '../../images/near.png',
+      iconPath: '../../images/map.png',
       id: id,
       latitude: lat,
       longitude: lng,

@@ -36,6 +36,10 @@ Page({
       this.setData({
         expressnumber: value
       })
+    } else if (type === 'liuyan') {
+      this.setData({
+
+      })
     }
   },
   // 发货操作

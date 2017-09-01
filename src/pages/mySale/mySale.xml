@@ -21,6 +21,7 @@
         <input bindinput="inputValue" value="{{ sealArr[index].shipping_info.user_name }}" data-type="name" placeholder="输入收货人姓名"/>
         <input bindinput="inputValue" value="{{ sealArr[index].shipping_info.mobile }}" data-type="phone" type="number" placeholder="输入收货人电话"/>
         <input bindinput="inputValue" value="{{ sealArr[index].shipping_info.address }}" data-type="address" placeholder="输入收货人详细地址"/>
+        <input value="{{ sealArr[index].shipping_info.buyer_message }}" placeholder="买家未给您的留言"/>
         <view class="title">发货快递信息</view>
         <view>快递公司</view>
         <input bindinput="inputValue" value="{{ sealArr[index].shipping_info.shipping_name }}" data-type="express" placeholder="输入快递公司"/>

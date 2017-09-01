@@ -1,14 +1,14 @@
 {
 //  微商造小程序页面分布
   "pages": [
-    "pages/moneyList/moneyList", // 零钱明细
     "pages/index/index", // 主页
+    "pages/sale/sale", // 我清货神器
+    "pages/moneyList/moneyList", // 零钱明细
     "pages/tuiguang/tuiguang", // 用户推广
     "pages/map/map", // 微商地图
     "pages/detail/detail", // 宝贝详情
     "pages/buy/buy", // 我买到的
     "pages/mySale/mySale", // 我卖出的
-    "pages/sale/sale", // 我清货神器
     "pages/releaseProduct/releaseProduct", // 我发布的产品
     "pages/release/release", // 发布产品
     "pages/myCollect/myCollect", // 我的收藏

@@ -163,6 +163,10 @@ Page({
         mask2: false,
         mask4: false
       })
+    } else if (e.currentTarget.dataset.type === 'detail') {
+      wx.navigateTo({
+        url: '../moneyList/moneyList'
+      })
     }
   },
   // 充值担保金mask

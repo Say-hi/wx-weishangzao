@@ -1,9 +1,10 @@
 <view class="ml" wx:for="{{ lists }}">
   <view class="ml-l">
-    <text>{{ item.money }}</text>
-    <text>{{ item.from }}</text>
+    <text>{{ item.desc }}</text>
+    <text>{{ item.add_time }}</text>
   </view>
   <view class="ml-r">
-    {{ item.time }}
+    ￥{{ item.money }}元
   </view>
 </view>
+<view class="tac">{{ more ? '--- 上拉加载更多 ---' : '--- 到底了 ---' }}</view>

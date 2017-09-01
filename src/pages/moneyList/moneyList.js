@@ -1,19 +1,51 @@
 // 获取全局应用程序实例对象
-// const app = getApp()
-
+const app = getApp()
+const serviceUrl = require('../../utils/service')
 // 创建页面实例对象
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    title: 'moneyList'
+    title: 'moneyList',
+    lists: [],
+    page: 1
   },
-
+  // 获取零钱明细
+  getList (page) {
+    let that = this
+    let gl = {
+      url: serviceUrl.userAccountList,
+      data: {
+        session_key: app.gs(),
+        page: page
+      },
+      success (res) {
+        wx.hideLoading()
+        if (res.data.code === 200) {
+          app.setMore(res.data.data, that)
+          if (page === 1) {
+            that.setData({
+              lists: []
+            })
+          }
+          that.setData({
+            lists: that.data.lists.concat(res.data.data)
+          })
+        } else {
+          wx.showToast({
+            title: res.data.message
+          })
+        }
+      }
+    }
+    app.wxrequest(gl)
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad () {
+    this.getList(1)
     // TODO: onLoad
   },
 
@@ -50,5 +82,9 @@ Page({
    */
   onPullDownRefresh () {
     // TODO: onPullDownRefresh
+  },
+  onReachBottom () {
+    if (!this.data.more) return
+    this.getList(++this.data.page)
   }
 })

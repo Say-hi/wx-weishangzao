@@ -16,7 +16,8 @@ module.exports = {
           title: '图片上传中',
           mask: true
         })
-        let coverImgArr = that.data[imgArr]
+        let coverImgArr = that.data[imgArr] || []
+        console.log(coverImgArr)
         for (let i of res.tempFilePaths) {
           let upImg = {
             url: serviceUrl.uploadPhotos,

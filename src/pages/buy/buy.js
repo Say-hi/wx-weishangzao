@@ -10,6 +10,7 @@ Page({
   data: {
     page: 1,
     sealArr: [],
+    sh: {},
     orderStatus: ['您未付款', '商家处理中', '确认收货', '已收货', '退货', '举报']
   },
   // 获取我买到的列表
@@ -86,15 +87,58 @@ Page({
       }
       app.wxrequest(ce)
     } else if (type === 'confirm' && (e.currentTarget.dataset.status * 1) === 0) {
+      this.setData({
+        index: e.currentTarget.dataset.index
+      })
       that.forPay(e.currentTarget.dataset.id)
     }
   },
   // 关闭弹窗
-  mOp () {
-    this.setData({
-      mask: false,
-      mask2: false
-    })
+  mOp (e) {
+    let that = this
+    if (e.currentTarget.dataset.type === 'payConfirm') {
+      that.upInfo()
+    } else {
+      this.setData({
+        mask: false,
+        mask2: false
+      })
+    }
+  },
+  // 提交用户位置信息
+  upInfo () {
+    let that = this
+    if (!that.data.sh.name || !that.data.sh.mobile || !that.data.sh.address) {
+      return wx.showToast({
+        title: '请补全您的收货信息'
+      })
+    }
+    let pc = {
+      url: serviceUrl.updateOrderUserInfo,
+      data: {
+        session_key: app.gs(),
+        order_id: that.data.sealArr[that.data.index].order_id,
+        user_name: that.data.sh.name,
+        mobile: that.data.sh.mobile,
+        address: that.data.sh.address,
+        buyer_message: that.data.sh.liuyan || ''
+      },
+      success (res) {
+        wx.hideLoading()
+        if (res.data.code === 200) {
+          that.data.sealArr[that.data.index].order_status = 1
+          that.setData({
+            sealArr: that.data.sealArr,
+            mask3: false
+          })
+        } else {
+          wx.showToast({
+            title: res.data.message
+          })
+        }
+      }
+    }
+    app.wxrequest(pc)
   },
   // 查看快递
   check (e) {
@@ -120,7 +164,10 @@ Page({
             title: '支付成功',
             mask: true
           })
-          that.getList(1)
+          that.setData({
+            mask3: true
+          })
+          // that.getList(1)
         } else if (res.data.code === 201) {
           // 发起微信支付
           let obj = {
@@ -132,10 +179,13 @@ Page({
               if (res.errMsg === 'requestPayment:ok') {
                 // 微信支付成功
                 console.log(res)
-                that.getList(1)
+                that.setData({
+                  mask3: true
+                })
+                // that.getList(1)
               } else {
                 // 微信支付失败
-                wx.showLoast({
+                wx.showToast({
                   title: '未完成支付'
                 })
               }
@@ -143,7 +193,7 @@ Page({
             fail (res) {
               // 调用支付失败
               console.log(res)
-              wx.showLoast({
+              wx.showToast({
                 title: '未完成支付'
               })
             }
@@ -153,6 +203,25 @@ Page({
       }
     }
     app.wxrequest(fp)
+  },
+  // 收货信息录入
+  inputValue (e) {
+    let type = e.currentTarget.dataset.type
+    let value = e.detail.value
+    let sh = this.data.sh
+    // console.log(e)
+    if (type === 'name') {
+      sh['name'] = value
+    } else if (type === 'mobile') {
+      sh['mobile'] = value
+    } else if (type === 'address') {
+      sh['address'] = value
+    } else if (type === 'liuyan') {
+      sh['liuyan'] = value
+    }
+    this.setData({
+      sh: this.data.sh
+    })
   },
   /**
    * 生命周期函数--监听页面加载

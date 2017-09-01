@@ -131,6 +131,11 @@ Page({
       },
       success (res) {
         wx.hideLoading()
+        if (res.data.code === 400) {
+          return wx.redirectTo({
+            url: '../weishang/weishang'
+          })
+        }
         that.setData({
           user: res.data.data,
           products: res.data.data.products,

@@ -78,8 +78,9 @@
     <view class="mask-in">
         <view class="title">填写您的收货信息</view>
         <input bindinput="inputValue" value="{{ sh.name }}" data-type="name" placeholder="填写收货人姓名"/>
-        <input bindinput="inputValue" value="{{ sh.mobile }}" data-type="mobile" placeholder="填写收货人电话"/>
+        <input type="number" maxlength="11" bindinput="inputValue" value="{{ sh.mobile }}" data-type="mobile" placeholder="填写收货人电话"/>
         <input bindinput="inputValue" value="{{ sh.address }}" data-type="address" placeholder="填写收货人详细地址"/>
+        <input bindinput="inputValue" value="{{ sh.liuyan }}" data-type="liuyan" placeholder="请填写您给商家的留言"/>
         <view catchtap="confrim" class="mask-btn">
             确认
         </view>

@@ -9,26 +9,12 @@ Page({
    */
   data: {
     page: 1,
-    sealArr: [
-      // {
-      //   img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-      //   name: '一脸油菜',
-      //   price: 150,
-      //   status: 0
-      // },
-      // {
-      //   img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-      //   name: '一脸油菜',
-      //   price: 150,
-      //   status: 1
-      // },
-      // {
-      //   img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-      //   name: '一脸油菜',
-      //   price: 150,
-      //   status: 2
-      // }
-    ]
+    sealArr: []
+  },
+  goRelease () {
+    wx.redirectTo({
+      url: '../release/release'
+    })
   },
   // 获取发布产品列表
   getList (page) {
