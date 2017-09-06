@@ -2,8 +2,11 @@
 <!--底部tab栏-->
 <view class="bottom-tab">
   <view catchtap="follow"  data-type="{{ user.is_proxy ? 'cancel' : 'proxy' }}" class="iconfont icon-turned_in">{{ user.is_proxy ? '已关联':'关联上家'}}</view>
-  <view catchtap="support" data-id="{{ id }}" class="iconfont icon-02">{{ user.is_support ? '已支持':'支持TA' }}</view>
+  <view catchtap="support" data-id="{{ id }}" class="iconfont icon-02">{{ user.is_support ? '已点赞':'点赞TA' }}</view>
   <view catchtap="showMask" class="iconfont icon-liuyan">联系</view>
+  <view>
+    <button class="kf iconfont icon-liuyan" open-type="contact">客服</button>
+  </view>
 </view>
 <!--背景轮播-->
 <view class="carousel-wrap">
@@ -22,11 +25,11 @@
     <view class="user-info">
       <text>{{ user.user_name || '未填写' }}</text>
       <text>微信号: {{ user.wechat_no || '未填写' }}</text>
-      <text>保证金: {{ user.money }}</text>
+      <text>担保金: {{ user.money }}</text>
     </view>
     <view class="user-btn">
       <text catchtap="follow" data-type="{{ user.is_proxy ? 'cancel' : 'proxy' }}" class="{{ user.is_proxy ? 'hui':'' }}"> {{ user.is_proxy ? '已关联':'关联上家'}} </text>
-      <text catchtap="support"  class="{{ user.is_support ? 'hui':'red' }}"> {{ user.is_support ? '已支持':'支持TA' }} </text>
+      <text catchtap="support"  class="{{ user.is_support ? 'hui':'huang' }}"> {{ user.is_support ? '已点赞':'点赞TA' }} </text>
     </view>
     <!--数量bottom-->
     <view class="user-bottom">

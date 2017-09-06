@@ -74,6 +74,8 @@ Page({
       info['good_name'] = value
     } else if (type === 'money') {
       info['original_price'] = value
+    } else if (type === 'money2') {
+      info['qinghuo_price'] = value
     } else if (type === 'count') {
       info['stock_num'] = value
     } else if (type === 'full') {
@@ -111,7 +113,7 @@ Page({
   // 发布信息
   fabu () {
     let { info } = this.data
-    if (!info.good_name || !info.original_price || !info.stock_num || !info.product_integrity || !info.describe || (this.data.upImg.length === 0) || (this.data.index === 0)) {
+    if (!info.qinghuo_price || !info.good_name || !info.original_price || !info.stock_num || !info.product_integrity || !info.describe || (this.data.upImg.length === 0) || (this.data.index === 0)) {
       return wx.showToast({
         title: '请正确补全信息再提交'
       })
@@ -124,6 +126,7 @@ Page({
         good_id: that.data.id,
         good_name: info.good_name,
         original_price: info.original_price,
+        qinghuo_price: info.qinghuo_price,
         stock_num: info.stock_num,
         exp_time: info.exp_time,
         product_integrity: info.product_integrity,
@@ -139,8 +142,8 @@ Page({
             mask: true
           })
           setTimeout(function () {
-            wx.navigateBack({
-              delta: 1
+            wx.redirectTo({
+              url: '../releaseProduct/releaseProduct'
             })
           }, 1500)
         } else {

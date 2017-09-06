@@ -7,7 +7,7 @@
             <view>{{ info.user_info.user_nicename }}</view>
             <view>{{ info.product_info.add_time }}</view>
         </view>
-        <view class='price'>￥{{ info.product_info.clearance_price }}</view>
+        <view class='price'><text class="p-o">￥{{ infos[2].c }}</text>￥{{ info.product_info.clearance_price }}</view>
     </view>
     <view class='info'>
         <view wx:for='{{ infos }}'>{{ item.t }}{{ index == 5 ? '' : ':' }} {{ item.c }}</view>
@@ -36,7 +36,8 @@
 <view class='f-b'>
     <view catchtap='bottomOp' data-type='collect' class="iconfont {{ info.product_info.is_collection ? 'icon-wuxing' : 'icon-wuxing1' }}">{{ info.product_info.is_collection ? '已收藏' : '收藏' }}</view>
     <view catchtap='bottomOp' data-type='comment' class='iconfont icon-liuyan'>留言</view>
-    <view catchtap='bottomOp' data-type='share' class='iconfont icon-fenxiang'>分享有礼</view>
+    <view wx:if="{{ shareCount < 2 }}" catchtap='bottomOp' data-type='share' class='iconfont icon-fenxiang'>分享有礼</view>
+    <button open-type="share" class='iconfont icon-fenxiang' wx:else>分享有礼</button>
     <!--<button open-type='share' class='iconfont icon-fenxiang'>分享有礼</button>-->
     <view catchtap='bottomOp' data-type='want' class='want'>我想要</view>
 </view>
@@ -54,6 +55,7 @@
         <view class="btn-wrap">
             <button catchtap="delMask">取消</button>
             <button catchtap="sendComment">确定</button>
+            <button wx:if="{{ reply }}" catchtap="delComment">删除留言</button>
         </view>
     </view>
 </view>
@@ -75,7 +77,7 @@
 </view>
 
 <view wx:if="{{ addressMask }}" class="mask">
-    <view class="mask-in">
+    <view class="mask-in sb">
         <view class="title">填写您的收货信息</view>
         <input bindinput="inputValue" value="{{ sh.name }}" data-type="name" placeholder="填写收货人姓名"/>
         <input type="number" maxlength="11" bindinput="inputValue" value="{{ sh.mobile }}" data-type="mobile" placeholder="填写收货人电话"/>

@@ -11,7 +11,7 @@
   <!--导航-->
   <view class="nav">
     <view wx:for="{{ navTab }}">
-      <navigator class="nav-tab" url="{{ item.url }}">
+      <navigator catchtap="showMessage" data-index="{{ index }}" class="nav-tab" url="{{ item.url }}">
         <image src="{{ item.img }}"></image>
         <view>{{ item.text }}</view>
       </navigator>
@@ -20,13 +20,13 @@
   <!--排行榜-->
   <view class="ranking-list">
     <view class="top-title">
-      荣耀微商排行榜
+      微商荣耀排行榜
       <navigator url="../ruler/ruler" class="rule">排行规则</navigator>
     </view>
   </view>
   <!--搜索框-->
   <view class="search">
-    <input bindinput="searchInput" bindconfirm="searchConfirm" confirm-type="search" placeholder="搜索团队名称"/>
+    <input bindinput="searchInput" bindconfirm="searchConfirm" confirm-type="search" placeholder="搜索微商名称或微信号"/>
     <view catchtap="searchConfirm" class="iconfont icon-sousuo"></view>
   </view>
   <!--类型-->
@@ -35,7 +35,7 @@
     <view catchtap="typeChoose" data-index="1" class="{{ curChoose == 1 ? 'cur' : '' }}">微商大咖</view>
   </view>
   <!--申请-->
-  <view class="apply">
+  <view wx:if="{{ curChoose == 2 }}" class="apply">
     <navigator url="../applyTeam/applyTeam" >申请新团队参与排名</navigator>
   </view>
   <!--名称排行-->
@@ -54,12 +54,18 @@
           <text>{{ item.name }}</text>
           <text class="rcl-s" wx:if="{{ item.signature }}">{{ item.signature }}</text>
         </view>
-        <navigator class="goSupport" url="{{ curChoose * 1 == 2 ? '../supportTeamPage/supportTeamPage' : '../supportPage/supportPage'  }}?id={{ item.user_id }}">支持TA</navigator>
+        <navigator class="goSupport" url="{{ curChoose * 1 == 2 ? '../supportTeamPage/supportTeamPage' : '../supportPage/supportPage'  }}?id={{ item.user_id }}">{{ curChoose == 2 ? '支持TA' : '点赞TA' }}</navigator>
       </view>
-      <!--下半部-->
-      <view class="rcl-bottom">
+      <!--下半部  团队-->
+      <view wx:if="{{ curChoose == 2 }}" class="rcl-bottom">
         <view class="rcl-b-a">影响力:{{ item.yx }}</view>
         <view class="rcl-b-b">支持度:{{ item.zc }}</view>
+        <view class="rcl-b-c">担保金:{{ item.td }}</view>
+      </view>
+      <!--下半部  人物-->
+      <view wx:else class="rcl-bottom">
+        <view class="rcl-b-a">知名度:{{ item.yx }}</view>
+        <view class="rcl-b-b">点赞数:{{ item.zc }}</view>
         <view class="rcl-b-c">担保金:{{ item.td }}</view>
       </view>
     </view>
@@ -68,7 +74,9 @@
 </view>
 
 <!--消息浮窗-->
-<image style="position:fixed; bottom: 140rpx; right: 60rpx; width: 86rpx; height: 86rpx; border-radius: 50%;" catchtap="message" src="../../images/message.png"></image>
+<view catchtap="message" class="mf br iconfont icon-laba {{ mCount > 0 ? 'ch' : '' }}">
+  <text wx:if="{{ mCount > 0 }}" class="br">{{ mCount }}</text>
+</view>
 <!--底部导航-->
 <view style="height: 98rpx; width: 100%;"></view>
 <view class="static-bottom">

@@ -24,6 +24,10 @@ Page({
         c: '152'
       },
       {
+        t: '清货价',
+        c: '152'
+      },
+      {
         t: '数量',
         c: '152'
       },
@@ -45,12 +49,49 @@ Page({
   },
   // 回复留言
   replyComment (e) {
+    if ((this.data.user.user_id * 1) !== (this.data.info.user_info.user_id * 1)) {
+      return wx.showToast({
+        title: '只有发布者可回复留言'
+      })
+    }
     this.setData({
       reply: true,
       user_id: e.currentTarget.dataset.userid,
       leaving_id: e.currentTarget.dataset.liuyan,
       messageMaask: true
     })
+  },
+  // 删除留言
+  delComment () {
+    let that = this
+    let dc = {
+      url: serviceUrl.deleteReleaseLeavingMessage,
+      data: {
+        session_key: app.gs(),
+        id: that.data.leaving_id
+      },
+      success (res) {
+        wx.hideLoading()
+        if (res.data.code === 200) {
+          wx.showToast({
+            title: '删除成功'
+          })
+          that.setData({
+            buyMask: false,
+            messageMaask: false,
+            reply: false,
+            page: 1,
+            commentArr: []
+          })
+          that.getMessage(that.data.id, 1)
+        } else {
+          wx.showToast({
+            title: res.data.message
+          })
+        }
+      }
+    }
+    app.wxrequest(dc)
   },
   // 支付
   // pay () {
@@ -63,13 +104,12 @@ Page({
   countNumber (e) {
     let type = e.currentTarget.dataset.type
     if (type === 'add') {
+      if (this.data.count * 1 >= this.data.info.product_info.stock_num) return
       this.setData({
         count: ++this.data.count
       })
     } else {
-      if (this.data.count * 1 === 1) {
-        return
-      }
+      if (this.data.count * 1 === 1) return
       this.setData({
         count: --this.data.count
       })
@@ -153,9 +193,10 @@ Page({
         if (res.data.code === 200) {
           that.data.infos[0]['c'] = res.data.data.product_info.good_name
           that.data.infos[1]['c'] = res.data.data.product_info.category_name
-          that.data.infos[2]['c'] = res.data.data.product_info.original_price * 1.4
-          that.data.infos[3]['c'] = res.data.data.product_info.stock_num
-          that.data.infos[4]['c'] = `${res.data.data.product_info.product_integrity}%`
+          that.data.infos[2]['c'] = res.data.data.product_info.original_price
+          that.data.infos[3]['c'] = res.data.data.product_info.clearance_price
+          that.data.infos[4]['c'] = res.data.data.product_info.stock_num
+          that.data.infos[5]['c'] = `${res.data.data.product_info.product_integrity}%`
           that.setData({
             infos: that.data.infos,
             info: res.data.data
@@ -282,7 +323,7 @@ Page({
             success (res) {
               if (res.errMsg === 'requestPayment:ok') {
                 // 微信支付成功
-                console.log(res)
+                // console.log(res)
                 that.setData({
                   buyMask: false,
                   addressMask: true
@@ -364,6 +405,42 @@ Page({
       sh: this.data.sh
     })
   },
+  // 获取本地化分享次数
+  getShareCount () {
+    if (wx.getStorageSync('shareCount')) {
+      this.setData({
+        shareCount: wx.getStorageSync('shareCount')
+      })
+    } else {
+      wx.setStorageSync('shareCount', '0')
+      this.setData({
+        shareCount: 0
+      })
+    }
+  },
+  // 获取用户信息
+  getUserInfo () {
+    let that = this
+    let s = {
+      url: serviceUrl.userCenter,
+      data: {
+        session_key: app.gs()
+      },
+      success (res) {
+        wx.hideLoading()
+        if (res.data.code === 200) {
+          that.setData({
+            user: res.data.data
+          })
+        } else {
+          wx.showToast({
+            title: res.data.message
+          })
+        }
+      }
+    }
+    app.wxrequest(s)
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -383,6 +460,8 @@ Page({
     }
     this.getDetail(params.id)
     this.getMessage(params.id, 1)
+    this.getShareCount()
+    this.getUserInfo()
   },
 
   /**
@@ -425,9 +504,16 @@ Page({
   },
   // 转发消息
   onShareAppMessage () {
+    if (this.data.shareCount < 2) {
+      this.setData({
+        shareMask: !this.data.shareMask
+      })
+    }
+    ++this.data.shareCount
     this.setData({
-      shareMask: !this.data.shareMask
+      shareCount: this.data.shareCount
     })
+    wx.setStorageSync('shareCount', this.data.shareCount)
     return {
       title: '分享有礼',
       path: `pages/detail/detail?recommend_id=${this.data.info.product_info.user_id}&id=${this.data.id}`

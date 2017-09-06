@@ -31,7 +31,7 @@ Page({
       },
       {
         icon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAuCAYAAABXuSs3AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTExIDc5LjE1ODMyNSwgMjAxNS8wOS8xMC0wMToxMDoyMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjNCNDI5QUU4ODIzNDExRTc5OERBRDBERTlENkRFRUUzIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjNCNDI5QUU5ODIzNDExRTc5OERBRDBERTlENkRFRUUzIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6M0I0MjlBRTY4MjM0MTFFNzk4REFEMERFOUQ2REVFRTMiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6M0I0MjlBRTc4MjM0MTFFNzk4REFEMERFOUQ2REVFRTMiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4BshECAAAGNElEQVR42txa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',
-        text: '我的推广码',
+        text: '我的邀请码',
         url: '../tuiguang/tuiguang'
       },
       {
@@ -67,7 +67,7 @@ Page({
       {
         name: '已阅读并承诺遵守《担保金说明》条例',
         value: '已阅读并承诺遵守《担保金说明》条例',
-        checked: false
+        checked: true
       }
     ],
     pLevel: ['p0', 'p1', 'p2', 'p3', 'p4', 'p5']
@@ -102,6 +102,11 @@ Page({
   },
   // 充值
   charge () {
+    if (!this.data.items[0].checked) {
+      return wx.showToast({
+        title: '请同意担保金充值条款，方可充值'
+      })
+    }
     let that = this
     let c = {
       url: serviceUrl.payByGuarantee,
@@ -121,10 +126,10 @@ Page({
             success (res) {
               if (res.errMsg === 'requestPayment:ok') {
                 // 微信支付成功
-                console.log(res)
                 that.setData({
                   mask2: false
                 })
+                that.getUserInfo()
               } else {
                 // 微信支付失败
               }
@@ -149,12 +154,18 @@ Page({
       mask4: true
     })
   },
+  showDb () {
+    this.setData({
+      mask2: false,
+      mask3: true
+    })
+  },
   // 弹窗操作
   maskOp (e) {
     if (e.currentTarget.dataset.type === 'confirm') {
       this.setData({
         mask: false,
-        mask3: true
+        mask2: true
       })
     } else if (e.currentTarget.dataset.type === 'cancel') {
       this.setData({
@@ -166,6 +177,15 @@ Page({
     } else if (e.currentTarget.dataset.type === 'detail') {
       wx.navigateTo({
         url: '../moneyList/moneyList'
+      })
+    } else if (e.currentTarget.dataset.type === 'tdb') {
+      this.setData({
+        mask: false,
+        mask5: true
+      })
+    } else if (e.currentTarget.dataset.type === 'dbc') {
+      this.setData({
+        mask5: false
       })
     }
   },

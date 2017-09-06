@@ -48,6 +48,9 @@ let serviceUrl = {
   weishangMap: baseDomain + '/api/user/weishangMap',
   updateMapUser: baseDomain + '/api/user/updateMapUser',
   extensionErcode: baseDomain + '/api/user/extensionErcode',
-  userAccountList: baseDomain + '/api/user/userAccountList'
+  userAccountList: baseDomain + '/api/user/userAccountList',
+  getNotReadMessage: baseDomain + '/api/product/getNotReadMessage',
+  updateMessageIsRead: baseDomain + '/api/product/updateMessageIsRead',
+  deleteReleaseLeavingMessage: baseDomain + '/api/product/deleteReleaseLeavingMessage'
 }
 module.exports = serviceUrl

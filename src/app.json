@@ -20,14 +20,14 @@
     "pages/faburuler/faburuler", // 发布规则
     "pages/near/near", // 附近的人
     "pages/message/message", // 消息
-    "pages/posterOne/posterOne", // 1号海报模板
+//    "pages/posterOne/posterOne", // 1号海报模板
 //    "pages/posterCollect/posterCollect", // 海报收藏夹
 //    "pages/posterShow/posterShow", // 海报展示
     "pages/supportPage/supportPage",  // 微商人物支持页面
     "pages/applyTeam/applyTeam", // 团队申请
     "pages/upload/upload", // 上传图片
     "pages/weishang/weishang", // 我是微商
-    "pages/customization/customization", // 个性化定制
+//    "pages/customization/customization", // 个性化定制
 //    "pages/ktPoster/ktPoster", // 海报开通
     "pages/followWs/followWs", // 我关注的微商
     "pages/relevanceTeam/relevanceTeam", // 我关联的团队
@@ -47,7 +47,7 @@
     "navigationBarTextStyle": "black",
     // 类型：String；默认值：无
     // 导航栏标题文字内容
-    "navigationBarTitleText": "微商造",
+    "navigationBarTitleText": "微商荣耀",
     // 类型：HexColor；默认值：#ffffff
     // 窗口的背景色
     "backgroundColor": "#fff",

@@ -34,8 +34,17 @@ Page({
   },
   // 类型选择切换
   typeChoose (e) {
+    let rankNavArr = ['知名度', '点赞最多', '担保金最多']
+    if (e.currentTarget.dataset.index * 1 === 1) {
+      rankNavArr.push(this.data.rankNavArr[3])
+    } else {
+      rankNavArr = ['总影响力', '支持度最高', '担保金最多']
+      rankNavArr.push(this.data.rankNavArr[3])
+    }
+    console.log(rankNavArr)
     this.setData({
       page: 1,
+      rankNavArr: rankNavArr,
       curChoose: e.currentTarget.dataset.index
     })
     this.getRank('', 1, (this.data.value[0] * 1 + 1))

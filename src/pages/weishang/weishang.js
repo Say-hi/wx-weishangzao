@@ -25,10 +25,38 @@ Page({
             title: '开通成功'
           })
           setTimeout(function () {
-            wx.navigateBack({
-              delta: 1
+            wx.redirectTo({
+              url: '../homepage/homepage'
             })
           }, 1000)
+        } else {
+          wx.showToast({
+            title: res.data.message
+          })
+          setTimeout(function () {
+            wx.redirectTo({
+              url: '../homepage/homepage'
+            })
+          }, 1000)
+        }
+      }
+    }
+    app.wxrequest(k)
+  },
+  // 获取用户信息
+  getUserInfo () {
+    let that = this
+    let s = {
+      url: serviceUrl.userCenter,
+      data: {
+        session_key: app.gs()
+      },
+      success (res) {
+        wx.hideLoading()
+        if (res.data.code === 200) {
+          that.setData({
+            user: res.data.data
+          })
         } else {
           wx.showToast({
             title: res.data.message
@@ -36,12 +64,13 @@ Page({
         }
       }
     }
-    app.wxrequest(k)
+    app.wxrequest(s)
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad () {
+    this.getUserInfo()
     // TODO: onLoad
   },
 

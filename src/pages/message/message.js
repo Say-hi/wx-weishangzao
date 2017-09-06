@@ -35,6 +35,31 @@ Page({
     }
     app.wxrequest(gl)
   },
+  // 消息已读
+  read (e) {
+    let that = this
+    let r = {
+      url: serviceUrl.updateMessageIsRead,
+      data: {
+        session_key: app.gs(),
+        id: e.currentTarget.dataset.id
+      },
+      success (res) {
+        wx.hideLoading()
+        if (res.data.code === 200) {
+          that.data.lists[e.currentTarget.dataset.index].is_read = 1
+          that.setData({
+            lists: that.data.lists
+          })
+        } else {
+          wx.showToast({
+            title: res.data.message
+          })
+        }
+      }
+    }
+    app.wxrequest(r)
+  },
   /**
    * 生命周期函数--监听页面加载
    */

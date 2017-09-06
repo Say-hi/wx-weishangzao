@@ -39,10 +39,10 @@
         </view>
       </view>
       <view class="rca-number {{ index > 2 ? 'noColor' : '' }} {{ curRankNav == 0 ? 'rcl-b-a' : curRankNav == 1 ? 'rcl-b-b' : curRankNav == 2 ? 'rcl-b-c' : ''}}">
-        {{ curRankNav == 0 ? '影响力:' : curRankNav == 1 ? '支持度:' : curRankNav == 2 ? '保证金:' : ''}}{{ curRankNav == 0 ? item.yx : curRankNav == 1 ? item.zc : curRankNav == 2 ? item.td : ''}}
+        {{ curChoose == 1 ? curRankNav == 0 ? '知名度:' : curRankNav == 1 ? '点赞数:' : curRankNav == 2 ? '担保金:' : '' : curRankNav == 0 ? '影响力:' : curRankNav == 1 ? '支持度:' : curRankNav == 2 ? '担保金:' : '' }}{{ curRankNav == 0 ? item.yx : curRankNav == 1 ? item.zc : curRankNav == 2 ? item.td : ''}}
       </view>
     </view>
-    <navigator class="goSupport" url="{{ curChoose * 1 == 2 ? '../supportTeamPage/supportTeamPage' : '../supportPage/supportPage'  }}?id={{ item.user_id }}">支持TA</navigator>
+    <navigator class="goSupport" url="{{ curChoose * 1 == 2 ? '../supportTeamPage/supportTeamPage' : '../supportPage/supportPage'  }}?id={{ item.user_id }}">{{ curChoose == 1 ? '点赞TA' : '支持TA' }}</navigator>
   </view>
   <view class="tac" wx:if="{{ rankContentArr.length == 0 || !more }}">--- 没有更多内容 --</view>
   <!--</view>-->

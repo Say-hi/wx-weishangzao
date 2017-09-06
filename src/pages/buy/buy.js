@@ -196,6 +196,13 @@ Page({
               wx.showToast({
                 title: '未完成支付'
               })
+              // that.setData({
+              //   mask3: true
+              // })
+              // that.data.saleArr[that.data.index].order_status = 1
+              // that.setData({
+              //   saleArr: that.data.saleArr
+              // })
             }
           }
           app.wxpay(obj)

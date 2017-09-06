@@ -21,7 +21,7 @@ Page({
         img: '../../images/weishang.png'
       },
       {
-        url: '../map/map',
+        url: '',
         text: '微商地图',
         img: '../../images/ditu.png'
       },
@@ -40,6 +40,13 @@ Page({
     curRankNav: 0, // rank-nav当前选择项
     rankContentList: [],
     orderArr: ['effect_num', 'support_count', 'money_count']
+  },
+  showMessage (e) {
+    if (e.currentTarget.dataset.index * 1 === 1) {
+      wx.showToast({
+        title: '该功能暂未开放！'
+      })
+    }
   },
   // 消息跳转
   message () {
@@ -88,8 +95,16 @@ Page({
   },
   // 类型选择切换
   typeChoose (e) {
+    let rankNavArr = ['知名度', '点赞最多', '担保金最多']
+    if (e.currentTarget.dataset.index * 1 === 1) {
+      rankNavArr.push(this.data.rankNavArr[3])
+    } else {
+      rankNavArr = ['总影响力', '支持度最高', '担保金最多']
+      rankNavArr.push(this.data.rankNavArr[3])
+    }
     this.setData({
       page: 1,
+      rankNavArr: rankNavArr,
       curChoose: e.currentTarget.dataset.index
     })
     if (this.data.searchValue) {
@@ -174,6 +189,7 @@ Page({
     app.wxlogin(function () {
       that.getCarousel()
       that.getRank('', 1, 0)
+      app.getMessageCount(that)
     }, params)
     // 获取位置授权
     wx.getLocation({
@@ -200,6 +216,7 @@ Page({
     this.setData({
       searchValue: ''
     })
+    app.getMessageCount(this)
     //
     // TODO: onShow
   },

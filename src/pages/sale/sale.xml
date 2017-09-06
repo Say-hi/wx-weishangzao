@@ -1,18 +1,25 @@
 <!--我的清货神器-->
 <view>
   <!--顶部轮播图-->
-  <swiper class="carousel" indicator-dots="{{ dots }}" circular="{{ circular }}" autoplay="true" interval="5000" duration="1000">
-    <block wx:for="{{ imgUrls }}">
-      <swiper-item>
-        <image mode="aspectFill" src="{{ item.thumb }}" class="slide-image" />
-      </swiper-item>
-    </block>
-  </swiper>
+  <!--<swiper class="carousel" indicator-dots="{{ dots }}" circular="{{ circular }}" autoplay="true" interval="5000" duration="1000">-->
+    <!--<block wx:for="{{ imgUrls }}">-->
+      <!--<swiper-item>-->
+        <!--<image mode="aspectFill" src="{{ item.thumb }}" class="slide-image" />-->
+      <!--</swiper-item>-->
+    <!--</block>-->
+  <!--</swiper>-->
   <!--搜索框-->
   <view class="search">
     <view class="iconfont icon-sousuo"></view>
     <input bindconfirm="search" confirm-type="search" class="search-input" placeholder="请输入您需要商品名称" />
-    <navigator url="../message/message" class="iconfont icon-xinxi"></navigator>
+    <!--<navigator url="../message/message" class="iconfont icon-xinxi"></navigator>-->
+    <picker bindchange="bindPickerChange" range-key="cat_name" value="{{ index }}" range="{{ array }}">
+      <view class="p-type">
+        <view>
+          {{ array[index].cat_name }}
+        </view>
+      </view>
+    </picker>
   </view>
   <!--分类导航-->
   <view class="type">
@@ -29,7 +36,7 @@
       <view class="s-u-t">
         <view>{{ item.user_nicename }}</view>
       </view>
-      <text class="s-u-p">￥{{ item.price }}</text>
+      <view class="s-u-p"><text class="s-u-p-o">￥{{ item.original_price }}</text><text>￥{{ item.price }}</text></view>
     </view>
     <!--中间图片-->
     <view class="s-c">
@@ -38,9 +45,12 @@
     <!--介绍文字-->
     <view class="s-t ell">{{ item.describe }}</view>
     <!--评论-->
-    <view class="comment">
+    <view wx:if="{{ curChoose == 2 }}" class="comment">
       <view>发布于: {{ item.add_time }}</view>
       <view class="iconfont icon-liuyan1">{{ item.leaving_count || '0' }}</view>
+    </view>
+    <view wx:else class="comment">
+      <view class="c-t">担保金:{{ item.money }}</view>
     </view>
   </navigator>
   <view class="tac" wx:if="{{ products.length === 0 }}">诶哟，还没有人发布产品诶</view>
@@ -52,4 +62,9 @@
     <image data-type="center" catchtap="chooseOperation" class="c" src="../../images/fabu.png"></image>
     <image data-type="right" catchtap="chooseOperation" class="r" src="../../images/user.png"></image>
   </view>
+</view>
+
+<!--消息浮窗-->
+<view catchtap="message" class="mf br iconfont icon-laba {{ mCount > 0 ? 'ch' : ''}}">
+  <text wx:if="{{ mCount > 0 }}" class="br">{{ mCount }}</text>
 </view>

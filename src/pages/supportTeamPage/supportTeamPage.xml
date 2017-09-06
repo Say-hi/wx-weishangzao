@@ -3,16 +3,19 @@
 <view class="bottom-tab">
   <view catchtap="follow"  data-type="{{ user.is_proxy ? 'cancel' : 'proxy' }}" class="iconfont icon-turned_in">{{ user.is_proxy ? '已关联':'关联团队'}}</view>
   <view catchtap="support" data-id="{{ id }}" class="iconfont icon-02">{{ user.is_support ? '已支持':'支持TA' }}</view>
-  <view catchtap="showMask" class="iconfont icon-liuyan">联系</view>
+  <!--<button catchtap="showMask" class="iconfont icon-liuyan">客服</button>-->
+  <view>
+    <button class="kf iconfont icon-liuyan" open-type="contact">客服</button>
+  </view>
 </view>
         <!--背景轮播-->
 <view class="carousel-wrap">
 <swiper class="carousel" autoplay="true" interval="5000" duration="1000" circular="true">
-  <block wx:for="{{ user.photos }}">
+  <!--<block wx:for="{{ user.photos }}">-->
     <swiper-item>
-      <image mode="aspectFill" src="{{item}}" class="slide-image" />
+      <image mode="aspectFill" src="{{ user.image }}" class="slide-image" />
     </swiper-item>
-  </block>
+  <!--</block>-->
 </swiper>
 <!--用户信息-->
 <view class="user">
@@ -20,11 +23,11 @@
   <image class="user-img br" src="{{ user.image }}"></image>
   <!--用户名和微信号-->
   <view class="user-info">
-    <text>{{ user.team_name }}</text>
-    <text>担保金额: {{ user.team_money }}</text>
+    <text class="u-name">{{ user.team_name }}</text>
+    <text>担保金: {{ user.team_money }}</text>
   </view>
   <view class="user-btn">
-    <text catchtap="follow" data-type="{{ user.is_proxy ? 'cancel' : 'proxy' }}" class="{{ user.is_proxy ? 'hui':'' }}"> {{ user.is_proxy ? '已关联':'关联团队'}} </text>
+    <!--<text catchtap="follow" data-type="{{ user.is_proxy ? 'cancel' : 'proxy' }}" class="{{ user.is_proxy ? 'hui':'' }}"> {{ user.is_proxy ? '已关联':'关联团队'}} </text>-->
     <text catchtap="support"  class="{{ user.is_support ? 'hui':'' }}"> {{ user.is_support ? '已支持':'支持TA' }} </text>
   </view>
   <!--数量bottom-->

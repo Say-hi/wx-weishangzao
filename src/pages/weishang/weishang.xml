@@ -1,23 +1,24 @@
 <!--我是微商-->
 <view class="content">
   <view class="c1">
-    <view>荣耀微商是全国首家专门为解决人脉、海报制作、找代理、清货等微商难题的功能平台。</view>
+    <view>微商荣耀是全国首家专门为解决人脉、招代理、清货等微商难题的功能小程序。</view>
   </view>
   <view class="c2">
-    <view>如果你也是一名微商，那请赶紧加入我们荣耀微商的大家庭！在这里无论你是大咖还是小白，都可以让你在业内拥有一定影响力！若你已经是一名大咖了，那么申请加入进来，你就可以取得更多的宣传推广机会，从而更提升您的微商界知名度！</view>
+    <view>如果你是一名微商，请赶紧加入我们微商荣耀的大家庭！在这里无论你是大咖还是小白，都可以迅速让你取得更多的宣传推广机会，从而提升您在微商界的知名度！</view>
   </view>
-  <view class="c2">
-    <view>开通后，不仅让所有的微商看到你的个人信息。还能在【微商地图】看到您周边正在经营微商的小伙伴点击【一键添加】加为好友！</view>
-  </view>
+  <!--<view class="c2">-->
+    <!--<view>开通后，不仅让所有的微商看到你的个人信息。还能在【微商地图】看到您周边正在经营微商的小伙伴点击【一键添加】加为好友！</view>-->
+  <!--</view>-->
   <view class="c2 kt">
-    <view catchtap="kt">开启微商之路</view>
+    <view catchtap="kt">{{ user.is_weishang == 1 ? '已开启':'开启微商之路' }}</view>
   </view>
-  <view class="c3">
-    <text>客服微信</text>
-    <text>二维码</text>
-  </view>
-  <view class="c3">
-    <text>1009527975</text>
-    <image src="../../images/kfewm.png "></image>
-  </view>
+  <button class="btn br" open-type="contact">客服</button>
+  <!--<view class="c3">-->
+    <!--<text>客服微信</text>-->
+    <!--<text>二维码</text>-->
+  <!--</view>-->
+  <!--<view class="c3">-->
+    <!--<text>1009572975</text>-->
+    <!--<image src="../../images/kfewm.png "></image>-->
+  <!--</view>-->
 </view>

@@ -53,7 +53,7 @@ page {
       font-size: 30rpx;
       color: #333;
       text {
-        margin-top: 30rpx;
+        margin-top: 10rpx;
       }
       text:nth-last-child(1) {
         margin-top: 10rpx;
@@ -80,9 +80,9 @@ page {
         background-color: #eee;
         color: #999;
       }
-      .red {
-        background-color: #f00;
-        color: #fff;
+      .huang {
+        background-color: #fedb43;
+        //color: #fff;
       }
     }
     .user-bottom {
@@ -118,8 +118,10 @@ page {
     margin-top: 10rpx;
   }
   .title {
-    margin: 20rpx 0;
-    display: inline-block;
+    margin: 20rpx auto;
+    width: 200rpx;
+    text-align: center;
+    display: block;
     line-height: 40rpx;
     padding:  0 6rpx;
     border-radius: 8rpx;
@@ -144,6 +146,14 @@ page {
   display: flex;
   justify-content: space-around;
   border-top: 1rpx solid #ccc;
+  .kf  {
+    background-color: #fff;
+    border: none;
+  }
+  .kf::after {
+    border: none;
+    //background-color: #fff;
+  }
 }
 
 .mask {

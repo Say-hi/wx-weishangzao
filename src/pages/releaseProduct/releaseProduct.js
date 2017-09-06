@@ -66,11 +66,35 @@ Page({
     }
     app.wxrequest(d)
   },
+  // 获取用户信息
+  getUserInfo () {
+    let that = this
+    let s = {
+      url: serviceUrl.userCenter,
+      data: {
+        session_key: app.gs()
+      },
+      success (res) {
+        wx.hideLoading()
+        if (res.data.code === 200) {
+          that.setData({
+            user: res.data.data
+          })
+        } else {
+          wx.showToast({
+            title: res.data.message
+          })
+        }
+      }
+    }
+    app.wxrequest(s)
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad () {
     this.getList(1)
+    this.getUserInfo()
     // TODO: onLoad
   },
 
@@ -111,5 +135,11 @@ Page({
   onReachBottom () {
     if (!this.data.more) return
     this.getList(++this.data.page)
+  },
+  onShareAppMessage (e) {
+    return {
+      title: '分享有礼',
+      path: `pages/detail/detail?recommend_id=${this.data.user.user_id}&id=${e.target.dataset.id}`
+    }
   }
 })

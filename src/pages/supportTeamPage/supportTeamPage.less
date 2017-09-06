@@ -8,12 +8,13 @@ page {
   position: relative;
   width: 100%;
   height: 100%;
+  background-color: #000;
   .carousel {
     width: 100%;
     height: 100%;
     image {
       width: 100%;
-      height: 100%;
+      height: 50%;
     }
   }
 
@@ -32,14 +33,14 @@ page {
     .lv {
       z-index: 999;
       top: 60rpx;
-      left: 28rpx;
+      left: 60rpx;
       width: 183rpx;
       height: 32rpx;
     }
     .user-img {
       position: absolute;
       top: 0;
-      left: 0;
+      left: 32rpx;
       transform: translate(20%, -50%);
       border: 4rpx solid #eee;
       height: 171rpx;
@@ -50,10 +51,16 @@ page {
       margin-top: 90rpx;
       display: flex;
       flex-direction: column;
-      font-size: 30rpx;
+      font-size: 40rpx;
       color: #333;
+      position: relative;
+      .u-name {
+        position: absolute;
+        top: -120%;
+        right: 20%;
+      }
       text {
-        margin-top: 30rpx;
+        margin-top: 60rpx;
       }
     }
     .user-btn {
@@ -61,7 +68,7 @@ page {
       position: absolute;
       display: flex;
       flex-direction: column;
-      top: 35%;
+      top: 45%;
       right: 20rpx;
       transform: translateY(-50%);
       text {
@@ -156,6 +163,13 @@ page {
   display: flex;
   justify-content: space-around;
   border-top: 1rpx solid #ccc;
+  .kf  {
+    background-color: #fff;
+    border: none;
+  }
+  .kf::after {
+    border: none;
+  }
 }
 
 .mask {

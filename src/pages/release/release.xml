@@ -1,7 +1,8 @@
 <!--发布产品-->
 <view class="product">
   <input class="p-i" value="{{ info.good_name }}" bindinput="inputValue" data-type="title" placeholder="标题 输入商品名称"/>
-  <input class="p-i" value="{{ info.original_price }}" type="digit" bindinput="inputValue" data-type="money" placeholder="零售价"/>
+  <input class="p-i" value="{{ info.original_price }}" type="digit" bindinput="inputValue" data-type="money" placeholder="零售价(单价)"/>
+  <input class="p-i" value="{{ info.qinghuo_price }}" type="digit" bindinput="inputValue" data-type="money2" placeholder="清货价"/>
   <input class="p-i" value="{{ info.stock_num }}" type="number" bindinput="inputValue" data-type="count" placeholder="数量"/>
   <picker class="p-i" mode="date" value="{{date}}" start="{{ starTime }}" end="{{ endTime }}" bindchange="bindDateChange">
     <view class="picker">
@@ -9,8 +10,8 @@
     </view>
   </picker>
   <!--<input class="p-i" bindinput="inputValue" type="number" maxlength="3" data-type="full" placeholder="产品完整性"/>-->
-  <view class="p-full">选择产品的完整性</view>
-  <slider bindchange="sliderchange" value="{{ info.product_integrity }}" min="1" max="100" show-value/>
+  <view class="p-full">设置产品的完整性：{{ info.product_integrity || '1' }}%</view>
+  <slider class="ssssss" bindchange="sliderchange" value="{{ info.product_integrity }}" min="1" max="100" />
   <textarea class="p-i p-it" value="{{ info.describe }}" bindinput="inputValue" data-type="introduce" placeholder="描述一下产品"></textarea>
   <!--<image class="p-img" wx:for="{{ imgArr }}"></image>-->
   <view class="p-u">

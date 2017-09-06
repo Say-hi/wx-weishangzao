@@ -162,6 +162,17 @@ page {
       line-height: 80rpx;
       font-size: 30rpx;
     }
+    .c-box {
+      display: flex;
+      font-size: 26rpx;
+      color: #2b2f41;
+      .radio-group {
+        //padding-top: 20rpx;
+        //font-size: 26rpx;
+        color: #2b2f41;
+        text-align: center;
+      }
+    }
     .mask-btn {
       width: 100%;
       display: flex;
@@ -181,6 +192,7 @@ page {
         color: #ccc;
       }
       button {
+        height: 60rpx;
         border-top: 1rpx solid #eee;
         border-left: 1rpx solid #eee;
         border-radius: 0;
@@ -189,6 +201,13 @@ page {
       button::after {
         flex: 1;
         border: none;
+      }
+      .btn {
+        flex: none;
+        width: 50%;
+        border-radius: 8rpx;
+        color: #000;
+        background-color: #fedb43;
       }
     }
   }

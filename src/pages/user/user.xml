@@ -23,7 +23,7 @@
 
   <view class="clearfix">
     <block wx:for="{{ operationArr }}">
-      <navigator class="user-operation" url="{{ item.text == '我的推广码' ?  (item.url + '?user_id=' + user.user_id + '&name=' + user.true_name): item.url }}">
+      <navigator class="user-operation" url="{{ item.text == '我的邀请码' ?  (item.url + '?user_id=' + user.user_id + '&name=' + (user.true_name || user.user_name) ): item.url }}">
         <image src="{{ item.icon }}"></image>
         <text>{{ item.text }}</text>
         <!--<text catchtap="kaiTongPoster" class="poster" wx:if="{{ index == 1 }}">{{ poster_time || '点击开通' }}</text>-->
@@ -54,9 +54,18 @@
     <view class="mask-btn">
       <view catchtap="maskOp" data-type="cancel">取消</view>
       <view catchtap="maskOp" data-type="confirm">充值</view>
-      <button wx:if="{{ user.money * 1 > 0 }}" open-type="contact">退担保金</button>
+      <view wx:if="{{ user.money * 1 > 0 }}" catchtap="maskOp" data-type="tdb">退担保金</view>
     </view>
   </view>
+</view>
+
+<view wx:if="{{ mask5 }}" class="mask">
+<view class="mask-in zoomIn animated">
+  <view>退担保金额、请联系客服微信diaodiao12580</view>
+  <view class="mask-btn">
+    <view catchtap="maskOp" style="color: #000;" data-type="dbc">确定</view>
+  </view>
+</view>
 </view>
 
 <view wx:if="{{ mask3 }}" class="mask">
@@ -73,14 +82,8 @@
       <view>1000或以上2500以下LV4</view>
       <view>2500或以上 5000以下LV5</view>
     </view>
-    <checkbox-group class="radio-group" bindchange="checkboxChange">
-      <label class="checkbox" wx:for="{{items}}">
-        <checkbox value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
-      </label>
-    </checkbox-group>
     <view class="mask-btn">
-      <view catchtap="maskOp" data-type="cancel">取消</view>
-      <view catchtap="mask3confirm" class="btn {{ items[0].checked ? 'y' : '' }}">确定</view>
+      <view catchtap="mask3confirm" class="btn">确定</view>
     </view>
   </view>
 </view>
@@ -89,6 +92,14 @@
   <view class="mask-in">
     <view>充值担保金</view>
     <view><input bindinput="inputValue" type="number" placeholder="请输入金额" /></view>
+    <view class="c-box">
+      <checkbox-group class="radio-group" bindchange="checkboxChange">
+        <label class="checkbox" wx:for="{{items}}">
+          <checkbox value="{{item.name}}" checked="{{item.checked}}"/>
+        </label>
+      </checkbox-group>
+      <text catchtap="showDb">已阅读并承诺遵守《担保金说明》条例</text>
+    </view>
     <view class="mask-btn">
       <view catchtap="maskOp" data-type="cancel">取消</view>
       <view catchtap="charge" data-type="charge">充值</view>
