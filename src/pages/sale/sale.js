@@ -44,6 +44,10 @@ Page({
       wx.navigateTo({
         url: '../faburuler/faburuler'
       })
+    } else if (e.currentTarget.dataset.type === 'left') {
+      wx.redirectTo({
+        url: '../index/index'
+      })
     }
   },
   // 获取产品分类

@@ -44,7 +44,7 @@
 
 <view catchtap='delMask' wx:if="{{ shareMask }}" class="mask">
     <view class="mask-in animated zoomIn">
-        <text>分享好友 产生购买可获得该产品清货价10%佣金奖励</text>
+        <text>分享好友 产生购买可获得该产品原清货价10%佣金奖励</text>
         <button open-type="share">确定</button>
     </view>
 </view>

@@ -9,6 +9,11 @@ Page({
   data: {
     title: 'tuiguang'
   },
+  golists () {
+    wx.navigateTo({
+      url: '../tuiGuangList/tuiGuangList'
+    })
+  },
   // 获取分享的二维码
   getCode () {
     let that = this
@@ -21,7 +26,7 @@ Page({
         wx.hideLoading()
         if (res.data.code === 200) {
           that.setData({
-            src: res.data.data.ercodeUrl
+            info: res.data.data
           })
         } else {
           wx.showToast({
@@ -133,7 +138,7 @@ Page({
   },
   onShareAppMessage () {
     return {
-      title: `您的好友${this.data.name}向您推荐荣耀微商`,
+      title: `您的好友${this.data.name}向您推荐微商荣耀`,
       path: `pages/index/index?recommend_id=${this.data.user_id}`
     }
   }

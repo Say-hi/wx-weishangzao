@@ -2,10 +2,11 @@
 //  微商造小程序页面分布
   "pages": [
     "pages/index/index", // 主页
+    "pages/tuiGuangList/tuiGuangList", // 推广详情
     "pages/sale/sale", // 我清货神器
     "pages/moneyList/moneyList", // 零钱明细
     "pages/tuiguang/tuiguang", // 用户推广
-    "pages/map/map", // 微商地图
+//    "pages/map/map", // 微商地图
     "pages/detail/detail", // 宝贝详情
     "pages/buy/buy", // 我买到的
     "pages/mySale/mySale", // 我卖出的
@@ -33,7 +34,8 @@
     "pages/relevanceTeam/relevanceTeam", // 我关联的团队
     "pages/relevanceAgent/relevanceAgent", // 关联我的代理
     "pages/ruler/ruler", // 规则
-    "pages/codePage/codePage" // 我的推广码,,
+    "pages/codePage/codePage" // 我的推广码,,,
+
     // Dont remove this comment
   ],
   // Window configuration

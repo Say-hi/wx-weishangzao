@@ -51,6 +51,7 @@ let serviceUrl = {
   userAccountList: baseDomain + '/api/user/userAccountList',
   getNotReadMessage: baseDomain + '/api/product/getNotReadMessage',
   updateMessageIsRead: baseDomain + '/api/product/updateMessageIsRead',
-  deleteReleaseLeavingMessage: baseDomain + '/api/product/deleteReleaseLeavingMessage'
+  deleteReleaseLeavingMessage: baseDomain + '/api/product/deleteReleaseLeavingMessage',
+  getShareMoneyLists: baseDomain + '/api/user/getShareMoneyLists'
 }
 module.exports = serviceUrl

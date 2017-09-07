@@ -51,6 +51,7 @@
     </view>
     <view wx:else class="comment">
       <view class="c-t">担保金:{{ item.money }}</view>
+      <view class="iconfont icon-liuyan1">{{ item.leaving_count || '0' }}</view>
     </view>
   </navigator>
   <view class="tac" wx:if="{{ products.length === 0 }}">诶哟，还没有人发布产品诶</view>
@@ -58,7 +59,7 @@
   <!--底部导航-->
   <view style="height: 80rpx; width: 100%;"></view>
   <view class="static-bottom">
-    <image data-type="left" catchtap="chooseOperation" class="l" src="../../images/home_hl.png"></image>
+    <image data-type="left" catchtap="chooseOperation" class="l" src="../../images/home.png"></image>
     <image data-type="center" catchtap="chooseOperation" class="c" src="../../images/fabu.png"></image>
     <image data-type="right" catchtap="chooseOperation" class="r" src="../../images/user.png"></image>
   </view>

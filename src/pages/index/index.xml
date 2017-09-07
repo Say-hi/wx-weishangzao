@@ -26,7 +26,7 @@
   </view>
   <!--搜索框-->
   <view class="search">
-    <input bindinput="searchInput" bindconfirm="searchConfirm" confirm-type="search" placeholder="搜索微商名称或微信号"/>
+    <input bindinput="searchInput" bindconfirm="searchConfirm" confirm-type="search" placeholder="{{ curChoose == 1 ? '搜索微商名称或微信号' : '搜索微商团队名称' }}"/>
     <view catchtap="searchConfirm" class="iconfont icon-sousuo"></view>
   </view>
   <!--类型-->

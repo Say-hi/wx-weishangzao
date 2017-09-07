@@ -2,7 +2,7 @@
 <view class="product">
   <input class="p-i" value="{{ info.good_name }}" bindinput="inputValue" data-type="title" placeholder="标题 输入商品名称"/>
   <input class="p-i" value="{{ info.original_price }}" type="digit" bindinput="inputValue" data-type="money" placeholder="零售价(单价)"/>
-  <input class="p-i" value="{{ info.qinghuo_price }}" type="digit" bindinput="inputValue" data-type="money2" placeholder="清货价"/>
+  <input class="p-i" value="{{ info.qinghuo_price }}" type="digit" bindinput="inputValue" data-type="money2" placeholder="清货价(单价)"/>
   <input class="p-i" value="{{ info.stock_num }}" type="number" bindinput="inputValue" data-type="count" placeholder="数量"/>
   <picker class="p-i" mode="date" value="{{date}}" start="{{ starTime }}" end="{{ endTime }}" bindchange="bindDateChange">
     <view class="picker">

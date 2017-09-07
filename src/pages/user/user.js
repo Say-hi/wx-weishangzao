@@ -187,6 +187,11 @@ Page({
       this.setData({
         mask5: false
       })
+    } else if (e.currentTarget.dataset.type === 'tlq') {
+      this.setData({
+        mask4: false,
+        mask5: true
+      })
     }
   },
   // 充值担保金mask

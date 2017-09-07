@@ -61,7 +61,7 @@
 
 <view wx:if="{{ mask5 }}" class="mask">
 <view class="mask-in zoomIn animated">
-  <view>退担保金额、请联系客服微信diaodiao12580</view>
+  <view>退担保金额\零钱提现、请联系客服微信1009572975</view>
   <view class="mask-btn">
     <view catchtap="maskOp" style="color: #000;" data-type="dbc">确定</view>
   </view>
@@ -114,7 +114,7 @@
     <view class="mask-btn">
       <view catchtap="maskOp" data-type="cancel">取消</view>
       <view catchtap="maskOp" data-type="detail">查看明细</view>
-      <button wx:if="{{ user.account * 1 > 0 }}" style="height: 80rpx;" open-type="contact">零钱提现</button>
+      <view catchtap="maskOp" data-type="tlq" wx:if="{{ user.account * 1 > 0 }}">零钱提现</view>
     </view>
   </view>
 </view>

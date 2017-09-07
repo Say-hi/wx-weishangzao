@@ -95,7 +95,7 @@ Page({
   },
   // 类型选择切换
   typeChoose (e) {
-    let rankNavArr = ['知名度', '点赞最多', '担保金最多']
+    let rankNavArr = ['总知名度', '点赞最多', '担保金最多']
     if (e.currentTarget.dataset.index * 1 === 1) {
       rankNavArr.push(this.data.rankNavArr[3])
     } else {

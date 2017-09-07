@@ -1,0 +1,20 @@
+<view class="wrap">
+  <blcok wx:for="{{ lists }}">
+    <view class="out">
+      <view class="left">
+        <image src="{{ item.avatar }}"></image>
+      </view>
+      <view class="center">
+        <view class="title">{{ item.user_nicename }}</view>
+        <view class="content">
+          获得佣金{{ item.money }}元
+        </view>
+      </view>
+      <view class="time">
+        {{ item.add_time }}
+      </view>
+    </view>
+  </blcok>
+</view>
+<view class="tac" wx:if="{{ lists.length === 0 }}">诶哟，您还没有收到过佣金诶</view>
+<view class="tac" wx:else>{{ more ? '--- 上拉加载更多 ---' : '--- 到底了 ---' }}</view>
