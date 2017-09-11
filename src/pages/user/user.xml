@@ -2,7 +2,8 @@
 <view>
   <!--个人信息顶部-->
   <view class="user-top">
-    <image class="bg" src="../../images/user-bg.png"></image>
+    <!--<image class="bg" src="../../images/user-bg.png"></image>-->
+    <view class="bg" ></view>
     <view class="lv {{ pLevel[user.level] }}"></view>
     <image class="user-img br" src="{{ user.avatar }}"></image>
     <text class="user-name">{{ user.user_name }}</text>

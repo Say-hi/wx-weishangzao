@@ -1,6 +1,6 @@
 <!--我收藏的-->
 <!--商品区间-->
-<view class="shop" wx:for="{{ products }}" wx:for-item="item" wx:for-index="index">
+<view catchtap="goDetail" data-id="{{ item.good_id }}" class="shop" wx:for="{{ products }}" wx:for-item="item" wx:for-index="index">
     <!--发布用户信息-->
     <view class="s-u">
         <image wx:if="{{ curChoose == 1 }}" class="lv" src="../../images/lv5.png"></image>

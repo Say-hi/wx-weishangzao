@@ -38,6 +38,11 @@ Page({
       // }
     ]
   },
+  goDetail (e) {
+    wx.navigateTo({
+      url: `../detail/detail?id=${e.currentTarget.dataset.id}`
+    })
+  },
   // 取消收藏
   cancel (e) {
     let that = this

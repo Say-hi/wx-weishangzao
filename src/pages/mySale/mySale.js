@@ -50,8 +50,8 @@ Page({
         mask: false
       })
     } else {
-      let {name, phone, address, express, expressnumber} = this.data
-      if (!(name && phone && address && express && expressnumber)) {
+      let {express, expressnumber} = this.data
+      if (!(express && expressnumber)) {
         wx.showToast({
           title: '请补全信息'
         })
@@ -61,9 +61,9 @@ Page({
           data: {
             session_key: app.gs(),
             order_id: that.data.id,
-            user_name: that.data.name,
-            mobile: that.data.phone,
-            address: that.data.address,
+            user_name: that.data.name || '',
+            mobile: that.data.phone || '',
+            address: that.data.address || '',
             shipping_name: that.data.express,
             shipping_no: that.data.expressnumber
           },
@@ -79,8 +79,9 @@ Page({
                 sealArr: that.data.sealArr
               })
             } else {
+              console.log(res)
               wx.showToast({
-                title: res.data.message
+                title: '发货错误，请联系客服'
               })
             }
           }

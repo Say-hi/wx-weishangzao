@@ -183,7 +183,14 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad (params) {
+  onLoad (options) {
+    let params = {}
+    if (options.scene) {
+      params['id'] = decodeURIComponent(options.scene)
+    } else {
+      params['id'] = options.recommend_id
+    }
+    console.log(params)
     this.curMonth()
     let that = this
     app.wxlogin(function () {
@@ -248,6 +255,12 @@ Page({
       this.getRank(this.data.searchValue, ++this.data.page, 0)
     } else {
       this.getRank('', ++this.data.page, 0)
+    }
+  },
+  onShareAppMessage () {
+    return {
+      title: '分享微商荣耀',
+      path: 'pages/index/index'
     }
   }
 })

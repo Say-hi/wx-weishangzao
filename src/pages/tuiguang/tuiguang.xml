@@ -6,7 +6,7 @@
 <!--<view class="tac">{{ name }}的专属荣耀微商二维码</view>-->
 <!--<view class="tac">您可已保存图片后发送到您的朋友圈进行推广</view>-->
 <view wx:if="{{ info.is_damowang == 0 }}" class="t">
-    <view>把邀请码截图或点击【我要邀请】</view>
+    <view>点击【我要邀请】</view>
     <view>邀请10名好友</view>
     <view>并成功完成分享即可成为[ 邀请大魔王 ]</view>
     <view>邀请大魔王:</view>
@@ -20,5 +20,5 @@
 </view>
 <view class="btn-wrap">
     <button open-type="share" class="tg">我要邀请</button>
-    <button catchtap="golists" class="tg">已邀请的</button>
+    <button catchtap="golists" class="tg">邀请佣金</button>
 </view>

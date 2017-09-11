@@ -283,6 +283,9 @@ Page({
       success (res) {
         wx.hideLoading()
         if (res.data.code === 200) {
+          that.setData({
+            order_id: res.data.data.order_id
+          })
           that.forPay(res.data.data.order_id)
         } else {
           wx.showToast({
@@ -303,6 +306,7 @@ Page({
         order_id: id
       },
       success (res) {
+        wx.hideLoading()
         // 零钱支付成功
         if (res.data.code === 200) {
           wx.showToast({
@@ -350,9 +354,9 @@ Page({
     app.wxrequest(fp)
   },
   // 提交用户位置信息
-  confrim () {
+  confirm () {
     let that = this
-    if (!this.data.sh.name || !this.data.sh.mobile || !this.data.sh.address) {
+    if (!this.data.sh.name || !this.data.sh.mobile || (this.data.sh.mobile.length * 1 !== 11) || !this.data.sh.address) {
       return wx.showToast({
         title: '请补全您的收货信息'
       })
@@ -361,7 +365,7 @@ Page({
       url: serviceUrl.updateOrderUserInfo,
       data: {
         session_key: app.gs(),
-        order_id: that.data.id,
+        order_id: that.data.order_id,
         user_name: that.data.sh.name,
         mobile: that.data.sh.mobile,
         address: that.data.sh.address,
