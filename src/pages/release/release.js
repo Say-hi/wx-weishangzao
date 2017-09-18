@@ -23,7 +23,19 @@ Page({
       'cat_id': 'false',
       'cat_name': '选择产品分类'
     }],
-    upImg: []
+    upImg: [],
+    items: [
+      {
+        name: '已阅读并承诺遵守《清货神器说明》条例',
+        value: '已阅读并承诺遵守《清货神器说明》条例',
+        checked: true
+      }
+    ]
+  },
+  showDb () {
+    wx.navigateTo({
+      url: '../faburuler/faburuler'
+    })
   },
   // 上传图片
   upImgs () {
@@ -82,6 +94,8 @@ Page({
       info['product_integrity'] = value
     } else if (type === 'introduce') {
       info['describe'] = value
+    } else if (type === 'mobile') {
+      info['mobile'] = value
     }
     this.setData({
       info: info
@@ -110,12 +124,23 @@ Page({
     }
     app.wxrequest(gc)
   },
+  checkboxChange () {
+    this.data.items[0].checked = !this.data.items[0].checked
+    this.setData({
+      items: this.data.items
+    })
+  },
   // 发布信息
   fabu () {
     let { info } = this.data
-    if (!info.qinghuo_price || !info.good_name || !info.original_price || !info.stock_num || !info.product_integrity || !info.describe || (this.data.upImg.length === 0) || (this.data.index === 0)) {
+    if (!info.mobile || !info.qinghuo_price || !info.good_name || !info.original_price || !info.stock_num || !info.product_integrity || !info.describe || (this.data.upImg.length === 0) || (this.data.index === 0)) {
       return wx.showToast({
         title: '请正确补全信息再提交'
+      })
+    }
+    if (!this.data.items[0].checked) {
+      return wx.showToast({
+        title: '请同意条款后再发布产品'
       })
     }
     let that = this
@@ -131,6 +156,7 @@ Page({
         exp_time: info.exp_time,
         product_integrity: info.product_integrity,
         describe: info.describe,
+        mobile: info.mobile,
         product_images: that.data.upImg.join(','),
         cat_id: that.data.array[that.data.index]['cat_id']
       },

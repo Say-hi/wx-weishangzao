@@ -12,28 +12,28 @@ Page({
     pLevel: ['p0', 'p1', 'p2', 'p3', 'p4', 'p5'],
     infos: [
       {
-        t: '商品',
-        c: '难过恋人'
+        t: '商品名称',
+        c: ''
       },
       {
         t: '分类',
-        c: '日用品'
+        c: ''
       },
       {
         t: '零售价',
-        c: '152'
+        c: ''
       },
       {
         t: '清货价',
-        c: '152'
+        c: ''
       },
       {
         t: '数量',
-        c: '152'
+        c: ''
       },
       {
         t: '产品完整性',
-        c: '50%'
+        c: ''
       },
       {
         t: '产品描述',
@@ -127,6 +127,11 @@ Page({
         shareMask: true
       })
     } else if (type === 'want') {
+      if (this.data.is_out_time * 1 === 1) {
+        return wx.showToast({
+          title: '产品已过期，无法购买'
+        })
+      }
       this.setData({
         buyMask: true
       })
@@ -179,6 +184,11 @@ Page({
   get (time) {
     return app.moment(time)
   },
+  goUserDetail (e) {
+    wx.navigateTo({
+      url: `../supportPage/supportPage?id=${e.currentTarget.dataset.id}`
+    })
+  },
   // 获取产品详情
   getDetail (id) {
     let that = this
@@ -191,20 +201,52 @@ Page({
       success (res) {
         wx.hideLoading()
         if (res.data.code === 200) {
+          if (res.data.data.product_info.stock_num * 1 === 0) {
+            wx.showToast({
+              title: '该商品无库存啦'
+            })
+            return setTimeout(() => {
+              wx.redirectTo({
+                url: '../sale/sale'
+              })
+            })
+          }
           that.data.infos[0]['c'] = res.data.data.product_info.good_name
           that.data.infos[1]['c'] = res.data.data.product_info.category_name
           that.data.infos[2]['c'] = res.data.data.product_info.original_price
           that.data.infos[3]['c'] = res.data.data.product_info.clearance_price
           that.data.infos[4]['c'] = res.data.data.product_info.stock_num
           that.data.infos[5]['c'] = `${res.data.data.product_info.product_integrity}%`
+          that.data.infos[6]['c'] = res.data.data.product_info.describe
           that.setData({
             infos: that.data.infos,
-            info: res.data.data
+            info: res.data.data,
+            is_out_time: res.data.data.product_info.is_out_time
           })
+          if (res.data.data.product_info.is_out_time * 1 === 1) {
+            setTimeout(() => {
+              wx.showToast({
+                title: '该产品已过期，无法购买'
+              })
+            }, 1000)
+          }
         } else {
           wx.showToast({
             title: res.data.message
           })
+          // setTimeout(() => {
+          //   wx.showToast({
+          //     title: '产品过期了'
+          //   })
+          // }, 100)
+          // setTimeout(() => {
+          //   wx.showToast({
+          //     title: '产品过期了'
+          //   })
+          //   wx.reLaunch({
+          //     url: '../sale/sale'
+          //   })
+          // }, 1000)
         }
       }
     }
@@ -374,8 +416,11 @@ Page({
       success (res) {
         wx.hideLoading()
         if (res.data.code === 200) {
-          that.setData({
-            addressMask: false
+          // that.setData({
+          //   addressMask: false
+          // })
+          wx.redirectTo({
+            url: '../buy/buy'
           })
         } else {
           wx.showToast({
@@ -519,7 +564,7 @@ Page({
     })
     wx.setStorageSync('shareCount', this.data.shareCount)
     return {
-      title: '分享有礼',
+      title: '宝贝详情',
       path: `pages/detail/detail?recommend_id=${this.data.info.product_info.user_id}&id=${this.data.id}`
     }
   }

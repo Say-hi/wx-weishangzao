@@ -208,7 +208,7 @@ Page({
       })
     } else if (e.currentTarget.dataset.type === 'center') {
       wx.navigateTo({
-        url: '../faburuler/faburuler'
+        url: '../release/release'
       })
     }
   },

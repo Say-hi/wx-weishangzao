@@ -37,11 +37,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad () {
-    if (wx.getStorageSync('fabu')) {
-      wx.redirectTo({
-        url: '../release/release'
-      })
-    }
+    // if (wx.getStorageSync('fabu')) {
+    //   wx.redirectTo({
+    //     url: '../release/release'
+    //   })
+    // }
     // TODO: onLoad
   },
 

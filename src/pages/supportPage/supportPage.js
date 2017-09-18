@@ -124,6 +124,11 @@ Page({
         wx.hideLoading()
         if (res.data.code === 200) {
           that.getInfo(that.data.id)
+          setTimeout(() => {
+            wx.showToast({
+              title: '每天限点赞1次'
+            })
+          }, 300)
         } else {
           wx.showToast({
             title: res.data.message

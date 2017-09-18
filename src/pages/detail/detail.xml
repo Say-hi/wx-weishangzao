@@ -2,7 +2,7 @@
 <view class='detail'>
     <view class="d-top">
         <view class='lv {{ pLevel[info.user_info.level] }}'></view>
-        <image class='br' src='{{ info.user_info.avatar }}'></image>
+        <image catchtap="goUserDetail" data-id="{{ info.user_info.user_id }}" class='br' src='{{ info.user_info.avatar }}'></image>
         <view class='user'>
             <view>{{ info.user_info.user_nicename }}</view>
             <view>{{ info.product_info.add_time }}</view>
@@ -12,7 +12,7 @@
     <view class='info'>
         <view wx:for='{{ infos }}'>{{ item.t }}{{ index == 5 ? '' : ':' }} {{ item.c }}</view>
     </view>
-    <view class='d-i'>{{ info.product_info.describe }}</view>
+    <!--<view class='d-i'>{{ info.product_info.describe }}</view>-->
     <image mode="widthFix" wx:for='{{ info.product_info.product_images }}' src='{{ item }}'></image>
 </view>
 

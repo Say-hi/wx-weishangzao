@@ -59,14 +59,17 @@
 <view class="diw">
   <view class="title">代理产品</view>
   <view>代理产品:{{ user.product || '未填写' }}</view>
+  <view class="team-introduce">
+    <image mode="aspectFill" catchtap="previewImg" data-type="product" data-index="{{ index }}" class="product-img" wx:for="{{ user.product_images }}" src="{{ item }}"></image>
+  </view>
 </view>
 <!--<view>代理级别:{{ user.level }}</view>-->
 <!--<view>微商经历:{{ user.experience }}</view>-->
 <view class="diw">
   <view class="title">团队风采</view>
+  <view>团队风采:{{ user.fengcai_desc || '未填写' }}</view>
   <view class="team-introduce">
-    <view>产品名称:{{ user.product || '未填写' }}</view>
-    <image mode="aspectFill" catchtap="previewImg" data-index="{{ index }}" class="product-img" wx:for="{{ user.photos }}" src="{{ item }}"></image>
+    <image mode="aspectFill" catchtap="previewImg" data-type="team" data-index="{{ index }}" class="product-img" wx:for="{{ user.photos }}" src="{{ item }}"></image>
   </view>
 </view>
 </view>

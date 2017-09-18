@@ -7,16 +7,16 @@
 <!--<view class="tac">您可已保存图片后发送到您的朋友圈进行推广</view>-->
 <view wx:if="{{ info.is_damowang == 0 }}" class="t">
     <view>点击【我要邀请】</view>
-    <view>邀请10名好友</view>
-    <view>并成功完成分享即可成为[ 邀请大魔王 ]</view>
+    <view>邀请2名好友</view>
+    <view>好友完成分享后您即可成为[ 邀请大魔王 ]</view>
     <view>邀请大魔王:</view>
-    <view>所有邀请好友完成分享可得到5%佣金奖励</view>
+    <view>所有邀请好友完成分享后都可得到5%［ 邀请佣金 ］</view>
 </view>
 
 <view wx:else class="t">
     <view>邀请大魔王</view>
     <view class="t-b">已邀请<text>{{ info.count }}</text>好友</view>
-    <view>所有邀请的好友，无论完成发布或分享都可躺赚5%利润！</view>
+    <view>所有邀请好友完成分享后都可得到5%［ 邀请佣金 ］</view>
 </view>
 <view class="btn-wrap">
     <button open-type="share" class="tg">我要邀请</button>

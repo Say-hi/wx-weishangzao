@@ -37,12 +37,12 @@ Page({
   },
   chooseOperation (e) {
     if (e.currentTarget.dataset.type === 'right') {
-      wx.navigateTo({
+      wx.redirectTo({
         url: '../user/user'
       })
     } else if (e.currentTarget.dataset.type === 'center') {
-      wx.navigateTo({
-        url: '../faburuler/faburuler'
+      wx.redirectTo({
+        url: '../release/release'
       })
     } else if (e.currentTarget.dataset.type === 'left') {
       wx.redirectTo({
@@ -146,14 +146,21 @@ Page({
     }
     app.wxrequest(p)
   },
+  s (that) {
+    that.getCategoryLists()
+    that.getList('', 1, '')
+  },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad () {
+  onLoad (params) {
     // this.getCarousel()
-    this.getCategoryLists()
-    this.getList('', 1, '')
-
+    if (params.type === 'out') {
+      app.wxlogin(this.s, this)
+    } else {
+      this.getCategoryLists()
+      this.getList('', 1, '')
+    }
     // TODO: onLoad
   },
 
@@ -198,6 +205,12 @@ Page({
       this.getList(this.data.searchValue, ++this.data.page, '')
     } else {
       this.getList(this.data.searchValue, ++this.data.page, 'guarantee')
+    }
+  },
+  onShareAppMessage () {
+    return {
+      title: '微商界最大的二手闲置清货平台！',
+      path: 'pages/sale/sale?type=out'
     }
   }
 })

@@ -10,7 +10,7 @@ Page({
   data: {
     page: 1,
     sealArr: [],
-    orderStatus: ['用户未付款', '待发货', '已发货', '用户已收货', '退货', '举报']
+    orderStatus: ['用户未付款', '点击确认发货', '待客户签收', '用户已收货', '退货', '举报']
   },
   // 快递信息录入
   inputValue (e) {
@@ -61,9 +61,9 @@ Page({
           data: {
             session_key: app.gs(),
             order_id: that.data.id,
-            user_name: that.data.name || '',
-            mobile: that.data.phone || '',
-            address: that.data.address || '',
+            user_name: that.data.sealArr[that.data.index].shipping_info.user_name || '',
+            mobile: that.data.sealArr[that.data.index].shipping_info.mobile || '',
+            address: that.data.sealArr[that.data.index].shipping_info.address || '',
             shipping_name: that.data.express,
             shipping_no: that.data.expressnumber
           },

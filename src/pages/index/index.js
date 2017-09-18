@@ -21,14 +21,14 @@ Page({
         img: '../../images/weishang.png'
       },
       {
-        url: '',
-        text: '微商地图',
-        img: '../../images/ditu.png'
-      },
-      {
         url: '../ranking/ranking',
         text: '历史排行',
         img: '../../images/haibao.png'
+      },
+      {
+        url: '../hufen/hufen',
+        text: '互粉神器',
+        img: '../../images/ditu.png'
       },
       {
         url: '../sale/sale',
@@ -42,11 +42,11 @@ Page({
     orderArr: ['effect_num', 'support_count', 'money_count']
   },
   showMessage (e) {
-    if (e.currentTarget.dataset.index * 1 === 1) {
-      wx.showToast({
-        title: '该功能暂未开放！'
-      })
-    }
+    // if (e.currentTarget.dataset.index * 1 === 2) {
+    //   wx.showToast({
+    //     title: '该功能紧急开发中'
+    //   })
+    // }
   },
   // 消息跳转
   message () {
@@ -62,7 +62,7 @@ Page({
       })
     } else if (e.currentTarget.dataset.type === 'center') {
       wx.navigateTo({
-        url: '../faburuler/faburuler'
+        url: '../release/release'
       })
     }
   },
@@ -199,12 +199,12 @@ Page({
       app.getMessageCount(that)
     }, params)
     // 获取位置授权
-    wx.getLocation({
-      type: 'gcj02',
-      success (res) {
-        console.log(res)
-      }
-    })
+    // wx.getLocation({
+    //   type: 'gcj02',
+    //   success (res) {
+    //     console.log(res)
+    //   }
+    // })
 
     // TODO: onLoad
   },
@@ -259,7 +259,7 @@ Page({
   },
   onShareAppMessage () {
     return {
-      title: '分享微商荣耀',
+      title: '微商荣耀排行榜火热评选中！赶紧为您支持的微商团队 人物投上一票吧～',
       path: 'pages/index/index'
     }
   }

@@ -13,10 +13,17 @@ Page({
   // 预览图片
   previewImg (e) {
     let that = this
-    wx.previewImage({
-      current: that.data.user.products[e.currentTarget.dataset.index], // 当前显示图片的http链接
-      urls: that.data.user.products // 需要预览的图片http链接列表
-    })
+    if (e.currentTarget.dataset.type === 'product') {
+      wx.previewImage({
+        current: that.data.user.product_images[e.currentTarget.dataset.index], // 当前显示图片的http链接
+        urls: that.data.user.product_images // 需要预览的图片http链接列表
+      })
+    } else {
+      wx.previewImage({
+        current: that.data.user.photos[e.currentTarget.dataset.index], // 当前显示图片的http链接
+        urls: that.data.user.photos // 需要预览的图片http链接列表
+      })
+    }
   },
   // mask取消按钮
   cancel () {
@@ -116,6 +123,11 @@ Page({
         wx.hideLoading()
         if (res.data.code === 200) {
           that.getInfo(that.data.id)
+          setTimeout(() => {
+            wx.showToast({
+              title: '每天限支持1次'
+            })
+          }, 300)
         } else {
           wx.showToast({
             title: res.data.message

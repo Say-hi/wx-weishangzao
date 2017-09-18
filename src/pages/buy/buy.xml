@@ -23,14 +23,14 @@
     <view class="mask-in animated zoomIn">
         <view data-type="cancel" catchtap="mOp" class="br">×</view>
         <view class="title">客户收货信息</view>
-        <input value="{{ sealArr[index].user_name || '发货方未填写' }}"/>
-        <input value="{{ sealArr[index].mobile || '发货方未填写' }}" />
-        <input value="{{ sealArr[index].address || '发货方未填写' }}"/>
+        <input value="{{ sealArr[index].shipping_info.user_name || '发货方未填写' }}"/>
+        <input value="{{ sealArr[index].shipping_info.mobile || '发货方未填写' }}" />
+        <input value="{{ sealArr[index].shipping_info.address || '发货方未填写' }}"/>
         <view class="title">发货快递信息</view>
         <view>快递公司</view>
-        <input value="{{ sealArr[index].shipping_name || '发货方未填写' }}"/>
+        <input value="{{ sealArr[index].shipping_info.shipping_name || '发货方未填写' }}"/>
         <view>快递单号</view>
-        <input value="{{ sealArr[index].shipping_no || '发货方未填写' }}"/>
+        <input value="{{ sealArr[index].shipping_info.shipping_no || '发货方未填写' }}"/>
         <view data-type="confirm" catchtap="mOp" class="m-confirm">关闭</view>
     </view>
 </view>

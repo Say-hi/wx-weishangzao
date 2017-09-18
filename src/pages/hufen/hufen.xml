@@ -1,0 +1,29 @@
+<!--互粉神器-->
+<view class="hf-w">
+  <view class="bb" wx:for="{{ lists }}">
+    <image mode="aspectFill" src="{{ item.avatar }}"></image>
+    <!--<view>{{ item.user_nicename }}</view>-->
+  </view>
+</view>
+
+<view hidden="{{ lists.length > 0 }}" class="noMore">--- 平台内都是您的好友啦 ---</view>
+
+<view hidden="{{ lists.length == 0 }}" catchtap="addhaoyou" class="add br">
+  <view>点击一键添加好友</view>
+</view>
+
+<view hidden="{{ noWeChat }}" class="mask">
+  <view class="mask-in">
+    <view class="m-i-i">
+      <view class="title">请先填写您自己的微信号才可让其他人主动添加您</view>
+      <input bindinput="inputValue" placeholder="请输入您的微信号"/>
+    </view>
+    <view class="m-btn">
+      <view catchtap="del">取消</view>
+      <view catchtap="upDate">确定</view>
+    </view>
+  </view>
+</view>
+
+<button class="sharebtn" hidden="{{ needShare }}" open-type="share">分享微商荣耀</button>
+

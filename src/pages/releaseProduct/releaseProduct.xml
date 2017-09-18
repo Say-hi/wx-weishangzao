@@ -3,7 +3,7 @@
   <image mode="aspectFill" src="{{ item.product_images }}"></image>
   <view class="s-c">
     <view>{{ item.good_name }}</view>
-    <view class="s-c-p">￥{{ item.qinghuo_price }}</view>
+    <view class="s-c-p">￥{{ item.clearance_price }}</view>
   </view>
   <view catchtap="del" data-index="{{ index }}" data-id="{{ item.good_id }}" class="del-btn send-btn">删除</view>
   <button data-id="{{ item.good_id }}" class="send-btn" open-type="share">分享</button>

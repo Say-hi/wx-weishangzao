@@ -43,7 +43,7 @@
       <image mode="aspectFill" class="s-c-i" src="{{ p }}" wx:if="{{ index < 3}}" wx:for="{{ item.images }}" wx:for-item="p"></image>
     </view>
     <!--介绍文字-->
-    <view class="s-t ell">{{ item.describe }}</view>
+    <view class="s-t ell">商品名称:{{ item.describe }}</view>
     <!--评论-->
     <view wx:if="{{ curChoose == 2 }}" class="comment">
       <view>发布于: {{ item.add_time }}</view>

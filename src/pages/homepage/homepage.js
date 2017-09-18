@@ -91,7 +91,7 @@ Page({
       data: {
         session_key: wx.getStorageSync('session_key'),
         wechat_no: user.wechat_no,
-        true_name: user.wechat_no,
+        true_name: user.true_name,
         residence: user.residence,
         signature: user.signature,
         team: user.team,

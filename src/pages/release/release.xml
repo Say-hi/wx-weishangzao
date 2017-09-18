@@ -34,6 +34,16 @@
       </view>
     </view>
   </picker>
-
+  <view class="c-box">
+    <checkbox-group class="radio-group" bindchange="checkboxChange">
+      <label class="checkbox" wx:for="{{items}}">
+        <checkbox value="{{item.name}}" checked="{{item.checked}}"/>
+      </label>
+    </checkbox-group>
+    <text catchtap="showDb">已阅读并承诺遵守《清货神器说明》条例</text>
+  </view>
+  <view class="mobileInput">
+    <input type="number" maxlength="11" value="{{ info.mobile }}" data-type="mobile" bindinput="inputValue" placeholder="您的手机号码(不公开)"/>
+  </view>
   <view class="confirm-btn" catchtap="fabu">确定发布</view>
 </view>

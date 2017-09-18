@@ -26,7 +26,7 @@
         <view>快递公司</view>
         <input bindinput="inputValue" value="{{ sealArr[index].shipping_info.shipping_name }}" data-type="express" placeholder="输入快递公司"/>
         <view>快递单号</view>
-        <input bindinput="inputValue" value="{{ sealArr[index].shipping_info.shipping_no }}" data-type="expressnumber" placeholder="输入快递单号"/>
+        <input bindinput="inputValue" type="number" value="{{ sealArr[index].shipping_info.shipping_no }}" data-type="expressnumber" placeholder="输入快递单号"/>
         <view wx:if="{{ sealArr[index].order_status == 1 }}" data-type="confirm" catchtap="mOp" class="m-confirm">确定发货</view>
     </view>
 </view>

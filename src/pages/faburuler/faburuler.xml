@@ -20,20 +20,21 @@
       <view>2、发布时填写的清货价将以增加20%的价格展示于平台，用作分享等利益分配。（假设：用户分享您的清货链接产生了购买，该用户可得到此增加的10%佣金奖励。如果是你自己分享产生购买，那么10%当然由你所获得。）</view>
       <view>3、在双方交易过程中发生任何违规行为，本平台都有权对此做出一切处理！</view>
       <!--<view>每人每天可为人物支持1次</view>-->
-      <checkbox-group class="radio-group" bindchange="checkboxChange">
-        <label class="checkbox" wx:for="{{items}}">
-          <checkbox value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
-        </label>
-      </checkbox-group>
-      <view catchtap="go" class=" cy {{ items[0].checked ? '' : 'cn' }}">开始清货</view>
+      <!--<checkbox-group class="radio-group" bindchange="checkboxChange">-->
+        <!--<label class="checkbox" wx:for="{{items}}">-->
+          <!--<checkbox value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}-->
+        <!--</label>-->
+      <!--</checkbox-group>-->
+      <!--<view catchtap="go" class=" cy {{ items[0].checked ? '' : 'cn' }}">开始清货</view>-->
     </view>
-    <view class="c3">
-      <text>客服微信</text>
-      <text>二维码</text>
-    </view>
-    <view class="c3">
-      <text>diaodiao12580</text>
-      <image src="../../images/kfewm.png "></image>
-    </view>
+    <button class="btn br" open-type="contact">客服</button>
+    <!--<view class="c3">-->
+      <!--<text>客服微信</text>-->
+      <!--<text>二维码</text>-->
+    <!--</view>-->
+    <!--<view class="c3">-->
+      <!--<text>diaodiao12580</text>-->
+      <!--<image src="../../images/kfewm.png "></image>-->
+    <!--</view>-->
   </view>
 </view>
