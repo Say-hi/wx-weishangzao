@@ -128,6 +128,7 @@ Page({
   },
   // 获取轮播图
   getCarousel () {
+    console.log('getCarousel')
     let that = this
     let obj = {
       url: serviceUrl.getBanners,
@@ -190,10 +191,11 @@ Page({
     } else {
       params['id'] = options.recommend_id
     }
-    console.log(params)
+    console.log('params', params)
     this.curMonth()
     let that = this
     app.wxlogin(function () {
+      console.log('login')
       that.getCarousel()
       that.getRank('', 1, 0)
       app.getMessageCount(that)

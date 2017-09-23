@@ -182,6 +182,7 @@ App({
                 success (session) {
                   // let s = 'DUGufWMOkMIolSIXLajTvCEvXAYQZwSpnafUVlSagdNEReVSRDAECzwEVAtFbPWg'
                   wx.setStorageSync('session_key', session.data.data.session_key)
+                  console.log('session', session)
                   // wx.setStorageSync('session_key', s)
                   if (loginSuccess) {
                     loginSuccess(params)

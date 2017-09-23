@@ -7,6 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    shareType: 'share',
+    btnText: '分享微商荣耀',
     noWeChat: true,
     needShare: true,
     lists: [
@@ -56,9 +58,14 @@ Page({
     }
     let s = ''
     this.data.lists.forEach(v => {
+      if (v.wechat_no === 'undefined') {
+        v.wechat_no = ''
+      } else if (v.wechat_no === '') {
+        v.wechat_no = ''
+      }
       s += `${v.wechat_no} `
     })
-    console.log(s)
+    // console.log(s)
     wx.setClipboardData({
       data: s
     })
@@ -162,12 +169,12 @@ Page({
     app.wxrequest(i)
   },
   hufenSuceess () {
+    let that = this
     let id = ''
     this.data.lists.forEach(v => {
+      if (v.wechat_no === 'undefined' || v.wechat_no === '') return
       id += `${v.id},`
     })
-    id = id.slice(0, (id.length - 1))
-    console.log(id)
     let hf = {
       url: useUrl.updateSubscribes,
       data: {
@@ -176,14 +183,59 @@ Page({
       },
       success () {
         wx.hideLoading()
+        that.setData({
+          showMask: true
+        })
+        setTimeout(() => {
+          that.setData({
+            showMask: false
+          })
+        }, 3000)
+        // wx.showToast({
+        //   title: '复制成功,请到微信-添加好友/朋友,进行粘贴微信号添加！',
+        //   duration: 3000
+        // })
       }
     }
     app.wxrequest(hf)
   },
+  getinfro () {
+    this.getUserInfo()
+    this.getlists()
+    this.getImg()
+  },
+  gohaoyou () {
+    let that = this
+    if (this.data.copy) {
+      this.setData({
+        showMask: true
+      })
+      let s = ''
+      that.data.lists.forEach(v => {
+        if (v.wechat_no === 'undefined') {
+          v.wechat_no = ''
+        }
+        s += `${v.wechat_no} `
+      })
+      // console.log(s)
+      wx.setClipboardData({
+        data: s
+      })
+      this.hufenSuceess()
+      setTimeout(() => {
+        that.setData({
+          showMask: false
+        })
+      }, 3000)
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad () {
+  onLoad (params) {
+    if (params.type === 'out') {
+      return app.wxlogin(this.getinfro)
+    }
     this.getUserInfo()
     this.getlists()
     this.getImg()
@@ -227,13 +279,38 @@ Page({
   onShareAppMessage () {
     let that = this
     return {
-      title: `您的好友${that.data.user.user_name}向您推荐微商荣耀`,
-      imageUrl: that.data.shareImg,
-      path: 'pages/index/index',
+      title: `一群想买货的 想发财的～在这等着主动加你和被你加啦～【互粉神器】`,
+      // imageUrl: that.data.shareImg,
+      imageUrl: '../../images/ditu.png',
+      path: 'pages/hufen/hufen?type=out',
       success () {
         that.setData({
-          copy: true
+          copy: true,
+          btnText: '复制9名好友微信号',
+          shareType: 'button'
+          // showMask: true
         })
+        // setTimeout(() => {
+        //   that.setData({
+        //     showMask: false
+        //   })
+        // }, 3000)
+        // // wx.showToast({
+        // //   title: '复制成功,请到微信-添加好友/朋友,进行粘贴微信号添加！',
+        // //   duration: 3000
+        // // })
+        // let s = ''
+        // that.data.lists.forEach(v => {
+        //   if (v.wechat_no === 'undefined') {
+        //     v.wechat_no = ''
+        //   }
+        //   s += `${v.wechat_no} `
+        // })
+        // // console.log(s)
+        // wx.setClipboardData({
+        //   data: s
+        // })
+        // that.hufenSuceess()
       }
     }
   }

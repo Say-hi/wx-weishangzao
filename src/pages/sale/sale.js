@@ -26,8 +26,14 @@ Page({
   bindPickerChange (e) {
     // console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
-      index: e.detail.value
+      index: e.detail.value,
+      page: 1
     })
+    if (this.data.curChoose * 1 === 2) {
+      this.getList(this.data.searchValue, 1, '')
+    } else {
+      this.getList(this.data.searchValue, 1, 'guarantee')
+    }
   },
   // 消息跳转
   message () {

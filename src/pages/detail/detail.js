@@ -169,6 +169,10 @@ Page({
         }
       }
       app.wxrequest(col)
+    } else if (type === 'gofabu') {
+      wx.redirectTo({
+        url: '../release/release'
+      })
     }
   },
   // 去除遮罩

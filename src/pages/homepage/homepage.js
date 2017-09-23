@@ -86,20 +86,32 @@ Page({
   save () {
     let user = this.data.user
     let that = this
+    let photos = ''
+    let products = ''
+    if (that.data.photos.length === 0) {
+      photos = ''
+    } else {
+      photos = that.data.photos.join(',')
+    }
+    if (this.data.products.length === 0) {
+      products = ''
+    } else {
+      products = that.data.products.join(',')
+    }
     let obj = {
       url: serviceUrl.editeUserInfo,
       data: {
         session_key: wx.getStorageSync('session_key'),
-        wechat_no: user.wechat_no,
-        true_name: user.true_name,
-        residence: user.residence,
-        signature: user.signature,
-        team: user.team,
-        lever: user.lever,
-        weishang_lu: user.weishang_lu,
-        product_name: user.product_name,
-        products: that.data.products.join(','),
-        photos: that.data.photos.join(',')
+        wechat_no: user.wechat_no || '',
+        true_name: user.true_name || '',
+        residence: user.residence || '',
+        signature: user.signature || '',
+        team: user.team || '',
+        lever: user.lever || '',
+        weishang_lu: user.weishang_lu || '',
+        product_name: user.product_name || '',
+        products: products,
+        photos: photos
       },
       success (res) {
         wx.hideLoading()

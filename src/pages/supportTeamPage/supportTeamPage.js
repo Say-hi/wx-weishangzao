@@ -181,5 +181,11 @@ Page({
    */
   onPullDownRefresh () {
     // TODO: onPullDownRefresh
+  },
+  onShareAppMessage () {
+    return {
+      title: `微商荣耀排行榜火热评选中！赶紧为您支持的微商团队 人物投上一票吧～`,
+      path: `pages/supportTeamPage/supportTeamPage?id=${this.data.id}`
+    }
   }
 })

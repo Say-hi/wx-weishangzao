@@ -77,15 +77,15 @@ page {
       line-height: 70rpx;
       view {
         text-align: center;
-        width: 50%;
         font-size: 30rpx;
+        width: 100%;
         font-weight: 700;
         background-color: #fedb43;
       }
-      view:nth-child(1) {
-        color: #999;
-        background-color: #eee;
-      }
+      //view:nth-child(1) {
+      //  color: #999;
+      //  background-color: #eee;
+      //}
     }
   }
 }
@@ -99,5 +99,11 @@ page {
   position: fixed;
   top: 50%;
   left: 50%;
+  width: 80%;
+  background-color: #fedb43;
   transform: translate(-50%, -50%);
+}
+
+.mask {
+  background-color: rgba(0,0,0,0);
 }

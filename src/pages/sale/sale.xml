@@ -40,7 +40,7 @@
     </view>
     <!--中间图片-->
     <view class="s-c">
-      <image mode="aspectFill" class="s-c-i" src="{{ p }}" wx:if="{{ index < 3}}" wx:for="{{ item.images }}" wx:for-item="p"></image>
+      <image lazy-load="true" mode="aspectFill" class="s-c-i" src="{{ p }}" wx:if="{{ index < 3}}" wx:for="{{ item.images }}" wx:for-item="p"></image>
     </view>
     <!--介绍文字-->
     <view class="s-t ell">商品名称:{{ item.describe }}</view>

@@ -15,7 +15,7 @@
     <!--<view class='d-i'>{{ info.product_info.describe }}</view>-->
     <image mode="widthFix" wx:for='{{ info.product_info.product_images }}' src='{{ item }}'></image>
 </view>
-
+<view catchtap='bottomOp' data-type='collect' class="ndy iconfont {{ info.product_info.is_collection ? 'icon-wuxing' : 'icon-wuxing1' }}">{{ info.product_info.is_collection ? '已收藏' : '收藏' }}</view>
 <view class='comment'>
     <view class='c-t'>留言 {{ number == 'null' ? '0' : number }}</view>
     <view catchtap="replyComment" data-liuyan="{{ item.id }}" data-userid="{{ item.user_id }}" class='c-c' wx:for='{{ commentArr }}'>
@@ -34,7 +34,8 @@
 <view style='height: 88rpx;'></view>
 
 <view class='f-b'>
-    <view catchtap='bottomOp' data-type='collect' class="iconfont {{ info.product_info.is_collection ? 'icon-wuxing' : 'icon-wuxing1' }}">{{ info.product_info.is_collection ? '已收藏' : '收藏' }}</view>
+    <!--<view catchtap='bottomOp' data-type='collect' class="iconfont {{ info.product_info.is_collection ? 'icon-wuxing' : 'icon-wuxing1' }}">{{ info.product_info.is_collection ? '已收藏' : '收藏' }}</view>-->
+    <view catchtap='bottomOp' data-type='gofabu'>+我要清货</view>
     <view catchtap='bottomOp' data-type='comment' class='iconfont icon-liuyan'>留言</view>
     <view wx:if="{{ shareCount < 2 }}" catchtap='bottomOp' data-type='share' class='iconfont icon-fenxiang'>分享有礼</view>
     <button open-type="share" class='iconfont icon-fenxiang' wx:else>分享有礼</button>

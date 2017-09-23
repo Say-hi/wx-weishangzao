@@ -4,7 +4,7 @@ const app = getApp()
 const wxf = require('../../utils/common')
 const serviceUrl = require('../../utils/service')
 const dates = (new Date()).getFullYear() + '-' + ((new Date()).getMonth() + 1) + '-' + (new Date()).getDate()
-const datess = ((new Date()).getFullYear() + 1) + '-' + ((new Date()).getMonth() + 1) + '-' + (new Date()).getDate()
+const datess = ((new Date()).getFullYear() + 20) + '-' + ((new Date()).getMonth() + 1) + '-' + (new Date()).getDate()
 // 创建页面实例对象
 Page({
   /**

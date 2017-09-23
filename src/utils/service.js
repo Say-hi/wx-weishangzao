@@ -1,7 +1,8 @@
 /**
  * Created by Administrator on 2017/6/2.
  */
-let baseDomain = 'http://wsz.lanzhangxiu.cn'
+// let baseDomain = 'http://wsz.lanzhangxiu.cn'
+let baseDomain = 'https://weizao.vyvwlkj.cn'
 let serviceUrl = {
   login: baseDomain + '/api/public/login',
   getBanners: baseDomain + '/api/index/getBanners',
