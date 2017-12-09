@@ -20,13 +20,19 @@ Page({
   // 获取当前月份
   curMonth () {
     let that = this
-    let month = (new Date()).getMonth() + 1
+    let month = (new Date()).getMonth()
+    let year = (new Date()).getFullYear()
     for (let i = 1; i <= month; i++) {
       that.data.months.push(i)
+    }
+    if (year * 1 === 2017) {
+      that.data.months = that.data.months.slice(8)
     }
     this.data.rankNavArr.push(month + '月份▼')
     this.data.value.push((month - 1))
     this.setData({
+      // time: month + 1,
+      // endDate: year + '-' + month,
       months: that.data.months,
       value: that.data.value,
       rankNavArr: that.data.rankNavArr
@@ -41,7 +47,7 @@ Page({
       rankNavArr = ['总影响力', '支持度最高', '担保金最多']
       rankNavArr.push(this.data.rankNavArr[3])
     }
-    console.log(rankNavArr)
+    // console.log(rankNavArr)
     this.setData({
       page: 1,
       rankNavArr: rankNavArr,

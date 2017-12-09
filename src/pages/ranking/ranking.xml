@@ -10,8 +10,14 @@
     <view catchtap="rankNavChoose" data-index="{{ index }}" class="rank-nav-list {{ (curRankNav == index && index == 0) ? 'yellow' : (curRankNav == index && index == 1)? 'blue' : (curRankNav == index && index == 2) ? 'orgin' : '' }}" wx:for="{{ rankNavArr }}">
       {{ item }}
     </view>
+
     <!--月份弹窗-->
     <view wx:if="{{ maskShow }}" class="mask">
+      <!--<picker mode="date" value="{{time}}" start="2017-09-01" end="{{ endDate }}" bindchange="bindTimeChange">-->
+        <!--<view class="picker">-->
+          <!--{{time}}月-->
+        <!--</view>-->
+      <!--</picker>-->
       <view class="mask-wrap">
         <view class="mask-btn">
           <view catchtap="noMask">取消</view>

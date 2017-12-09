@@ -124,11 +124,11 @@ Page({
         wx.hideLoading()
         if (res.data.code === 200) {
           that.getInfo(that.data.id)
-          setTimeout(() => {
-            wx.showToast({
-              title: '每天限点赞1次'
-            })
-          }, 300)
+          // setTimeout(() => {
+          that.setData({
+            showTips: true
+          })
+          // }, 300)
         } else {
           wx.showToast({
             title: res.data.message
@@ -138,7 +138,17 @@ Page({
     }
     app.wxrequest(s)
   },
-
+  maskO (e) {
+    if (e.currentTarget.dataset.type === 'cancel') {
+      this.setData({
+        showTips: false
+      })
+    } else {
+      wx.redirectTo({
+        url: '../qun/qun'
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -146,7 +156,8 @@ Page({
     this.setData({
       id: params.id
     })
-    this.getInfo(params.id)
+    // this.getInfo(params.id)
+    app.wxlogin(this.getInfo, params.id)
     // TODO: onLoad
   },
 

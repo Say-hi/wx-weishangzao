@@ -26,7 +26,7 @@ Page({
         img: '../../images/haibao.png'
       },
       {
-        url: '../hufen/hufen',
+        // url: '../hufen/hufen',
         text: '互粉神器',
         img: '../../images/ditu.png'
       },
@@ -42,16 +42,24 @@ Page({
     orderArr: ['effect_num', 'support_count', 'money_count']
   },
   showMessage (e) {
-    // if (e.currentTarget.dataset.index * 1 === 2) {
-    //   wx.showToast({
-    //     title: '该功能紧急开发中'
-    //   })
-    // }
+    if (e.currentTarget.dataset.index * 1 === 2) {
+      wx.showToast({
+        title: '正在开发 尽请期待'
+      })
+    }
   },
   // 消息跳转
   message () {
+    wx.showToast({
+      title: '拼命开发中 敬请期待...'
+    })
+    // wx.navigateTo({
+    //   url: '../message/message'
+    // })
+  },
+  goRuler () {
     wx.navigateTo({
-      url: '../message/message'
+      url: '../ruler/ruler'
     })
   },
   // 底部导航url
@@ -62,7 +70,7 @@ Page({
       })
     } else if (e.currentTarget.dataset.type === 'center') {
       wx.navigateTo({
-        url: '../release/release'
+        url: '../ranking/ranking'
       })
     }
   },

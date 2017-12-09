@@ -4,29 +4,29 @@
   <swiper class="carousel" indicator-dots="{{ dots }}" circular="{{ circular }}" autoplay="true" interval="5000" duration="1000">
     <block wx:for="{{ imgUrls }}">
       <swiper-item>
-        <image mode="aspectFill" src="{{ item.thumb }}" class="slide-image" />
+        <image catchtap="goRuler" mode="aspectFill" src="{{ item.thumb }}" class="slide-image" />
       </swiper-item>
     </block>
   </swiper>
   <!--导航-->
-  <view class="nav">
-    <view wx:for="{{ navTab }}">
-      <navigator catchtap="showMessage" data-index="{{ index }}" class="nav-tab" url="{{ item.url }}">
-        <image src="{{ item.img }}"></image>
-        <view>{{ item.text }}</view>
-      </navigator>
-    </view>
-  </view>
+  <!--<view class="nav">-->
+    <!--<view wx:for="{{ navTab }}">-->
+      <!--<navigator catchtap="showMessage" data-index="{{ index }}" class="nav-tab" url="{{ item.url }}">-->
+        <!--<image src="{{ item.img }}"></image>-->
+        <!--<view>{{ item.text }}</view>-->
+      <!--</navigator>-->
+    <!--</view>-->
+  <!--</view>-->
   <!--排行榜-->
-  <view class="ranking-list">
-    <view class="top-title">
-      微商荣耀排行榜
-      <navigator url="../ruler/ruler" class="rule">排行规则</navigator>
-    </view>
-  </view>
+  <!--<view class="ranking-list">-->
+    <!--<view class="top-title">-->
+      <!--微商荣耀排行榜-->
+      <!--<navigator url="../ruler/ruler" class="rule">排行规则</navigator>-->
+    <!--</view>-->
+  <!--</view>-->
   <!--搜索框-->
   <view class="search">
-    <input bindinput="searchInput" bindconfirm="searchConfirm" confirm-type="search" placeholder="{{ curChoose == 1 ? '搜索微商名称或微信号' : '搜索微商团队名称' }}"/>
+    <input bindinput="searchInput" bindconfirm="searchConfirm" confirm-type="search" placeholder="{{ curChoose == 1 ? '搜索微商名称 微信号' : '搜索微商团队名称' }}"/>
     <view catchtap="searchConfirm" class="iconfont icon-sousuo"></view>
   </view>
   <!--类型-->
@@ -74,13 +74,15 @@
 </view>
 
 <!--消息浮窗-->
-<view catchtap="message" class="mf br iconfont icon-laba {{ mCount > 0 ? 'ch' : '' }}">
-  <text wx:if="{{ mCount > 0 }}" class="br">{{ mCount }}</text>
+<view catchtap="message" class="mf br">
+  <!--<text wx:if="{{ mCount > 0 }}" class="br">{{ mCount }}</text>-->
+  <image class="br" src="../../images/640.png"></image>
+  <text>加入社群</text>
 </view>
 <!--底部导航-->
-<view style="height: 98rpx; width: 100%;"></view>
-<view class="static-bottom">
-  <image data-type="left" catchtap="chooseOperation" class="l" src="../../images/home_hl.png"></image>
-  <image data-type="center" catchtap="chooseOperation" class="c" src="../../images/fabu.png"></image>
-  <image data-type="right" catchtap="chooseOperation" class="r" src="../../images/user.png"></image>
-</view>
+<!--<view style="height: 98rpx; width: 100%;"></view>-->
+<!--<view class="static-bottom">-->
+  <!--<image data-type="left" catchtap="chooseOperation" class="l" src="../../images/home_hl.png"></image>-->
+  <!--<image data-type="center" catchtap="chooseOperation" class="c" src="../../images/fabu.png"></image>-->
+  <!--<image data-type="right" catchtap="chooseOperation" class="r" src="../../images/user.png"></image>-->
+<!--</view>-->

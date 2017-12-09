@@ -85,3 +85,15 @@
     </view>
   </view>
 </view>
+
+<view hidden="{{ !showTips }}" class="mask">
+  <view class="mask-in">
+    <view>每天都可支持1次喔！</view>
+    <view>加入用户交流群</view>
+    <view>可以随时接收最新消息喔~</view>
+    <view class="mo">
+      <view catchtap="maskO" data-type="confirm">确定</view>
+      <view catchtap="maskO" data-type="cancel">返回</view>
+    </view>
+  </view>
+</view>

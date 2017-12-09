@@ -51,7 +51,7 @@
 <!--详细信息-->
 <view class="detail-info">
   <view class="title">个人简历</view>
-  <view>名称:{{ user.user_name || '未填写' }}</view>
+  <!--<view>名称:{{ user.user_name || '未填写' }}</view>-->
   <view>微信号:{{ user.wechat_no || '未填写' }}</view>
   <view>现居地:{{ user.residence || '未填写' }}</view>
   <view>个性签名:{{ user.signature || '未填写' }}</view>
@@ -74,4 +74,16 @@
     <view wx:if="{{ user.wechat_no }}" catchtap="confirm">复制</view>
   </view>
 </view>
+</view>
+
+<view hidden="{{ !showTips }}" class="mask">
+  <view class="mask-in">
+    <view>每天都可点赞1次喔！</view>
+    <view>加入用户交流群</view>
+    <view>可以随时接收最新消息喔~</view>
+    <view class="mo">
+      <view catchtap="maskO" data-type="confirm">确定</view>
+      <view catchtap="maskO" data-type="cancel">返回</view>
+    </view>
+  </view>
 </view>

@@ -1,62 +1,76 @@
-<!--我的微商主页-->
-<!--封面图片-->
-<view class="cover" style="text-align: center;">
-  <text>封面展示</text>
-  <view class="cover-img-wrap">
-    <view class="cover-img" wx:for="{{ photos }}">
-      <image data-type="img1" catchtap="showImg" data-index="{{ index }}" mode="aspectFill" src="{{ item }}"></image>
-      <view data-type="img1" catchtap="delphoto" data-index="{{ index }}" class="del">×</view>
+<view wx:if="{{ hide }}">
+  <!--我的微商主页-->
+  <!--封面图片-->
+  <view class="cover" style="text-align: center;">
+    <text>封面展示</text>
+    <view class="cover-img-wrap">
+      <view class="cover-img" wx:for="{{ photos }}">
+        <image data-type="img1" catchtap="showImg" data-index="{{ index }}" mode="aspectFill" src="{{ item }}"></image>
+        <view data-type="img1" catchtap="delphoto" data-index="{{ index }}" class="del">×</view>
+      </view>
+    </view>
+    <image wx:if="{{ photos.length < 6 }}" class="up-img" data-type="img1" catchtap="upPhoto" src="{{ upimg }}"></image>
+  </view>
+  <!--个人信息-->
+  <view class="introduction">
+    <view style="text-align: center;">
+      <text>个人简介</text>
+    </view>
+    <view class="name">
+      <!--<view><view class="t">名称: </view><input bindinput="inputValue" data-type="truename" value="{{ user.true_name }}" class="name-input" /></view>-->
+      <view><view class="t">微信号: </view><input bindinput="inputValue" data-type="wechatno" value="{{ user.wechat_no }}" class="wxn-input" /></view>
+    </view>
+    <view class="address">
+      <view><view class="t">现居地: </view><input bindinput="inputValue" data-type="residence" value="{{ user.residence }}" class="address-input" /></view>
+    </view>
+    <view class="sign">
+      <view><view class="t">个性签名: </view><input bindinput="inputValue" data-type="signature" value="{{ user.signature }}" class="sign-input" placeholder="20字内" maxlength="20" /></view>
     </view>
   </view>
-  <image wx:if="{{ photos.length < 6 }}" class="up-img" data-type="img1" catchtap="upPhoto" src="{{ upimg }}"></image>
-</view>
-<!--个人信息-->
-<view class="introduction">
-  <view style="text-align: center;">
-    <text>个人简介</text>
-  </view>
-  <view class="name">
-    <view><view class="t">名称: </view><input bindinput="inputValue" data-type="truename" value="{{ user.true_name }}" class="name-input" /></view>
-    <view><view class="t">微信号: </view><input bindinput="inputValue" data-type="wechatno" value="{{ user.wechat_no }}" class="wxn-input" /></view>
-  </view>
-  <view class="address">
-    <view><view class="t">现居地: </view><input bindinput="inputValue" data-type="residence" value="{{ user.residence }}" class="address-input" /></view>
-  </view>
-  <view class="sign">
-    <view><view class="t">个性签名: </view><input bindinput="inputValue" data-type="signature" value="{{ user.signature }}" class="sign-input" placeholder="20字内" maxlength="20" /></view>
-  </view>
-</view>
- <!--微商之路-->
-<view class="introduction road">
-  <view style="text-align: center;">
-    <text>微商之路</text>
-  </view>
-  <view class="name">
-    <view><view class="t">所属团队: </view><input bindinput="inputValue" data-type="team" value="{{ user.team }}" class="name-input" /></view>
-    <view><view class="t">代理级别: </view><input bindinput="inputValue" data-type="lever" value="{{ user.lever }}" class="wxn-input" /></view>
-  </view>
-  <view class="address">
-    <view><view class="t">微商之路: </view><input bindinput="inputValue" data-type="weishanglu" value="{{ user.weishang_lu }}" class="address-input" /></view>
-  </view>
-</view>
-<!--代理产品-->
-<view class="introduction product">
-  <view style="text-align: center;">
-    <text>代理产品</text>
-  </view>
-  <view class="address">
-    <view><view class="t">产品名称: </view><input bindinput="inputValue" data-type="productname" value="{{ user.product_name }}" class="address-input" /></view>
-  </view>
-</view>
-<!--封面图片-->
-<view style="margin-top: 80rpx;" class="cover">
-  <view class="cover-img-wrap">
-    <view class="cover-img" wx:for="{{ products }}">
-      <image data-type="img2" catchtap="showImg" data-index="{{ index }}" mode="aspectFill" src="{{ item }}"></image>
-      <view data-type="img2" catchtap="delphoto" data-index="{{ index }}" class="del">×</view>
+  <!--微商之路-->
+  <view class="introduction road">
+    <view style="text-align: center;">
+      <text>微商之路</text>
+    </view>
+    <view class="name">
+      <view><view class="t">所属团队: </view><input bindinput="inputValue" data-type="team" value="{{ user.team }}" class="name-input" /></view>
+      <view><view class="t">代理级别: </view><input bindinput="inputValue" data-type="lever" value="{{ user.lever }}" class="wxn-input" /></view>
+    </view>
+    <view class="address">
+      <view><view class="t">微商之路: </view><input bindinput="inputValue" data-type="weishanglu" value="{{ user.weishang_lu }}" class="address-input" /></view>
     </view>
   </view>
-  <image wx:if="{{ products.length < 5 }}" data-type="img2" style="margin: 20rpx 0; margin-bottom: 90rpx;" class="up-img2" catchtap="upPhoto" src="{{ upimg }}"></image>
+  <!--代理产品-->
+  <view class="introduction product">
+    <view style="text-align: center;">
+      <text>代理产品</text>
+    </view>
+    <view class="address">
+      <view><view class="t">产品名称: </view><input bindinput="inputValue" data-type="productname" value="{{ user.product_name }}" class="address-input" /></view>
+    </view>
+  </view>
+  <!--封面图片-->
+  <view style="margin-top: 80rpx;" class="cover">
+    <view class="cover-img-wrap">
+      <view class="cover-img" wx:for="{{ products }}">
+        <image data-type="img2" catchtap="showImg" data-index="{{ index }}" mode="aspectFill" src="{{ item }}"></image>
+        <view data-type="img2" catchtap="delphoto" data-index="{{ index }}" class="del">×</view>
+      </view>
+    </view>
+    <image wx:if="{{ products.length < 5 }}" data-type="img2" style="margin: 20rpx 0; margin-bottom: 90rpx;" class="up-img2" catchtap="upPhoto" src="{{ upimg }}"></image>
+  </view>
+  <!--确定按钮-->
+  <view class="btn-wrap"><view class="confirm-btn" catchtap="save">确定修改</view></view>
 </view>
-<!--确定按钮-->
-<view class="btn-wrap"><view class="confirm-btn" catchtap="save">确定修改</view></view>
+
+<view wx:if="{{ !hide }}">
+  <view class="agent">
+    <view class="a-top">
+      <image class="br" src="{{ userInfo.avatar }}"></image>
+      <text>{{ userInfo.name }}</text>
+    </view>
+    <text>{{ user.signature }}</text>
+    <button open-type="share" class="share">分享</button>
+    <view catchtap="del" class="del">编辑</view>
+  </view>
+</view>

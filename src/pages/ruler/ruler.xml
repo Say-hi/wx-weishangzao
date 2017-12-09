@@ -22,7 +22,7 @@
       <view>在广告位展示一周</view>
       <view>并获得参加争夺年度大赛的资格</view>
     </view>
-    <button class="btn br" open-type="contact">客服</button>
+    <!--<button class="btn br" open-type="contact">客服</button>-->
     <!--<view class="c3">-->
       <!--<text>客服微信</text>-->
       <!--<text>二维码</text>-->
@@ -49,7 +49,7 @@
       <view>在广告位展示一周</view>
       <view>并获得参加争夺年度大赛的资格</view>
     </view>
-    <button class="btn br" open-type="contact">客服</button>
+    <!--<button class="btn br" open-type="contact">客服</button>-->
     <!--<view class="c3">-->
       <!--<text>客服微信</text>-->
       <!--<text>二维码</text>-->

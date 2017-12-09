@@ -10,16 +10,17 @@
   </view>
   <!--用户操作-->
   <view class="op">
+    <!--<view>-->
+      <!--<view catchtap="showTixian">-->
+        <!--<image src="../../images/lq.png"></image>-->
+        <!--<text>零钱: {{ user.account }}</text>-->
+      <!--</view>-->
+    <!--</view>-->
     <view>
-      <view catchtap="showTixian">
-        <image src="../../images/lq.png"></image>
-        <text>零钱: {{ user.account }}</text>
-      </view>
-    </view>
-    <view catchtap="showMask">
       <image src="../../images/qd.png"></image>
       <text>担保金: {{ user.money }}</text>
     </view>
+    <view catchtap="showMask" class="dbcm">充值</view>
   </view>
 
   <view class="clearfix">
@@ -30,24 +31,32 @@
         <!--<text catchtap="kaiTongPoster" class="poster" wx:if="{{ index == 1 }}">{{ poster_time || '点击开通' }}</text>-->
       </navigator>
     </block>
+    <!--<view class="jlq">-->
+      <!--<image src=""></image>-->
+      <!--<text>用户交流群</text>-->
+    <!--</view>-->
+    <!--<button open-type="contact" class="kf">-->
+      <!--<image src=""></image>-->
+      <!--<text>联系客服</text>-->
+    <!--</button>-->
   </view>
 
-  <view class="title">我的清货神器</view>
-  <navigator wx:for="{{ saleArr }}" class="user-operation sale-operation" url="{{ item.url }}">
-    <image src="{{ item.icon }}"></image>
-    <text>{{ item.text }}</text>
-    <!--<text catchtap="kaiTongPoster" class="poster" wx:if="{{ index == 1 }}">{{ poster_time || '点击开通' }}</text>-->
-  </navigator>
+  <!--<view class="title">我的清货神器</view>-->
+  <!--<navigator wx:for="{{ saleArr }}" class="user-operation sale-operation" url="{{ item.url }}">-->
+    <!--<image src="{{ item.icon }}"></image>-->
+    <!--<text>{{ item.text }}</text>-->
+    <!--&lt;!&ndash;<text catchtap="kaiTongPoster" class="poster" wx:if="{{ index == 1 }}">{{ poster_time || '点击开通' }}</text>&ndash;&gt;-->
+  <!--</navigator>-->
 </view>
 
 <!--底部导航-->
-<view style="height: 98rpx; width: 100%;"></view>
+<!--<view style="height: 98rpx; width: 100%;"></view>-->
 
-<view class="static-bottom">
-  <image data-type="left" catchtap="chooseOperation" class="l" src="../../images/home.png"></image>
-  <image data-type="center" catchtap="chooseOperation" class="c" src="../../images/fabu.png"></image>
-  <image data-type="right" catchtap="chooseOperation" class="r" src="../../images/user_hl.png"></image>
-</view>
+<!--<view class="static-bottom">-->
+  <!--<image data-type="left" catchtap="chooseOperation" class="l" src="../../images/home.png"></image>-->
+  <!--<image data-type="center" catchtap="chooseOperation" class="c" src="../../images/fabu.png"></image>-->
+  <!--<image data-type="right" catchtap="chooseOperation" class="r" src="../../images/user_hl.png"></image>-->
+<!--</view>-->
 
 <view wx:if="{{ mask }}" class="mask">
   <view class="mask-in zoomIn animated">

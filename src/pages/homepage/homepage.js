@@ -120,10 +120,13 @@ Page({
             title: '保存信息成功'
           })
           setTimeout(function () {
-            wx.navigateBack({
-              delta: 1
+            // wx.navigateBack({
+            //   delta: 1
+            // })
+            that.setData({
+              hide: false
             })
-          }, 1500)
+          }, 1000)
         } else {
           wx.showToast({
             title: res.data.message
@@ -157,11 +160,40 @@ Page({
     }
     app.wxrequest(o)
   },
+  // 获取用户信息
+  getUserInfo () {
+    let that = this
+    let s = {
+      url: serviceUrl.userCenter,
+      data: {
+        session_key: app.gs()
+      },
+      success (res) {
+        wx.hideLoading()
+        if (res.data.code === 200) {
+          that.setData({
+            userInfo: res.data.data
+          })
+        } else {
+          wx.showToast({
+            title: res.data.message
+          })
+        }
+      }
+    }
+    app.wxrequest(s)
+  },
+  del () {
+    this.setData({
+      hide: true
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad () {
     this.getInfo()
+    this.getUserInfo()
     // TODO: onLoad
   },
 
@@ -198,5 +230,11 @@ Page({
    */
   onPullDownRefresh () {
     // TODO: onPullDownRefresh
+  },
+  onShareAppMessage () {
+    return {
+      title: '微商荣耀排行榜火热评选中！赶紧为您支持的微商团队 人物投上一票吧～',
+      path: `pages/supportPage/supportPage?id=${this.data.userInfo.user_id}`
+    }
   }
 })

@@ -198,4 +198,29 @@ page {
       }
     }
   }
+  .mask-in {
+    padding:0 20rpx;
+    background-color: #fff;
+    position: absolute;
+    width: 500rpx;
+    top: 50%;
+    left: 50%;
+    border-radius: 8rpx;
+    transform: translate(-50%, -50%);
+    > view {
+      text-align: center;
+      line-height: 60rpx;
+    }
+    .mo {
+      border-top: 1rpx solid #eee;
+      display: flex;
+      align-items: center;
+      view {
+        flex: 1;
+        text-align: center;
+        line-height: 70rpx;
+        border-left: 1rpx solid #eee;
+      }
+    }
+  }
 }

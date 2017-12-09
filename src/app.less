@@ -134,21 +134,33 @@ page {
   position: fixed;
   bottom: 300rpx;
   right: 30rpx;
-  background-color: #fedb43;
-  width: 100rpx;
+  //background-color: #fedb43;
+  width: 120rpx;
   font-size: 60rpx !important;
   text-align: center;
-  line-height: 100rpx;
-  box-shadow: 2rpx 2rpx 10rpx 2rpx #fed910;
+  height: 120rpx;
+  background-color: #01BC0D;
+  //line-height: 00rpx;
+  //box-shadow: 2rpx 2rpx 10rpx 2rpx #fed910;
   .br {
     position: absolute;
-    top: -10rpx;
-    left: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
     font-size: 22rpx;
     text-align: center;
-    background-color: #f00;
-    width: 40rpx;
-    line-height: 40rpx;
+    width: 80rpx;
+    height: 80rpx;
+  }
+  text {
+    position: absolute;
+    width: 100%;
+    display: block;
+    bottom: 10rpx;
+    font-size: 20rpx;
+    left: 50%;
+    color: #fff;
+    transform: translateX(-50%);
   }
 }
 .ch {
